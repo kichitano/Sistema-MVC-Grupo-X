@@ -45,6 +45,7 @@ namespace Sistema_MVC_Grupo_X.Controllers
                 return View("~/Views/Semestre/AgregarEditar.cshtml");
             }
         }
+
         //Accion eliminar
         public ActionResult Eliminar(int id)
         {

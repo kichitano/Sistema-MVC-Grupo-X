@@ -68,5 +68,86 @@ namespace Sistema_MVC_Grupo_X.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuario { get; set; }
+
+        //-----------------------------------------------------------------//
+
+        //Metodo Listar
+        public List<Docente> Listar() //Retorna un collection
+        {
+            var objDocente = new List<Docente>();
+            try
+            {
+                using (var db = new Modelo_Sistema())
+                {
+                    objDocente = db.Docente.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return objDocente;
+        }
+
+        //Metodo Obtener
+        public Docente Obtener(int id) //retorna solo un objeto
+        {
+            var objDocente = new Docente();
+            try
+            {
+                using (var db = new Modelo_Sistema())
+                {
+                    objDocente = db.Docente
+                    .Where(x => x.docente_id == id)
+                        .SingleOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return objDocente;
+        }
+
+        //Metodo Guardar y Modificar
+        public void Guardar()
+        {
+            try
+            {
+                using (var db = new Modelo_Sistema())
+                {
+                    if (this.docente_id > 0)
+                    { //si existe un valor mayor a 0 es x que existe el registro
+                        db.Entry(this).State = EntityState.Modified;
+                    }
+                    else
+                    { //sino existe el registro lo graba (nuevo)
+                        db.Entry(this).State = EntityState.Added;
+                    }
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        //Metodo Eliminar
+        public void Eliminar()
+        {
+            try
+            {
+                using (var db = new Modelo_Sistema())
+                {
+                    db.Entry(this).State = EntityState.Deleted;
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -164,6 +164,9 @@
     <Content Include="Views\Semestre\Index.cshtml" />
     <Content Include="Views\Semestre\Visualizar.cshtml" />
     <Content Include="Views\Semestre\AgregarEditar.cshtml" />
+    <Content Include="Views\Docente\Index.cshtml" />
+    <Content Include="Views\Docente\Visualizar.cshtml" />
+    <Content Include="Views\Docente\AgregarEditar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -173,7 +176,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Docente\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
