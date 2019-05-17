@@ -3,10 +3,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2 class="card text-center">Gestión de Semestres</h2>
+<h2 class="card text-center">Gestión de Docentes</h2>
 <br />
 <div class="text-right">
-    <a href="~/Semestre/AgregarEditar/" class="btn btn-secondary text-right">
+    <a href="~/Docente/AgregarEditar/" class="btn btn-secondary text-right">
         Nuevo Registro
     </a>
 </div>
@@ -14,11 +14,11 @@
 <table class="table">
     <thead>
         <tr>
-            <th style="width:50px">Id</th>
-            <th style="width:100px">Docente</th>
-            <th style="width:70px">Email - Celular</th>
-            <th style="width:80px">Estado</th>
-            <th style="width:200px">Acciones</th>
+            <th style="width:40px; text-align:center">Id</th>
+            <th style="width:150px; text-align:center">Docente</th>
+            <th style="width:150px; text-align:center">Email - Celular</th>
+            <th style="width:50px; text-align:center">Estado</th>
+            <th style="width:150px; text-align:center">Acciones</th>
 
         </tr>
     </thead>
@@ -26,16 +26,16 @@
         @foreach (var d in Model)
         {
             <tr>
-                <th>@(d.docente_id)</th>
-                <th>@(d.nombre + " " + d.apellido)</th>
-                <th>@(d.email + " / " + d.celular)</th>
-                <th>@(d.estado == "A" ? "Activo" : "Inactivo")</th>
+                <th style="text-align:center">@(d.docente_id)</th>
+                <th style="text-align:center">@(d.nombre + " " + d.apellido)</th>
+                <th style="text-align:center">@(d.email + " / " + d.celular)</th>
+                <th style="text-align:center">@(d.estado == "A" ? "Activo" : "Inactivo")</th>
                 <th style="text-align:center; align-content:center">
-                    <a href="~/Semestre/Visualizar/@d.docente_id"
+                    <a href="~/Docente/Visualizar/@d.docente_id"
                        class="btn btn-xs btn-warning">Visualizar</a>
-                    <a href="~/Semestre/AgregarEditar/@d.docente_id"
+                    <a href="~/Docente/AgregarEditar/@d.docente_id"
                        class="btn btn-xs btn-primary">Modificar</a>
-                    <a href="~/Semestre/Eliminar/@d.docente_id"
+                    <a href="~/Docente/Eliminar/@d.docente_id"
                        class="btn btn-xs btn-danger"
                        onclick="return confirm('¿Esta seguro de eliminar ...?');">Eliminar</a>
                 </th>
@@ -45,3 +45,4 @@
         }
     </tbody>
 </table>
+<hr />

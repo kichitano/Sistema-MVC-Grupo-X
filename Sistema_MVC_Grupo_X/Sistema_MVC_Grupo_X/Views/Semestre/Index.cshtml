@@ -14,11 +14,11 @@
 <table class="table">
     <thead>
         <tr>
-            <th style="width:50px">Id</th>
-            <th style="width:100px">Semestre</th>
-            <th style="width:70px">Anio</th>
-            <th style="width:80px">Estado</th>
-            <th style="width:200px">Acciones</th>
+            <th style="width:50px; text-align:center">Id</th>
+            <th style="width:100px; text-align:center">Semestre</th>
+            <th style="width:70px; text-align:center">Anio</th>
+            <th style="width:80px; text-align:center">Estado</th>
+            <th style="width:200px; text-align:center">Acciones</th>
 
         </tr>
     </thead>
@@ -26,10 +26,10 @@
         @foreach (var s in Model)
         {
             <tr>
-                <th>@(s.semestre_id)</th>
-                <th>@(s.nombre)</th>
-                <th>@(s.anio)</th>
-                <th>@(s.estado == "A" ? "Activo" : "Inactivo")</th>
+                <th style="text-align:center">@(s.semestre_id)</th>
+                <th style="text-align:center">@(s.nombre)</th>
+                <th style="text-align:center">@(s.anio)</th>
+                <th style="text-align:center">@(s.estado == "A" ? "Activo" : "Inactivo")</th>
                 <th style="text-align:center; align-content:center">
                     <a href="~/Semestre/Visualizar/@s.semestre_id"
                        class="btn btn-xs btn-warning">Visualizar</a>
@@ -39,9 +39,8 @@
                        class="btn btn-xs btn-danger"
                        onclick="return confirm('¿Esta seguro de eliminar ...?');">Eliminar</a>
                 </th>
-
-
             </tr>
         }
     </tbody>
 </table>
+<hr />
