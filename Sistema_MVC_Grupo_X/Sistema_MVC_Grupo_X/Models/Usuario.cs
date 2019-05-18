@@ -36,5 +36,86 @@ namespace Sistema_MVC_Grupo_X.Models
         public string estado { get; set; }
 
         public virtual Docente Docente { get; set; }
+
+        //-----------------------------------------------------------------//
+        //metodo listar
+        public List<Usuario> Listar() //Retorna un collection
+        {
+            var objUsuario = new List<Usuario>();            
+            try
+            {
+                using (var db = new Modelo_Sistema())
+                {
+                    objUsuario = db.Usuario.Include("Docente").ToList();        //      INCLUDE PARA TABLAS RELACIONADAS
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return objUsuario;
+        }
+
+        //metodo obtener
+        public Usuario Obtener(int id) //retorna solo un objeto
+        {
+            var objUsuario = new Usuario();
+            try
+            {
+                using (var db = new Modelo_Sistema())
+                {
+                    objUsuario = db.Usuario.Include("Docente")      //  INNER JOIN PARA TABLAS RELACIONADAS
+                    .Where(x => x.usuario_id == id)
+                        .SingleOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return objUsuario;
+        }
+        //metodo guardar y modificar
+        public void Guardar()
+        {
+            try
+            {
+                using (var db = new Modelo_Sistema())
+                {
+                    if (this.usuario_id > 0)
+                    { //si existe un valor mayor a 0 es x que existe el registro
+                        db.Entry(this).State = EntityState.Modified;
+
+                    }
+                    else
+                    { //sino existe el registro lo graba (nuevo)
+                        db.Entry(this).State = EntityState.Added;
+                    }
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        //metodo eliminar
+        public void Eliminar()
+        {
+            try
+            {
+                using (var db = new Modelo_Sistema())
+                {
+                    db.Entry(this).State = EntityState.Deleted;
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
     }
 }

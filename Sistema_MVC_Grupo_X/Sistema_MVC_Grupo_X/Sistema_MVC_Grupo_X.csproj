@@ -125,6 +125,7 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\DocenteController.cs" />
     <Compile Include="Controllers\SemestreController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -167,6 +168,9 @@
     <Content Include="Views\Docente\Index.cshtml" />
     <Content Include="Views\Docente\Visualizar.cshtml" />
     <Content Include="Views\Docente\AgregarEditar.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\Visualizar.cshtml" />
+    <Content Include="Views\Usuario\AgregarEditar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

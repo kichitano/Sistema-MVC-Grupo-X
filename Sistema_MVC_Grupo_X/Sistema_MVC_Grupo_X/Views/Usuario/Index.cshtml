@@ -1,0 +1,48 @@
+﻿@model List<Sistema_MVC_Grupo_X.Models.Usuario>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="card text-center">Gestión de Usuario</h2>
+<br />
+<div class="text-right">
+    <a href="~/Usuario/AgregarEditar/" class="btn btn-secondary text-right">
+        Nuevo Registro
+    </a>
+</div>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th style="width:50px; text-align:center">Id</th>
+            <th style="width:100px; text-align:center">Docente</th>
+            <th style="width:70px; text-align:center">Usuario</th>
+            <th style="width:70px; text-align:center">Nivel</th>
+            <th style="width:80px; text-align:center">Estado</th>
+            <th style="width:200px; text-align:center">Acciones</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <th style="text-align:center">@(u.usuario_id)</th>
+                <th style="text-align:center">@(u.Docente.nombre + " " + u.Docente.apellido)</th>
+                <th style="text-align:center">@(u.nombre)</th>
+                <th style="text-align:center">@(u.nivel)</th>
+                <th style="text-align:center">@(u.estado == "A" ? "Activo" : "Inactivo")</th>
+                <th style="text-align:center; align-content:center">
+                    <a href="~/Usuario/Visualizar/@u.usuario_id"
+                       class="btn btn-xs btn-warning">Visualizar</a>
+                    <a href="~/Usuario/AgregarEditar/@u.usuario_id"
+                       class="btn btn-xs btn-primary">Modificar</a>
+                    <a href="~/Usuario/Eliminar/@u.usuario_id"
+                       class="btn btn-xs btn-danger"
+                       onclick="return confirm('¿Esta seguro de eliminar ...?');">Eliminar</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>
+<hr />
