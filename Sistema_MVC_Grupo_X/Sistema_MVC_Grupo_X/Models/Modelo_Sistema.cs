@@ -24,6 +24,7 @@ namespace Sistema_MVC_Grupo_X.Models
         public virtual DbSet<EvidenciaCriterio> EvidenciaCriterio { get; set; }
         public virtual DbSet<Modelo> Modelo { get; set; }
         public virtual DbSet<Semestre> Semestre { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -45,6 +46,11 @@ namespace Sistema_MVC_Grupo_X.Models
                 .IsFixedLength()
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Actividad>()
+                .HasMany(e => e.EvidenciaActividad)
+                .WithRequired(e => e.Actividad)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Asignacion>()
                 .Property(e => e.titulo)
                 .IsUnicode(false);
@@ -52,6 +58,11 @@ namespace Sistema_MVC_Grupo_X.Models
             modelBuilder.Entity<Asignacion>()
                 .Property(e => e.estado)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Asignacion>()
+                .HasMany(e => e.DetalleAsignacion)
+                .WithRequired(e => e.Asignacion)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Control>()
                 .Property(e => e.titulo)
@@ -134,6 +145,11 @@ namespace Sistema_MVC_Grupo_X.Models
                 .HasForeignKey(e => e.evidencia_id)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Criterio>()
+                .HasMany(e => e.DetalleAsignacion)
+                .WithRequired(e => e.Criterio)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<DetalleAsignacion>()
                 .Property(e => e.estado)
                 .IsUnicode(false);
@@ -190,6 +206,11 @@ namespace Sistema_MVC_Grupo_X.Models
 
             modelBuilder.Entity<Docente>()
                 .HasMany(e => e.ControlAsignacion)
+                .WithRequired(e => e.Docente)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Docente>()
+                .HasMany(e => e.DetalleAsignacion)
                 .WithRequired(e => e.Docente)
                 .WillCascadeOnDelete(false);
 
@@ -296,6 +317,16 @@ namespace Sistema_MVC_Grupo_X.Models
 
             modelBuilder.Entity<Semestre>()
                 .HasMany(e => e.Actividad)
+                .WithRequired(e => e.Semestre)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Semestre>()
+                .HasMany(e => e.Asignacion)
+                .WithRequired(e => e.Semestre)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Semestre>()
+                .HasMany(e => e.Control)
                 .WithRequired(e => e.Semestre)
                 .WillCascadeOnDelete(false);
 

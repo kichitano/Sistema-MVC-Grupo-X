@@ -26,6 +26,8 @@ namespace Sistema_MVC_Grupo_X.Models
         [StringLength(1)]
         public string estado { get; set; }
 
+        public virtual Semestre Semestre { get; set; }
+
         //-----------------------------------------------------------------//
 
         //metodo listar
@@ -106,5 +108,6 @@ namespace Sistema_MVC_Grupo_X.Models
                 throw;
             }
         }
+
     }
 }

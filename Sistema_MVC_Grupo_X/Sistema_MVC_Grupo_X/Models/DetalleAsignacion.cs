@@ -29,7 +29,13 @@ namespace Sistema_MVC_Grupo_X.Models
         [StringLength(1)]
         public string estado { get; set; }
 
+        public virtual Asignacion Asignacion { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ControlAsignacion> ControlAsignacion { get; set; }
+
+        public virtual Criterio Criterio { get; set; }
+
+        public virtual Docente Docente { get; set; }
     }
 }

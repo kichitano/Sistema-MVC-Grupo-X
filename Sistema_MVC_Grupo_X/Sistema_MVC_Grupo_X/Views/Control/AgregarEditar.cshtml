@@ -1,0 +1,98 @@
+﻿@model Sistema_MVC_Grupo_X.Models.Control
+@{
+    List<Sistema_MVC_Grupo_X.Models.Semestre> semestre = ViewBag.Semestre;
+    ViewBag.Title = "AgregarEditar";
+}
+
+<h2>Agregar Editar</h2>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="~/Control/Index">Usuario</a>
+        </li>
+        <li class="breadcrumb-item active">
+            @(Model.control_id > 0 ? Model.titulo : "Nuevo Registro")
+        </li>
+    </ol>
+</nav>
+@using (Html.BeginForm("Guardar", "Control", FormMethod.Post, new { id = "frm-control" }))
+{
+    @Html.HiddenFor(x => x.control_id)
+    <div class="card">
+        <div class="card-header">Información de Control</div>
+        <div class="card-body">
+            <div class="form-group">
+                @Html.Label("Id")
+                @Html.TextBoxFor(x => x.control_id, new
+                { @class = "form-control", disabled = true })
+            </div>
+            <div class="form-group">
+                @Html.Label("Semestre")
+                <select name="semestre_id" class="form-control">
+                    <option @(Model.semestre_id.Equals("") ? "Selected" : "") value="">
+                        -- Seleccione --
+                    </option>
+                    @foreach (var s in semestre)
+                    {
+                        <option @(Model.semestre_id.Equals(s.semestre_id) ? "Selected" : "") value="@s.semestre_id">@s.nombre</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(x => x.semestre_id, null,
+                                    new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Titulo")
+                @Html.TextBoxFor(x => x.titulo, new
+                { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.titulo, null,
+                                    new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Fecha de Creacion")
+                @Html.TextBoxFor(x => x.fechacreacion, "{0:dd/MM/yyyy}",new
+           { @class = "form-control" , @id = "date-picker" ,})
+            </div>
+            <div class="form-group">
+                @Html.Label("Estado")
+                <select name="estado" class="form-control">
+                    <option @(Model.estado == "" ? "Selected" : "") value="">Seleccione</option>
+                    <option @(Model.estado == "A" ? "Selected" : "A") value="A">Activo</option>
+                    <option @(Model.estado == "I" ? "Selected" : "I") value="I">Inactivo</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary">Grabar</button>
+        <a href="~/Control" class="btn btn-danger">Cancelar</a>
+    </div>
+}
+<hr />
+
+<script type="text/javascript">
+    $(function () {
+        // Reset language
+        $.datepicker.regional['es'] = {
+            closeText: 'Cerrar',
+            prevText: '< Ant',
+            nextText: 'Sig >',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional["es"]);
+        // This will make every element with the class "date-picker" into a DatePicker element
+        $('#date-picker').datepicker();
+    })
+</script>

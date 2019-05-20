@@ -15,6 +15,7 @@ namespace Sistema_MVC_Grupo_X.Models
         public Docente()
         {
             ControlAsignacion = new HashSet<ControlAsignacion>();
+            DetalleAsignacion = new HashSet<DetalleAsignacion>();
             Usuario = new HashSet<Usuario>();
         }
 
@@ -65,6 +66,9 @@ namespace Sistema_MVC_Grupo_X.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ControlAsignacion> ControlAsignacion { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetalleAsignacion> DetalleAsignacion { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuario { get; set; }
@@ -149,5 +153,6 @@ namespace Sistema_MVC_Grupo_X.Models
                 throw;
             }
         }
+
     }
 }

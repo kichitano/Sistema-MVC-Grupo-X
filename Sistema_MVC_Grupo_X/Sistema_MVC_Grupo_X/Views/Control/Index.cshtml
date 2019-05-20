@@ -16,11 +16,10 @@
         <tr>
             <th style="width:50px; text-align:center">Id</th>
             <th style="width:80px; text-align:center">Semestre</th>
-            <th style="width:80px; text-align:center">Fecha de Creacion</th>
             <th style="width:100px; text-align:center">Titulo</th>
+            <th style="width:80px; text-align:center">Fecha de Creacion</th>
             <th style="width:80px; text-align:center">Estado</th>
             <th style="width:200px; text-align:center">Acciones</th>
-
         </tr>
     </thead>
     <tbody>
@@ -28,16 +27,16 @@
         {
             <tr>
                 <th style="text-align:center">@(c.control_id)</th>
-                @*<th style="text-align:center">@(c.Semestre.nombre)</th>*@
+                <th style="text-align:center">@(c.Semestre.nombre)</th>
                 <th style="text-align:center">@(c.titulo)</th>
-                <th style="text-align:center">@(c.fechacreacion)</th>
+                <th style="text-align:center">@(c.fechacreacion.Value.ToString("dd/MM/yyyy"))</th>
                 <th style="text-align:center">@(c.estado == "A" ? "Activo" : "Inactivo")</th>
                 <th style="text-align:center; align-content:center">
-                    <a href="~/Usuario/Visualizar/@c.control_id"
+                    <a href="~/Control/Visualizar/@c.control_id"
                        class="btn btn-xs btn-warning">Visualizar</a>
-                    <a href="~/Usuario/AgregarEditar/@c.control_id"
+                    <a href="~/Control/AgregarEditar/@c.control_id"
                        class="btn btn-xs btn-primary">Modificar</a>
-                    <a href="~/Usuario/Eliminar/@c.control_id"
+                    <a href="~/Control/Eliminar/@c.control_id"
                        class="btn btn-xs btn-danger"
                        onclick="return confirm('¿Esta seguro de eliminar ...?');">Eliminar</a>
                 </th>
