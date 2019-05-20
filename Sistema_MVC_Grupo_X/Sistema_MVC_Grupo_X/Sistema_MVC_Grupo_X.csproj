@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ControlController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\DocenteController.cs" />
     <Compile Include="Controllers\SemestreController.cs" />
@@ -171,6 +172,7 @@
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Usuario\Visualizar.cshtml" />
     <Content Include="Views\Usuario\AgregarEditar.cshtml" />
+    <Content Include="Views\Control\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
