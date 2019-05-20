@@ -51,7 +51,7 @@
             <div class="form-group">
                 @Html.Label("Fecha de Creacion")
                 @Html.TextBoxFor(x => x.fechacreacion, "{0:dd/MM/yyyy}",new
-           { @class = "form-control" , @id = "date-picker" ,})
+                { @class = "form-control" , @id = "date-picker" ,})
             </div>
             <div class="form-group">
                 @Html.Label("Estado")
@@ -61,6 +61,11 @@
                     <option @(Model.estado == "I" ? "Selected" : "I") value="I">Inactivo</option>
                 </select>
             </div>
+
+             
+            <input type="checkbox" data-toggle="toggle" data-on="Enabled" data-off="Disabled">
+
+
         </div>
     </div>
     <br />
