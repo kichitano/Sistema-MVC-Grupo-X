@@ -122,3 +122,40 @@
     <script src="~/assets/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+<script type="text/javascript">
+    $(function () {
+        // Reset language
+        $.datepicker.regional['es'] = {
+            closeText: 'Cerrar',
+            prevText: '< Ant',
+            nextText: 'Sig >',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional["es"]);
+        // This will make every element with the class "date-picker" into a DatePicker element
+        $('#date-picker').datepicker();
+    });
+    $(function () {
+        $('#estadoCheckbox').change(function () {
+            //$('#estado').html('A'.prop('checked'))
+            var hi = document.getElementById("estado");
+            if (hi.value == "I" || hi.value == null) {
+                hi.value = "A";
+            } else {
+                hi.value = "I";
+            }
+        })
+    })
+</script>

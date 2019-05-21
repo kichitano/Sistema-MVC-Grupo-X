@@ -36,7 +36,6 @@ namespace Sistema_MVC_Grupo_X.Controllers
         //Accion guardar
         public ActionResult Guardar(Control objControl)
         {
-            //if (objControl.estado.Equals("on")) { objControl.estado = "A"; } else { objControl.estado = "I"; }
             if (ModelState.IsValid)
             {
                 objControl.Guardar();
