@@ -9,7 +9,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="~/Control/Index">Usuario</a>
+            <a href="~/Control/Index">Control</a>
         </li>
         <li class="breadcrumb-item active">
             @(Model.control_id > 0 ? Model.titulo : "Nuevo Registro")
@@ -53,19 +53,21 @@
                 @Html.TextBoxFor(x => x.fechacreacion, "{0:dd/MM/yyyy}",new
                 { @class = "form-control" , @id = "date-picker" ,})
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 @Html.Label("Estado")
                 <select name="estado" class="form-control">
                     <option @(Model.estado == "" ? "Selected" : "") value="">Seleccione</option>
                     <option @(Model.estado == "A" ? "Selected" : "A") value="A">Activo</option>
                     <option @(Model.estado == "I" ? "Selected" : "I") value="I">Inactivo</option>
                 </select>
+            </div>*@
+
+            <div class="form-group">
+                @Html.Label("Estado")
+                <input id="estadoCheckbox" type="checkbox" data-toggle="toggle" @(Model.estado == "A" ? "checked" : "") 
+                       data-on="Activo" data-off="Inactivo" data-size="large" data-onstyle="success" data-offstyle="danger" data-width="100%">
+                <input name="estado" id="estado" type="hidden" value="@(Model.estado == "A" ? "A" : "I")">
             </div>
-
-             
-            <input type="checkbox" data-toggle="toggle" data-on="Enabled" data-off="Disabled">
-
-
         </div>
     </div>
     <br />
@@ -99,5 +101,16 @@
         $.datepicker.setDefaults($.datepicker.regional["es"]);
         // This will make every element with the class "date-picker" into a DatePicker element
         $('#date-picker').datepicker();
+    });
+    $(function () {
+        $('#estadoCheckbox').change(function () {
+            //$('#estado').html('A'.prop('checked'))
+            var hi = document.getElementById("estado");
+            if (hi.value == "I" || hi.value == null) {
+                hi.value = "A";
+            } else {
+                hi.value = "I";
+            }
+        })
     })
 </script>

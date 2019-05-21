@@ -33,11 +33,11 @@
                 <th style="text-align:center">@(c.estado == "A" ? "Activo" : "Inactivo")</th>
                 <th style="text-align:center; align-content:center">
                     <a href="~/Control/Visualizar/@c.control_id"
-                       class="btn btn-xs btn-warning">Visualizar</a>
+                       class="btn btn-xs btn-warning" style="padding:inherit">Visualizar</a>
                     <a href="~/Control/AgregarEditar/@c.control_id"
-                       class="btn btn-xs btn-primary">Modificar</a>
+                       class="btn btn-xs btn-primary" style="padding:inherit">Modificar</a>
                     <a href="~/Control/Eliminar/@c.control_id"
-                       class="btn btn-xs btn-danger"
+                       class="btn btn-xs btn-danger" style="padding:inherit"
                        onclick="return confirm('¿Esta seguro de eliminar ...?');">Eliminar</a>
                 </th>
             </tr>

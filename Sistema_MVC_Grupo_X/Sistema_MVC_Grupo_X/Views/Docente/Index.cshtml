@@ -32,11 +32,11 @@
                 <th style="text-align:center">@(d.estado == "A" ? "Activo" : "Inactivo")</th>
                 <th style="text-align:center; align-content:center">
                     <a href="~/Docente/Visualizar/@d.docente_id"
-                       class="btn btn-xs btn-warning">Visualizar</a>
+                       class="btn btn-xs btn-warning" style="padding:inherit">Visualizar</a>
                     <a href="~/Docente/AgregarEditar/@d.docente_id"
-                       class="btn btn-xs btn-primary">Modificar</a>
+                       class="btn btn-xs btn-primary" style="padding:inherit">Modificar</a>
                     <a href="~/Docente/Eliminar/@d.docente_id"
-                       class="btn btn-xs btn-danger"
+                       class="btn btn-xs btn-danger" style="padding:inherit"
                        onclick="return confirm('¿Esta seguro de eliminar ...?');">Eliminar</a>
                 </th>
 
