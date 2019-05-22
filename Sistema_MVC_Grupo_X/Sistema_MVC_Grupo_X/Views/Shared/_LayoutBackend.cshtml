@@ -10,6 +10,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <title>Sistema MVC Condori Vilcapuma</title>
     <!-- Tell the browser to be responsive to screen width -->
     @Styles.Render("~/LayoutBackend/css")
+    <link href="~/Scripts/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script src="~/Scripts/bootstrap4-toggle.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -291,9 +293,9 @@ desired effect
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            
+
             @RenderBody()
-            
+
         </div>
         <!-- /.content-wrapper -->
         <!-- Main Footer -->
@@ -303,7 +305,7 @@ desired effect
                 Desarrollo Web 2
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; @DateTime.Today <a href="#">UPT</a>.</strong> 
+            <strong>Copyright &copy; @DateTime.Today <a href="#">UPT</a>.</strong>
         </footer>
 
         <!-- Control Sidebar -->
@@ -390,5 +392,41 @@ desired effect
     <!-- Optionally, you can add Slimscroll and FastClick plugins.
          Both of these plugins are recommended to enhance the
          user experience. -->
+    <script type="text/javascript">
+    $(function () {
+        // Reset language
+        $.datepicker.regional['es'] = {
+            closeText: 'Cerrar',
+            prevText: '< Ant',
+            nextText: 'Sig >',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+            dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+        };
+        $.datepicker.setDefaults($.datepicker.regional["es"]);
+        // This will make every element with the class "date-picker" into a DatePicker element
+        $('#date-picker').datepicker();
+    });
+    $(function () {
+        $('#estadoCheckbox').change(function () {
+            //$('#estado').html('A'.prop('checked'))
+            var hi = document.getElementById("estado");
+            if (hi.value == "I" || hi.value == null) {
+                hi.value = "A";
+            } else {
+                hi.value = "I";
+            }
+        })
+    })
+    </script>
 </body>
 </html>

@@ -26,8 +26,7 @@ namespace Sistema_MVC_Grupo_X.Controllers
         //Accion agregarEditar
         public ActionResult AgregarEditar(int id = 0)
         {
-            return View(
-                id == 0 ? new Docente() //Agrega un nuevo objeto
+            return View(id == 0 ? new Docente() //Agrega un nuevo objeto
                 : objDocente.Obtener(id) //Devuelva un objeto
                 );
         }

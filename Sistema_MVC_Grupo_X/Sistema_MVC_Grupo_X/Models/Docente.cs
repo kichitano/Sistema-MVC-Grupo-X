@@ -120,14 +120,9 @@ namespace Sistema_MVC_Grupo_X.Models
             {
                 using (var db = new Modelo_Sistema())
                 {
-                    if (this.docente_id > 0)
-                    { //si existe un valor mayor a 0 es x que existe el registro
-                        db.Entry(this).State = EntityState.Modified;
-                    }
-                    else
-                    { //sino existe el registro lo graba (nuevo)
-                        db.Entry(this).State = EntityState.Added;
-                    }
+                    db.Entry(this).State = this.docente_id == 0 ?
+                        EntityState.Added :
+                        EntityState.Modified;
                     db.SaveChanges();
                 }
             }
