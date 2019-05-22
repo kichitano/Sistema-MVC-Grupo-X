@@ -2,22 +2,25 @@
 @{
     ViewBag.Title = "AgregarEditar";
 }
-
-<nav aria-label="breadcrumb">
+<section class="content-header">
+    <h1>
+        <a href="~/Modelo/Index">Modelo</a>
+        <small>Demasiada abstración</small>
+    </h1>
     <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a href="~/Modelo/Index">Modelo</a>
-        </li>
-        <li class="breadcrumb-item active">@(Model.modelo_id > 0 ? Model.nombre : "Nuevo Registro")</li>
+        <li><a href="~/Modelo/Index"><i class="fa fa-dashboard"></i> Modelo</a></li>
+        <li class="active"> @(Model.modelo_id > 0 ? Model.nombre : "Nuevo Registro")</li>
     </ol>
-</nav>
-
-@using (Html.BeginForm("Guardar", "Modelo", FormMethod.Post, new { id = "frm-modelo" }))
-{
-    @Html.HiddenFor(x => x.modelo_id)
-    <div class="card">
-        <div class="card-header">Información del Modelo</div>
-        <div class="card-body">
+</section>
+<!-- Content Header (Page header) -->
+<!-- Main content -->
+<section class="content container-fluid">
+    @using (Html.BeginForm("Guardar", "Modelo", FormMethod.Post, new { id = "frm-modelo" }))
+    {
+        @Html.HiddenFor(x => x.modelo_id)
+    <div class="box">
+        <div class="box-header with-border">Información del Modelo</div>
+        <div class="box-body">
             <div class="form-group">
                 @Html.Label("Id")
                 @Html.TextBoxFor(x => x.modelo_id, new { @class = "form-control", disabled = true })
@@ -43,12 +46,10 @@
                 @Html.ValidationMessageFor(x => x.estado, null, new { @class = "text-danger" })
             </div>
         </div>
-    </div>
-
-    <br />
-
-    <div class="text-right">
-        <button type="submit" class="btn btn-primary">Grabar</button>
-        <a href="~/Modelo" class="btn btn-danger">Cancelar</a>
-    </div>
-}
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary">Grabar</button>
+            <a href="~/Modelo" class="btn btn-danger">Cancelar</a>
+        </div>
+     </div>
+     }
+</section>

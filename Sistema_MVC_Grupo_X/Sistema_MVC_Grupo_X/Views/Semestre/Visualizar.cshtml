@@ -2,32 +2,33 @@
 @{
     ViewBag.Title = "Visualizar";
 }
-
-<h2>Visualizar</h2>
-<nav aria-label="breadcrumb">
+<section class="content-header">
+    <h1>
+        Visualizar
+    </h1>
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="~/Semestre/Index">Semestre</a>
+            <a href="~/Semestre/Index"><i class="fa fa-dashboard"></i>Semestre</a>
         </li>
         <li class="breadcrumb-item active">@Model.nombre</li>
     </ol>
-</nav>
-
-<div class="card">
-    <div class="card-header">
-        Información detallada del semestre
+</section>
+<section class="content container-fluid">
+    <div class="box">
+        <div class="box-header">
+            Información detallada del semestre
+        </div>
+        <div class="box-body">
+            <dl class="dl-horizontal">
+                <dt>Id</dt>
+                <dd>@Model.semestre_id</dd>
+                <dt>Semestre</dt>
+                <dd>@Model.nombre</dd>
+                <dt>Año</dt>
+                <dd>@Model.anio</dd>
+                <dt>Estado</dt>
+                <dd>@(Model.estado == "A" ? "Activo" : "Inactivo")</dd>
+            </dl>
+        </div>
     </div>
-    <div class="card-body">
-        <dl class="dl-horizontal">
-            <dt>Id</dt>
-            <dd>@Model.semestre_id</dd>
-            <dt>Semestre</dt>
-            <dd>@Model.nombre</dd>
-            <dt>Año</dt>
-            <dd>@Model.anio</dd>
-            <dt>Estado</dt>
-            <dd>@(Model.estado == "A" ? "Activo" : "Inactivo")</dd>
-        </dl>
-    </div>
-</div>
-<hr />
+</section>

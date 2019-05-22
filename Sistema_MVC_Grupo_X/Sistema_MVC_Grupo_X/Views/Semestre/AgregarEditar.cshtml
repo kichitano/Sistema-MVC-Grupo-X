@@ -2,25 +2,26 @@
 @{
     ViewBag.Title = "AgregarEditar";
 }
-
-<h2>Agregar Editar</h2>
-
-<nav aria-label="breadcrumb">
+<section class="content-header">
+    <h1>
+        Agregar Editar
+        <small>Semestre</small>
+    </h1>
     <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a href="~/Semestre/Index">Semestre</a>
-        </li>
-        <li class="breadcrumb-item active">
-            @(Model.semestre_id > 0 ? Model.nombre : "Nuevo Registro")
-        </li>
+        <li><a href="~/Semestre/Index"><i class="fa fa-dashboard"></i> Semestre</a></li>
+        <li class="active"> @(Model.semestre_id > 0 ? Model.nombre : "Nuevo Registro")<li>
     </ol>
-</nav>
-@using (Html.BeginForm("Guardar", "Semestre", FormMethod.Post, new { id = "frm-semestre" }))
-{
-    @Html.HiddenFor(x => x.semestre_id)
-    <div class="card">
-        <div class="card-header">Información del semestre</div>
-        <div class="card-body">
+</section>
+<!-- Content Header (Page header) -->
+<!-- Main content -->
+<section class="content container-fluid">
+
+    @using (Html.BeginForm("Guardar", "Semestre", FormMethod.Post, new { id = "frm-semestre" }))
+    {
+        @Html.HiddenFor(x => x.semestre_id)
+    <div class="box">
+        <div class="box-header  with-border">Información del semestre</div>
+        <div class="box-body">
             <div class="form-group">
                 @Html.Label("Id")
                 @Html.TextBoxFor(x => x.semestre_id, new
@@ -49,11 +50,10 @@
                 </select>
             </div>
         </div>
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary">Grabar</button>
+            <a href="~/Semestre" class="btn btn-danger">Cancelar</a>
+        </div>
     </div>
-    <br />
-    <div class="text-right">
-        <button type="submit" class="btn btn-primary">Grabar</button>
-        <a href="~/Semestre" class="btn btn-danger">Cancelar</a>
-    </div>
-}
-<hr />
+    }
+</section>
