@@ -4,115 +4,116 @@
     List<Sistema_MVC_Grupo_X.Models.Docente> docente = ViewBag.Docente;
     ViewBag.Title = "AgregarEditar";
 }
-
-<h2>Agregar Editar</h2>
-
-<nav aria-label="breadcrumb">
+<section class="content-header">
+    <h1>
+        Agregar Editar
+        <small>Asignación</small>
+    </h1>
     <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a href="~/Control/Index">Asignacion</a>
-        </li>
-        <li class="breadcrumb-item active">
+        <li><a href="~/Asignacion/Index"><i class="fa fa-dashboard"></i> Asignación</a></li>
+        <li class="active">
             @if (Model != null)
             {
-                @Model.asignacion_id > 0 ? Model.titulo : "Nuevo Registro";
+                @(Model.asignacion_id > 0 ? Model.titulo : "Nuevo Registro")
             }
-
-        </li>
+        <li>
     </ol>
-</nav>
-@using (Html.BeginForm("Guardar", "Asignacion", FormMethod.Post, new { id = "frm-asignacion" }))
-{
-    object[,] docentes = new object[docente.Count,2];
-    for (int i = 0; i < docente.Count; i++)
+</section>
+<!-- Content Header (Page header) -->
+<!-- Main content -->
+<section class="content container-fluid">
+    @using (Html.BeginForm("Guardar", "Asignacion", FormMethod.Post, new { id = "frm-asignacion" }))
     {
-        docentes[i, 0] = docente[i].docente_codigo;
-        docentes[i, 1] = docente[i].nombre + " " + docente[i].apellido;
-    }
+        object[,] docentes = new object[docente.Count, 2];
+        for (int i = 0; i < docente.Count; i++)
+        {
+            docentes[i, 0] = docente[i].docente_codigo;
+            docentes[i, 1] = docente[i].nombre + " " + docente[i].apellido;
+        }
 
-    @Html.HiddenFor(x => x.asignacion_id)
-    <div class="card">
-        <div class="card-header">Información de Asignacion</div>
-        <div class="card-body">   
-            <div class="container">
-                <div class="row">
-                    <div class="form-group col-4">
-                        @Html.Label("Id")
-                        @Html.TextBoxFor(x => x.asignacion_id, new
-                        { @class = "form-control", disabled = true })
+        @Html.HiddenFor(x => x.asignacion_id)
+        <div class="box">
+            <div class="box-header">Información de Asignacion</div>
+            <div class="box-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="form-group col-4">
+                            @Html.Label("Id")
+                            @Html.TextBoxFor(x => x.asignacion_id, new
+                            { @class = "form-control", disabled = true })
+                        </div>
+                        <div class="form-group col-4">
+                            @Html.Label("Semestre")
+                            <select name="semestre_id" class="form-control">
+                                <option @(Model.semestre_id.Equals("") ? "Selected" : "") value="">
+                                    -- Seleccione --
+                                </option>
+                                @foreach (var s in semestre)
+                                {
+                                    <option @(Model.semestre_id.Equals(s.semestre_id) ? "Selected" : "") value="@s.semestre_id">@s.nombre</option>
+                                }
+                            </select>
+                            @Html.ValidationMessageFor(x => x.semestre_id, null,
+                                              new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-4">
+                            @Html.Label("Fecha de Creacion")
+                            @Html.TextBoxFor(x => x.fecharegistro, "{0:dd/MM/yyyy}", new
+                            { @class = "form-control", @id = "date-picker", })
+                        </div>
                     </div>
-                    <div class="form-group col-4">
-                        @Html.Label("Semestre")
-                        <select name="semestre_id" class="form-control">
-                            <option @(Model.semestre_id.Equals("") ? "Selected" : "") value="">
-                                -- Seleccione --
-                            </option>
-                            @foreach (var s in semestre)
-                            {
-                            <option @(Model.semestre_id.Equals(s.semestre_id) ? "Selected" : "") value="@s.semestre_id">@s.nombre</option>
-                            }
-                        </select>
-                        @Html.ValidationMessageFor(x => x.semestre_id, null,
-                                          new { @class = "text-danger" })
+                    <div class="row">
+                        <div class="form-group col-9">
+                            @Html.Label("Titulo")
+                            @Html.TextBoxFor(x => x.titulo, new
+                            { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.titulo, null,
+                                              new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-3">
+                            @Html.Label("Estado")
+                            <input id="estadoCheckbox" type="checkbox" data-toggle="toggle" @(Model.estado == "A" ? "checked" : "")
+                                   data-on="Activo" data-off="Inactivo" data-size="normal" data-onstyle="success" data-offstyle="danger" data-width="100%">
+                            <input name="estado" id="estado" type="hidden" value="@(Model.estado == "A" ? "A" : "I")">
+                        </div>
                     </div>
-                    <div class="form-group col-4">
-                        @Html.Label("Fecha de Creacion")
-                        @Html.TextBoxFor(x => x.fecharegistro, "{0:dd/MM/yyyy}", new
-                        { @class = "form-control", @id = "date-picker", })
+                    <hr />
+                    <div class="row align-content-stretch">
+                        <div class="form-group col-9">
+                            <b>@Html.Label("Detalle Asignacion")</b>
+                        </div>
+                        <div class="form-group col-3">
+                            <button type="button" class="btn btn-block btn-success" onclick="crearElementos('cuerpoTabla')">
+                                <span class="glyphicon glyphicon-plus">Agregar detalle</span>
+                            </button>
+                        </div>
                     </div>
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th style="width:8%; text-align:center">Id</th>
+                                <th style="width:28%; text-align:center">Docente</th>
+                                <th style="width:27%; text-align:center">Criterio</th>
+                                <th style="width:12%; text-align:center">Estado</th>
+                                <th style="width:25%; text-align:center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpoTabla">
+                            @* AGREGAR TODO EL CODIGO FOR PARA DETALLE *@
+                        </tbody>
+                    </table>
                 </div>
-                <div class="row">
-                    <div class="form-group col-9">
-                        @Html.Label("Titulo")
-                        @Html.TextBoxFor(x => x.titulo, new
-                        { @class = "form-control" })
-                        @Html.ValidationMessageFor(x => x.titulo, null,
-                                          new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group col-3">
-                        @Html.Label("Estado")
-                        <input id="estadoCheckbox" type="checkbox" data-toggle="toggle" @(Model.estado == "A" ? "checked" : "")
-                               data-on="Activo" data-off="Inactivo" data-size="normal" data-onstyle="success" data-offstyle="danger" data-width="100%">
-                        <input name="estado" id="estado" type="hidden" value="@(Model.estado == "A" ? "A" : "I")">
-                    </div>
-                </div>
-                <hr />
-                <div class="row align-content-stretch">
-                    <div class="form-group col-9">
-                        <b>@Html.Label("Detalle Asignacion")</b>
-                    </div>
-                    <div class="form-group col-3">
-                        <button type="button" class="btn btn-block btn-success" onclick="crearElementos('cuerpoTabla')">
-                            <span class="glyphicon glyphicon-plus">Agregar detalle</span>
-                        </button>
-                    </div>
-                </div>
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th style="width:8%; text-align:center">Id</th>
-                            <th style="width:28%; text-align:center">Docente</th>
-                            <th style="width:27%; text-align:center">Criterio</th>
-                            <th style="width:12%; text-align:center">Estado</th>
-                            <th style="width:25%; text-align:center">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="cuerpoTabla">
-                        @* AGREGAR TODO EL CODIGO FOR PARA DETALLE *@
-                    </tbody>
-                </table>
-            </div>            
+            </div>
         </div>
-    </div>
-    <br />
-    <div class="text-right">
-        <button type="submit" class="btn btn-primary">Grabar</button>
-        <a href="~/Asignacion" class="btn btn-danger">Cancelar</a>
-    </div>
-}
-<hr />
+        <br />
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary">Grabar</button>
+            <a href="~/Asignacion" class="btn btn-danger">Cancelar</a>
+        </div>
+    }
+</section>
 
-<script>
+    <script>
     function crearElementos(tableID) {
 
         // Get a reference to the table
@@ -142,7 +143,7 @@
         //    listaDocente.appendChild(option);
         //}
 
-        
+
 
 
 
@@ -164,4 +165,4 @@
         }
 
     }
-</script>
+    </script>

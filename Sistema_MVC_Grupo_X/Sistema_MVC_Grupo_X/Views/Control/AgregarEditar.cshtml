@@ -3,25 +3,29 @@
     List<Sistema_MVC_Grupo_X.Models.Semestre> semestre = ViewBag.Semestre;
     ViewBag.Title = "AgregarEditar";
 }
-
-<h2>Agregar Editar</h2>
-
-<nav aria-label="breadcrumb">
+<section class="content-header">
+    <h1>
+        Agregar Editar
+    </h1>
     <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a href="~/Control/Index">Control</a>
-        </li>
-        <li class="breadcrumb-item active">
-            @(Model.control_id > 0 ? Model.titulo : "Nuevo Registro")
-        </li>
+        <li><a href="~/Control/Index"><i class="fa fa-dashboard"></i> Docente</a></li>
+        <li class="active">
+            @if (Model != null)
+            {
+                @(Model.control_id > 0 ? Model.titulo : "Nuevo Registro")
+            }
+        <li>
     </ol>
-</nav>
-@using (Html.BeginForm("Guardar", "Control", FormMethod.Post, new { id = "frm-control" }))
-{
-    @Html.HiddenFor(x => x.control_id)
-    <div class="card">
-        <div class="card-header">Información de Control</div>
-        <div class="card-body">
+</section>
+<!-- Content Header (Page header) -->
+<!-- Main content -->
+<section class="content container-fluid">
+    @using (Html.BeginForm("Guardar", "Control", FormMethod.Post, new { id = "frm-control" }))
+    {
+        @Html.HiddenFor(x => x.control_id)
+    <div class="box">
+        <div class="box-header">Información de Control</div>
+        <div class="box-body">
             <div class="form-group">
                 @Html.Label("Id")
                 @Html.TextBoxFor(x => x.control_id, new
@@ -55,16 +59,17 @@
             </div>
             <div class="form-group">
                 @Html.Label("Estado")
-                <input id="estadoCheckbox" type="checkbox" data-toggle="toggle" @(Model.estado == "A" ? "checked" : "") 
+                <input id="estadoCheckbox" type="checkbox" data-toggle="toggle" @(Model.estado == "A" ? "checked" : "")
                        data-on="Activo" data-off="Inactivo" data-size="large" data-onstyle="success" data-offstyle="danger" data-width="100%">
                 <input name="estado" id="estado" type="hidden" value="@(Model.estado == "A" ? "A" : "I")">
             </div>
         </div>
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary">Grabar</button>
+            <a href="~/Control" class="btn btn-danger">Cancelar</a>
+        </div>
     </div>
-    <br />
-    <div class="text-right">
-        <button type="submit" class="btn btn-primary">Grabar</button>
-        <a href="~/Control" class="btn btn-danger">Cancelar</a>
-    </div>
-}
-<hr />
+        
+        
+    }
+</section>

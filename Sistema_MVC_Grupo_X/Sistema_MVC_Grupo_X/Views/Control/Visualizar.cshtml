@@ -2,34 +2,31 @@
 @{
     ViewBag.Title = "Visualizar";
 }
-
-<h2>Visualizar</h2>
-<nav aria-label="breadcrumb">
+<section class="content-header">
+    <h1>Visualizar</h1>
     <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a href="~/Control/Index">Control</a>
-        </li>
-        <li class="breadcrumb-item active">@Model.titulo</li>
+        <li><a href="~/Control/Index"><i class="fa fa-dashboard"></i> Control</a></li>
+        <li class="active"> @Model.titulo</li>
     </ol>
-</nav>
-
-<div class="card">
-    <div class="card-header">
-        Información detallada del control
+</section>
+<section class="content container-fluid">
+    <div class="box">
+        <div class="box-header">
+            Información detallada del control
+        </div>
+        <div class="box-body">
+            <dl class="dl-horizontal">
+                <dt>Id</dt>
+                <dd>@Model.control_id</dd>
+                <dt>Semestre</dt>
+                <dd>@Model.Semestre.nombre</dd>
+                <dt>Titulo</dt>
+                <dd>@Model.titulo</dd>
+                <dt>Fecha de creacion</dt>
+                <dd>@Model.fechacreacion.Value.ToString("dd/MM/yyyy")</dd>
+                <dt>Estado</dt>
+                <dd>@(Model.estado == "A" ? "Activo" : "Inactivo")</dd>
+            </dl>
+        </div>
     </div>
-    <div class="card-body">
-        <dl class="dl-horizontal">
-            <dt>Id</dt>
-            <dd>@Model.control_id</dd>
-            <dt>Semestre</dt>
-            <dd>@Model.Semestre.nombre</dd>
-            <dt>Titulo</dt>
-            <dd>@Model.titulo</dd>
-            <dt>Fecha de creacion</dt>
-            <dd>@Model.fechacreacion.Value.ToString("dd/MM/yyyy")</dd>
-            <dt>Estado</dt>
-            <dd>@(Model.estado == "A" ? "Activo" : "Inactivo")</dd>
-        </dl>
-    </div>
-</div>
-<hr />
+</section>
