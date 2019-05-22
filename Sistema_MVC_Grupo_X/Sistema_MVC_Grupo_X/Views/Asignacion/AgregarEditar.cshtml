@@ -80,7 +80,7 @@
                 @* Creando lista invisible *@
                 <div hidden>
                     <select id="listaDocentes" name="docente_id" class="form-control">
-                            <option value="x">SELECCIONE</option>
+                            <option value="x">-- Seleccione --</option>
                             @foreach (var d in docente)
                             {
                             <option value="@d.docente_id">@d.nombre @d.apellido</option>
