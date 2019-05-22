@@ -19,13 +19,6 @@
 </nav>
 @using (Html.BeginForm("Guardar", "Asignacion", FormMethod.Post, new { id = "frm-asignacion" }))
 {
-    object[,] docentes = new object[docente.Count,2];
-    for (int i = 0; i < docente.Count; i++)
-    {
-        docentes[i, 0] = docente[i].docente_codigo;
-        docentes[i, 1] = docente[i].nombre + " " + docente[i].apellido;
-    }
-
     @Html.HiddenFor(x => x.asignacion_id)
     <div class="card">
         <div class="card-header">Información de Asignacion</div>
@@ -72,7 +65,7 @@
                         <input name="estado" id="estado" type="hidden" value="@(Model.estado == "A" ? "A" : "I")">
                     </div>
                 </div>
-                <hr />
+                <hr style="height:1px; border:none; color:#000; background-color:#000;"/>
                 <div class="row align-content-stretch">
                     <div class="form-group col-9">
                         <b>@Html.Label("Detalle Asignacion")</b>
@@ -83,6 +76,20 @@
                         </button>
                     </div>
                 </div>
+
+                @* Creando lista invisible *@
+                <div hidden>
+                    <select id="listaDocentes" name="docente_id" class="form-control">
+                            <option value="x">SELECCIONE</option>
+                            @foreach (var d in docente)
+                            {
+                            <option value="@d.docente_id">@d.nombre @d.apellido</option>
+                            }
+                        </select>
+                </div>
+                @* Fin de lista invisible *@
+
+
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
@@ -125,29 +132,17 @@
         let celdaAcciones = newRow.insertCell(4);
 
         // Append a text node to the cell    || Agregar elementos a las celdas
-        let idTexto = document.createTextNode('0');
-        let listaDocente = document.createElement("SELECT");
+            //Texto ID
+        var idTexto = document.createTextNode('0');
+            //Copiando Lista invisible
+        var idListaDocentes = document.getElementById('listaDocentes');
+        var ListaDocentes = null;
+        ListaDocentes = idListaDocentes.cloneNode(true);
 
-
-        //var docentes = @ViewBag.Docente;
-
-        //for (var i = 0; i < docentes.length ; i++) {
-        //    var option = document.createElement("option");
-        //    option.value = docentes.docente_id;
-        //    option.text = docentes.nombre + " " + docentes.apellido;
-        //    listaDocente.appendChild(option);
-        //}
-
-        
-
-
-
-        let newText2 = document.createTextNode('New bottom row 2');
-
-        let newText3 = document.createTextNode('New bottom row 3');
+        //Agregando los elementos dinamicamente
 
         celdaID.appendChild(idTexto);
-        celdaDocente.appendChild(listaDocente);
+        celdaDocente.appendChild(ListaDocentes);
 
         //Ocultar IDs o valores necesarios
         celdaID.style.editable = 'false';
