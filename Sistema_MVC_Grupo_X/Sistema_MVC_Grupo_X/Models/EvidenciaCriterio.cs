@@ -7,7 +7,7 @@ namespace Sistema_MVC_Grupo_X.Models
     using System.Data.Entity.Spatial;
     using System.Linq;
     using System.Data.Entity;
-    
+
     [Table("EvidenciaCriterio")]
     public partial class EvidenciaCriterio
     {

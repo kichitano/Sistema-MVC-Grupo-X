@@ -31,6 +31,8 @@ namespace Sistema_MVC_Grupo_X.Models
         [Column(TypeName = "text")]
         public string descripcion { get; set; }
 
+        public virtual Actividad Actividad { get; set; }
+
         public virtual Criterio Criterio { get; set; }
     }
 }

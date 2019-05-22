@@ -18,6 +18,7 @@ namespace Sistema_MVC_Grupo_X.Models
             ControlAsignacion = new HashSet<ControlAsignacion>();
             EvidenciaActividad = new HashSet<EvidenciaActividad>();
             EvidenciaCriterio = new HashSet<EvidenciaCriterio>();
+            DetalleAsignacion = new HashSet<DetalleAsignacion>();
         }
 
         [Key]
@@ -55,5 +56,8 @@ namespace Sistema_MVC_Grupo_X.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EvidenciaCriterio> EvidenciaCriterio { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetalleAsignacion> DetalleAsignacion { get; set; }
     }
 }

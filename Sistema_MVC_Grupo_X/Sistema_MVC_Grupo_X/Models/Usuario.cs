@@ -41,7 +41,7 @@ namespace Sistema_MVC_Grupo_X.Models
         //metodo listar
         public List<Usuario> Listar() //Retorna un collection
         {
-            var objUsuario = new List<Usuario>();            
+            var objUsuario = new List<Usuario>();
             try
             {
                 using (var db = new Modelo_Sistema())
@@ -116,6 +116,5 @@ namespace Sistema_MVC_Grupo_X.Models
                 throw;
             }
         }
-
     }
 }
