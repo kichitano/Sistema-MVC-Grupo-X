@@ -12,7 +12,11 @@
             <a href="~/Control/Index">Asignacion</a>
         </li>
         <li class="breadcrumb-item active">
-            @(Model.asignacion_id > 0 ? Model.titulo : "Nuevo Registro")
+            @if (Model != null)
+            {
+                @Model.asignacion_id > 0 ? Model.titulo : "Nuevo Registro";
+            }
+
         </li>
     </ol>
 </nav>
