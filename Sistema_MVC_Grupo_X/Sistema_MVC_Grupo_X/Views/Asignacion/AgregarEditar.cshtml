@@ -1,6 +1,7 @@
 ﻿@model Sistema_MVC_Grupo_X.Models.Asignacion
 @{
     List<Sistema_MVC_Grupo_X.Models.Semestre> semestre = ViewBag.Semestre;
+    List<Sistema_MVC_Grupo_X.Models.Docente> docente = ViewBag.Docente;
     ViewBag.Title = "AgregarEditar";
 }
 
@@ -22,6 +23,13 @@
 </nav>
 @using (Html.BeginForm("Guardar", "Asignacion", FormMethod.Post, new { id = "frm-asignacion" }))
 {
+    object[,] docentes = new object[docente.Count,2];
+    for (int i = 0; i < docente.Count; i++)
+    {
+        docentes[i, 0] = docente[i].docente_codigo;
+        docentes[i, 1] = docente[i].nombre + " " + docente[i].apellido;
+    }
+
     @Html.HiddenFor(x => x.asignacion_id)
     <div class="card">
         <div class="card-header">Información de Asignacion</div>
@@ -41,11 +49,11 @@
                             </option>
                             @foreach (var s in semestre)
                             {
-                                <option @(Model.semestre_id.Equals(s.semestre_id) ? "Selected" : "") value="@s.semestre_id">@s.nombre</option>
+                            <option @(Model.semestre_id.Equals(s.semestre_id) ? "Selected" : "") value="@s.semestre_id">@s.nombre</option>
                             }
                         </select>
                         @Html.ValidationMessageFor(x => x.semestre_id, null,
-                                                 new { @class = "text-danger" })
+                                          new { @class = "text-danger" })
                     </div>
                     <div class="form-group col-4">
                         @Html.Label("Fecha de Creacion")
@@ -59,7 +67,7 @@
                         @Html.TextBoxFor(x => x.titulo, new
                         { @class = "form-control" })
                         @Html.ValidationMessageFor(x => x.titulo, null,
-                                                 new { @class = "text-danger" })
+                                          new { @class = "text-danger" })
                     </div>
                     <div class="form-group col-3">
                         @Html.Label("Estado")
@@ -68,6 +76,31 @@
                         <input name="estado" id="estado" type="hidden" value="@(Model.estado == "A" ? "A" : "I")">
                     </div>
                 </div>
+                <hr />
+                <div class="row align-content-stretch">
+                    <div class="form-group col-9">
+                        <b>@Html.Label("Detalle Asignacion")</b>
+                    </div>
+                    <div class="form-group col-3">
+                        <button type="button" class="btn btn-block btn-success" onclick="crearElementos('cuerpoTabla')">
+                            <span class="glyphicon glyphicon-plus">Agregar detalle</span>
+                        </button>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th style="width:8%; text-align:center">Id</th>
+                            <th style="width:28%; text-align:center">Docente</th>
+                            <th style="width:27%; text-align:center">Criterio</th>
+                            <th style="width:12%; text-align:center">Estado</th>
+                            <th style="width:25%; text-align:center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoTabla">
+                        @* AGREGAR TODO EL CODIGO FOR PARA DETALLE *@
+                    </tbody>
+                </table>
             </div>            
         </div>
     </div>
@@ -78,3 +111,57 @@
     </div>
 }
 <hr />
+
+<script>
+    function crearElementos(tableID) {
+
+        // Get a reference to the table
+        let tableRef = document.getElementById(tableID);
+
+        // Insert a row at the end of the table
+        let newRow = tableRef.insertRow(-1);
+
+        // Insert a cell in the row at index || Agregar celdas
+        let celdaID = newRow.insertCell(0);
+        let celdaDocente = newRow.insertCell(1);
+        let celdaCriterio = newRow.insertCell(2);
+        let celdaEstado = newRow.insertCell(3);
+        let celdaAcciones = newRow.insertCell(4);
+
+        // Append a text node to the cell    || Agregar elementos a las celdas
+        let idTexto = document.createTextNode('0');
+        let listaDocente = document.createElement("SELECT");
+
+
+        //var docentes = @ViewBag.Docente;
+
+        //for (var i = 0; i < docentes.length ; i++) {
+        //    var option = document.createElement("option");
+        //    option.value = docentes.docente_id;
+        //    option.text = docentes.nombre + " " + docentes.apellido;
+        //    listaDocente.appendChild(option);
+        //}
+
+        
+
+
+
+        let newText2 = document.createTextNode('New bottom row 2');
+
+        let newText3 = document.createTextNode('New bottom row 3');
+
+        celdaID.appendChild(idTexto);
+        celdaDocente.appendChild(listaDocente);
+
+        //Ocultar IDs o valores necesarios
+        celdaID.style.editable = 'false';
+        //celdaID.style.textAlign = 'center';
+        for (var i = 0; i < array.length; i++) {
+            var option = document.createElement("option");
+            option.value = array[i];
+            option.text = array[i];
+            listaDocente.appendChild(option);
+        }
+
+    }
+</script>
