@@ -11,6 +11,12 @@ namespace Sistema_MVC_Grupo_X.Models
     [Table("Control")]
     public partial class Control
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Control()
+        {
+            ControlAsignacion = new HashSet<ControlAsignacion>();
+        }
+
         [Key]
         public int control_id { get; set; }
 
@@ -25,6 +31,9 @@ namespace Sistema_MVC_Grupo_X.Models
 
         [StringLength(1)]
         public string estado { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ControlAsignacion> ControlAsignacion { get; set; }
 
         public virtual Semestre Semestre { get; set; }
 
@@ -108,6 +117,5 @@ namespace Sistema_MVC_Grupo_X.Models
                 throw;
             }
         }
-
     }
 }

@@ -11,6 +11,7 @@ namespace Sistema_MVC_Grupo_X.Controllers
     {
         private Asignacion objAsignacion = new Asignacion();
         private Semestre objSemestre = new Semestre();
+        private Docente objDocente = new Docente();
         //GET
         public ActionResult Index()
         {
@@ -27,6 +28,7 @@ namespace Sistema_MVC_Grupo_X.Controllers
         public ActionResult AgregarEditar(int id = 0)
         {
             ViewBag.Semestre = objSemestre.Listar();
+            ViewBag.Docente = objDocente.Listar();
             return View(
                 id == 0 ? new Asignacion() //Agrega un nuevo objeto
                 : objAsignacion.Obtener(id) //Devuelva un objeto
