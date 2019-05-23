@@ -1,0 +1,62 @@
+﻿@model List<Sistema_MVC_Grupo_X.Models.Semestre>
+@{
+    ViewBag.Title = "Index";
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Gestión de Semestres
+        <small>Periodo de tiempo</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Semestre</a></li>
+        <li class="active"> Index</li>
+    </ol>
+</section>
+<!-- Content Header (Page header) -->
+<!-- Main content -->
+<section class="content container-fluid">
+    <div class="box">
+        <div class="box-header with-border">
+            <div class="text-right">
+                <a href="~/Semestre/AgregarEditar/" class="btn btn-success text-right">Nuevo Registro</a>
+            </div>
+            <br />
+        </div>
+        <div class="box-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width:50px; text-align:center">Id</th>
+                        <th style="width:100px; text-align:center">Semestre</th>
+                        <th style="width:70px; text-align:center">Anio</th>
+                        <th style="width:80px; text-align:center">Estado</th>
+                        <th style="width:200px; text-align:center">Acciones</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var s in Model)
+                    {
+                        <tr>
+                            <th style="text-align:center">@(s.semestre_id)</th>
+                            <th style="text-align:center">@(s.nombre)</th>
+                            <th style="text-align:center">@(s.anio)</th>
+                            <th style="text-align:center">@(s.estado == "A" ? "Activo" : "Inactivo")</th>
+                            <th style="text-align:center; align-content:center">
+                                <a href="~/Semestre/Visualizar/@s.semestre_id"
+                                   class="btn btn-xs btn-warning">Visualizar</a>
+                                <a href="~/Semestre/AgregarEditar/@s.semestre_id"
+                                   class="btn btn-xs btn-primary">Modificar</a>
+                                <a href="~/Semestre/Eliminar/@s.semestre_id"
+                                   class="btn btn-xs btn-danger"
+                                   onclick="return confirm('¿Esta seguro de eliminar ...?');">Eliminar</a>
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<!-- /.content -->

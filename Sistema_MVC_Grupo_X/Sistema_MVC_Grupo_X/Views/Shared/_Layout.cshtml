@@ -2,9 +2,12 @@
 @{
     Layout = null;
     string controlador = ViewContext.RouteData.Values["controller"].ToString().ToLower();
+<<<<<<< HEAD
     Sistema_MVC_Grupo_X.Models.Usuario usuario =
         new Sistema_MVC_Grupo_X.Models.Usuario().Obtener(
             Sistema_MVC_Grupo_X.Models.SessionHelper.GetUser());
+=======
+>>>>>>> parent of 06eb0ea... Limpieza Master
 
 }
 
@@ -33,6 +36,7 @@
 
 </head>
 <body>
+<<<<<<< HEAD
     @if (controlador != "login")
     {
         <nav class="navbar navbar-light navbar-expand-lg" style="background-color: #e3f2fd;">
@@ -114,6 +118,89 @@
 
             </div>
         </nav>
+=======
+
+    <nav class="navbar navbar-light navbar-expand-lg" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="#">Sistema Web</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Mantenimiento
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="~/Semestre/Index">Semestre</a>
+                        <a class="dropdown-item" href="~/Criterio/Index">Criterio</a>
+                        <a class="dropdown-item" href="~/Docente/Index">Docente</a>
+                        <a class="dropdown-item" href="~/Usuario/Index">Usuario</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="~/Asignacion/Index">ASIGNACIÓN</a>
+                        <a class="dropdown-item" href="~/Control/Index">CONTROL</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Consultas
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="~/Semestre/Consulta">SEMESTRE</a>
+                        <a class="dropdown-item" href="~/Criterio/Consulta">CRITERIO</a>
+                        <a class="dropdown-item" href="~/Docente/Consulta">DOCENTE</a>
+                        <a class="dropdown-item" href="~/Usuario/Consulta">USUARIO</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="~/Asignacion/Consulta">ASIGNACIÓN</a>
+                        <a class="dropdown-item" href="~/Control/Consulta">CONTROL</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Reportes
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="~/Semestre/Reportes">SEMESTRE</a>
+                        <a class="dropdown-item" href="~/Criterio/Reportes">CRITERIO</a>
+                        <a class="dropdown-item" href="~/Docente/Reportes">DOCENTE</a>
+                        <a class="dropdown-item" href="~/Usuario/Reportes">USUARIO</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="~/Asignacion/Reportes">ASIGNACIÓN</a>
+                        <a class="dropdown-item" href="~/Control/Reportes">CONTROL</a>
+                    </div>
+                </li>
+            </ul>
+
+
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                       role="button" aria-haspopup="true" aria-expanded="false">
+                        <img id="user-pic" src="~/Uploads/" width="40" height="40" />
+                        <b>Bienvenidos : </b> Grupo X <span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="~/Perfil/index">Perfil de Usuario</a>
+                        <a class="dropdown-item" href="~/Login/logout">Cerrar Sesión</a>
+                    </div>
+
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+>>>>>>> parent of 06eb0ea... Limpieza Master
     }
     <div class="container">
         <h1 class="jumbotron">
@@ -123,11 +210,14 @@
     </div>
     <!--Boostrap-->
     <script src="~/assets/js/bootstrap.min.js"></script>
+<<<<<<< HEAD
     <!--ResponseModel-->
     <script src="~/Assets/js/ini.js"></script>
     <script src="~/Assets/js/jquery.form.js"></script>
     <script src="~/Assets/js/jquery.validate.min.js"></script>
     <script src="~/Assets/js/jquery.validate.unobtrusive.min.js"></script>
+=======
+>>>>>>> parent of 06eb0ea... Limpieza Master
 </body>
 </html>
 

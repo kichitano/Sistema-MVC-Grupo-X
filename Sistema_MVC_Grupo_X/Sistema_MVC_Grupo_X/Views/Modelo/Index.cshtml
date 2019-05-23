@@ -1,0 +1,55 @@
+﻿@model List<Sistema_MVC_Grupo_X.Models.Modelo>
+@{ViewBag.Title = "Index";}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Gestionar Modelo
+        <small>Demasiada abstración</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Modelo</a></li>
+        <li class="active"> Index</li>
+    </ol>
+</section>
+<!-- Content Header (Page header) -->
+<!-- Main content -->
+<section class="content container-fluid">
+    <div class="box">
+        <div class="box-header with-border">
+            <div class="text-right">
+                <a href="~/Modelo/AgregarEditar/" class="btn btn-success text-right">Nuevo Registro</a>
+            </div>
+            <br />
+        </div>
+        <div class="box-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width:50px;text-align:center">Id</th>
+                        <th style="width:10px;text-align:center">Modelo</th>
+                        <th style="width:70px;text-align:center">Descripción</th>
+                        <th style="width:80px;text-align:center">Estado</th>
+                        <th style="width:150px;text-align:center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var s in Model)
+                    {
+                        <tr>
+                            <th>@s.modelo_id</th>
+                            <th>@s.nombre</th>
+                            <th>@s.descripcion</th>
+                            <th>@(s.estado == "A" ? "Activo" : "Inactivo") </th>
+                            <th style="text-align:center">
+                                <a href="~/Modelo/Visualizar/@s.modelo_id" class="btn btn-info">Visualizar</a>
+                                <a href="~/Modelo/AgregarEditar/@s.modelo_id" class="btn btn-primary">Modificar</a>
+                                <a href="~/Modelo/Eliminar/@s.modelo_id" class="btn btn-danger" onclick="return confirm('Esta seguro de Eliminar?...')">Eliminar</a>
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<!-- /.content -->

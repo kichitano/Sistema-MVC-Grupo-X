@@ -1,7 +1,10 @@
 ﻿@model Sistema_MVC_Grupo_X.Models.Asignacion
 @{
     List<Sistema_MVC_Grupo_X.Models.Semestre> semestre = ViewBag.Semestre;
+<<<<<<< HEAD
     List<Sistema_MVC_Grupo_X.Models.Docente> docente = ViewBag.Docente;
+=======
+>>>>>>> parent of 06eb0ea... Limpieza Master
     ViewBag.Title = "AgregarEditar";
 }
 
@@ -9,16 +12,61 @@
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+        <li><a href="~/Asignacion/Index"><i class="fa fa-dashboard"></i> Asignación</a></li>
+        <li class="active">
+=======
+        <li class="breadcrumb-item">
+            <a href="~/Control/Index">Asignacion</a>
+        </li>
+        <li class="breadcrumb-item active">
+>>>>>>> parent of dd6ed62... actualización vistas
+            @if (Model != null)
+            {
+                @Model.asignacion_id > 0 ? Model.titulo : "Nuevo Registro";
+            }
+<<<<<<< HEAD
+        <li>
+=======
+>>>>>>> parent of 06eb0ea... Limpieza Master
         <li class="breadcrumb-item">
             <a href="~/Control/Index">Asignacion</a>
         </li>
         <li class="breadcrumb-item active">
             @(Model.asignacion_id > 0 ? Model.titulo : "Nuevo Registro")
         </li>
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 0c844d1... cambios de la interfaz
+    </ol>
+<<<<<<< HEAD
+</section>
+<!-- Content Header (Page header) -->
+<!-- Main content -->
+<section class="content container-fluid">
+    @using (Html.BeginForm("Guardar", "Asignacion", FormMethod.Post, new { id = "frm-asignacion" }))
+=======
+
+        </li>
+>>>>>>> parent of 06eb0ea... Limpieza Master
     </ol>
 </nav>
 @using (Html.BeginForm("Guardar", "Asignacion", FormMethod.Post, new { id = "frm-asignacion" }))
 {
+<<<<<<< HEAD
+=======
+    object[,] docentes = new object[docente.Count,2];
+    for (int i = 0; i < docente.Count; i++)
+>>>>>>> parent of dd6ed62... actualización vistas
+    {
+        docentes[i, 0] = docente[i].docente_codigo;
+        docentes[i, 1] = docente[i].nombre + " " + docente[i].apellido;
+    }
+
+>>>>>>> parent of 06eb0ea... Limpieza Master
     @Html.HiddenFor(x => x.asignacion_id)
     <div class="card">
         <div class="card-header">Información de Asignacion</div>
@@ -65,7 +113,11 @@
                         <input name="estado" id="estado" type="hidden" value="@(Model.estado == "A" ? "A" : "I")">
                     </div>
                 </div>
+<<<<<<< HEAD
                 <hr style="height:1px; border:none; color:#000; background-color:#000;"/>
+=======
+                <hr />
+>>>>>>> parent of 06eb0ea... Limpieza Master
                 <div class="row align-content-stretch">
                     <div class="form-group col-9">
                         <b>@Html.Label("Detalle Asignacion")</b>
@@ -76,6 +128,7 @@
                         </button>
                     </div>
                 </div>
+<<<<<<< HEAD
 
                 @* Creando lista invisible *@
                 <div hidden>
@@ -90,6 +143,8 @@
                 @* Fin de lista invisible *@
 
 
+=======
+>>>>>>> parent of 06eb0ea... Limpieza Master
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
@@ -132,6 +187,7 @@
         let celdaAcciones = newRow.insertCell(4);
 
         // Append a text node to the cell    || Agregar elementos a las celdas
+<<<<<<< HEAD
             //Texto ID
         var idTexto = document.createTextNode('0');
             //Copiando Lista invisible
@@ -143,6 +199,31 @@
 
         celdaID.appendChild(idTexto);
         celdaDocente.appendChild(ListaDocentes);
+=======
+        let idTexto = document.createTextNode('0');
+        let listaDocente = document.createElement("SELECT");
+
+
+        //var docentes = @ViewBag.Docente;
+
+        //for (var i = 0; i < docentes.length ; i++) {
+        //    var option = document.createElement("option");
+        //    option.value = docentes.docente_id;
+        //    option.text = docentes.nombre + " " + docentes.apellido;
+        //    listaDocente.appendChild(option);
+        //}
+
+        
+
+
+
+        let newText2 = document.createTextNode('New bottom row 2');
+
+        let newText3 = document.createTextNode('New bottom row 3');
+
+        celdaID.appendChild(idTexto);
+        celdaDocente.appendChild(listaDocente);
+>>>>>>> parent of 06eb0ea... Limpieza Master
 
         //Ocultar IDs o valores necesarios
         celdaID.style.editable = 'false';
@@ -155,4 +236,73 @@
         }
 
     }
+<<<<<<< HEAD
 </script>
+=======
+<<<<<<< HEAD
+    </script>
+=======
+</nav>
+@using (Html.BeginForm("Guardar", "Asignacion", FormMethod.Post, new { id = "frm-asignacion" }))
+{
+    @Html.HiddenFor(x => x.asignacion_id)
+    <div class="card">
+        <div class="card-header">Información de Asignacion</div>
+        <div class="card-body">   
+            <div class="container">
+                <div class="row">
+                    <div class="form-group col-4">
+                        @Html.Label("Id")
+                        @Html.TextBoxFor(x => x.asignacion_id, new
+                        { @class = "form-control", disabled = true })
+                    </div>
+                    <div class="form-group col-4">
+                        @Html.Label("Semestre")
+                        <select name="semestre_id" class="form-control">
+                            <option @(Model.semestre_id.Equals("") ? "Selected" : "") value="">
+                                -- Seleccione --
+                            </option>
+                            @foreach (var s in semestre)
+                            {
+                                <option @(Model.semestre_id.Equals(s.semestre_id) ? "Selected" : "") value="@s.semestre_id">@s.nombre</option>
+                            }
+                        </select>
+                        @Html.ValidationMessageFor(x => x.semestre_id, null,
+                                                 new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-4">
+                        @Html.Label("Fecha de Creacion")
+                        @Html.TextBoxFor(x => x.fecharegistro, "{0:dd/MM/yyyy}", new
+                        { @class = "form-control", @id = "date-picker", })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-9">
+                        @Html.Label("Titulo")
+                        @Html.TextBoxFor(x => x.titulo, new
+                        { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.titulo, null,
+                                                 new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-3">
+                        @Html.Label("Estado")
+                        <input id="estadoCheckbox" type="checkbox" data-toggle="toggle" @(Model.estado == "A" ? "checked" : "")
+                               data-on="Activo" data-off="Inactivo" data-size="normal" data-onstyle="success" data-offstyle="danger" data-width="100%">
+                        <input name="estado" id="estado" type="hidden" value="@(Model.estado == "A" ? "A" : "I")">
+                    </div>
+                </div>
+            </div>            
+        </div>
+    </div>
+    <br />
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary">Grabar</button>
+        <a href="~/Asignacion" class="btn btn-danger">Cancelar</a>
+    </div>
+}
+<hr />
+>>>>>>> parent of b8aa46b... Nuevo master.
+=======
+</script>
+>>>>>>> parent of dd6ed62... actualización vistas
+>>>>>>> parent of 06eb0ea... Limpieza Master

@@ -116,6 +116,7 @@ namespace Sistema_MVC_Grupo_X.Models
                 throw;
             }
         }
+<<<<<<< HEAD
 
         //metodo validar login
         public ResponseModel validarLogin(string Usuario, string Password)
@@ -147,5 +148,7 @@ namespace Sistema_MVC_Grupo_X.Models
             }
             return rm;
         }
+=======
+>>>>>>> parent of 06eb0ea... Limpieza Master
     }
 }

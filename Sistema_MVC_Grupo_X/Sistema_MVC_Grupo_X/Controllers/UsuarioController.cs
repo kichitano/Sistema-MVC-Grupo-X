@@ -4,7 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Sistema_MVC_Grupo_X.Models;
+<<<<<<< HEAD
 using Sistema_MVC_Grupo_X.Filters;
+=======
+>>>>>>> parent of 06eb0ea... Limpieza Master
 
 namespace Sistema_MVC_Grupo_X.Controllers
 {
@@ -12,7 +15,10 @@ namespace Sistema_MVC_Grupo_X.Controllers
     {
         private Usuario objUsuario = new Usuario();
         private Docente objDocente = new Docente();
+<<<<<<< HEAD
         [Autenticado]
+=======
+>>>>>>> parent of 06eb0ea... Limpieza Master
         //GET
         public ActionResult Index()
         {
