@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Sistema_MVC_Grupo_X.Models;
+using Sistema_MVC_Grupo_X.Filters;
 
 namespace Sistema_MVC_Grupo_X.Controllers
 {
@@ -11,6 +12,7 @@ namespace Sistema_MVC_Grupo_X.Controllers
     {
         private Usuario objUsuario = new Usuario();
         private Docente objDocente = new Docente();
+        [Autenticado]
         //GET
         public ActionResult Index()
         {

@@ -107,7 +107,13 @@
     <Content Include="Assets\js\bootstrap.bundle.min.js" />
     <Content Include="Assets\js\bootstrap.js" />
     <Content Include="Assets\js\bootstrap.min.js" />
+    <Content Include="Assets\js\ini.js" />
     <Content Include="Assets\js\jquery-3.3.0.min.js" />
+    <Content Include="Assets\js\jquery.form.js" />
+    <Content Include="Assets\js\jquery.js" />
+    <Content Include="Assets\js\jquery.validate.min.js" />
+    <Content Include="Assets\js\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Avatars\usuario 1.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
@@ -184,8 +190,10 @@
     <Compile Include="Controllers\ControlController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\DocenteController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SemestreController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Filters\AdminFilters.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -199,9 +207,12 @@
     <Compile Include="Models\Estudiante.cs" />
     <Compile Include="Models\EvidenciaActividad.cs" />
     <Compile Include="Models\EvidenciaCriterio.cs" />
+    <Compile Include="Models\HashHelper.cs" />
     <Compile Include="Models\Modelo.cs" />
     <Compile Include="Models\Modelo_Sistema.cs" />
+    <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Models\Semestre.cs" />
+    <Compile Include="Models\SessionHelper.cs" />
     <Compile Include="Models\sysdiagrams.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -238,6 +249,7 @@
     <Content Include="Views\Control\Visualizar.cshtml" />
     <Content Include="Views\Asignacion\Index.cshtml" />
     <Content Include="Views\Asignacion\AgregarEditar.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

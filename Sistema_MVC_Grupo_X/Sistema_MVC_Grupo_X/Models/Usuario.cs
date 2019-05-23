@@ -116,5 +116,36 @@ namespace Sistema_MVC_Grupo_X.Models
                 throw;
             }
         }
+
+        //metodo validar login
+        public ResponseModel validarLogin(string Usuario, string Password)
+        {
+            var rm = new ResponseModel();
+            try
+            {
+                using (var db = new Modelo_Sistema())
+                {
+                    Password = HashHelper.SHA1(Password);
+
+                    var usuario = db.Usuario.Where(x => x.nombre == Usuario)
+                                            .Where(x => x.clave == Password)
+                                            .SingleOrDefault();
+                    if(usuario != null)
+                    {
+                        SessionHelper.AddUserToSession(usuario.usuario_id.ToString());
+                        rm.SetResponse(true);
+                    }
+                    else
+                    {
+                        rm.SetResponse(false,"Usuario o Password incorrectos...");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return rm;
+        }
     }
 }
