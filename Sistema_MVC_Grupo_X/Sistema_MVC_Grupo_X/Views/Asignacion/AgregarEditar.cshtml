@@ -1,0 +1,158 @@
+﻿@model Sistema_MVC_Grupo_X.Models.Asignacion
+@{
+    List<Sistema_MVC_Grupo_X.Models.Semestre> semestre = ViewBag.Semestre;
+    List<Sistema_MVC_Grupo_X.Models.Docente> docente = ViewBag.Docente;
+    ViewBag.Title = "AgregarEditar";
+}
+
+<h2>Agregar Editar</h2>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="~/Control/Index">Asignacion</a>
+        </li>
+        <li class="breadcrumb-item active">
+            @(Model.asignacion_id > 0 ? Model.titulo : "Nuevo Registro")
+        </li>
+    </ol>
+</nav>
+@using (Html.BeginForm("Guardar", "Asignacion", FormMethod.Post, new { id = "frm-asignacion" }))
+{
+    @Html.HiddenFor(x => x.asignacion_id)
+    <div class="card">
+        <div class="card-header">Información de Asignacion</div>
+        <div class="card-body">   
+            <div class="container">
+                <div class="row">
+                    <div class="form-group col-4">
+                        @Html.Label("Id")
+                        @Html.TextBoxFor(x => x.asignacion_id, new
+                        { @class = "form-control", disabled = true })
+                    </div>
+                    <div class="form-group col-4">
+                        @Html.Label("Semestre")
+                        <select name="semestre_id" class="form-control">
+                            <option @(Model.semestre_id.Equals("") ? "Selected" : "") value="">
+                                -- Seleccione --
+                            </option>
+                            @foreach (var s in semestre)
+                            {
+                            <option @(Model.semestre_id.Equals(s.semestre_id) ? "Selected" : "") value="@s.semestre_id">@s.nombre</option>
+                            }
+                        </select>
+                        @Html.ValidationMessageFor(x => x.semestre_id, null,
+                                          new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-4">
+                        @Html.Label("Fecha de Creacion")
+                        @Html.TextBoxFor(x => x.fecharegistro, "{0:dd/MM/yyyy}", new
+                        { @class = "form-control", @id = "date-picker", })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-9">
+                        @Html.Label("Titulo")
+                        @Html.TextBoxFor(x => x.titulo, new
+                        { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.titulo, null,
+                                          new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-3">
+                        @Html.Label("Estado")
+                        <input id="estadoCheckbox" type="checkbox" data-toggle="toggle" @(Model.estado == "A" ? "checked" : "")
+                               data-on="Activo" data-off="Inactivo" data-size="normal" data-onstyle="success" data-offstyle="danger" data-width="100%">
+                        <input name="estado" id="estado" type="hidden" value="@(Model.estado == "A" ? "A" : "I")">
+                    </div>
+                </div>
+                <hr style="height:1px; border:none; color:#000; background-color:#000;"/>
+                <div class="row align-content-stretch">
+                    <div class="form-group col-9">
+                        <b>@Html.Label("Detalle Asignacion")</b>
+                    </div>
+                    <div class="form-group col-3">
+                        <button type="button" class="btn btn-block btn-success" onclick="crearElementos('cuerpoTabla')">
+                            <span class="glyphicon glyphicon-plus">Agregar detalle</span>
+                        </button>
+                    </div>
+                </div>
+
+                @* Creando lista invisible *@
+                <div hidden>
+                    <select id="listaDocentes" name="docente_id" class="form-control">
+                            <option value="x">-- Seleccione --</option>
+                            @foreach (var d in docente)
+                            {
+                            <option value="@d.docente_id">@d.nombre @d.apellido</option>
+                            }
+                        </select>
+                </div>
+                @* Fin de lista invisible *@
+
+
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th style="width:8%; text-align:center">Id</th>
+                            <th style="width:28%; text-align:center">Docente</th>
+                            <th style="width:27%; text-align:center">Criterio</th>
+                            <th style="width:12%; text-align:center">Estado</th>
+                            <th style="width:25%; text-align:center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoTabla">
+                        @* AGREGAR TODO EL CODIGO FOR PARA DETALLE *@
+                    </tbody>
+                </table>
+            </div>            
+        </div>
+    </div>
+    <br />
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary">Grabar</button>
+        <a href="~/Asignacion" class="btn btn-danger">Cancelar</a>
+    </div>
+}
+<hr />
+
+<script>
+    function crearElementos(tableID) {
+
+        // Get a reference to the table
+        let tableRef = document.getElementById(tableID);
+
+        // Insert a row at the end of the table
+        let newRow = tableRef.insertRow(-1);
+
+        // Insert a cell in the row at index || Agregar celdas
+        let celdaID = newRow.insertCell(0);
+        let celdaDocente = newRow.insertCell(1);
+        let celdaCriterio = newRow.insertCell(2);
+        let celdaEstado = newRow.insertCell(3);
+        let celdaAcciones = newRow.insertCell(4);
+
+        // Append a text node to the cell    || Agregar elementos a las celdas
+            //Texto ID
+        var idTexto = document.createTextNode('0');
+            //Copiando Lista invisible
+        var idListaDocentes = document.getElementById('listaDocentes');
+        var ListaDocentes = null;
+        ListaDocentes = idListaDocentes.cloneNode(true);
+
+        //Agregando los elementos dinamicamente
+
+        celdaID.appendChild(idTexto);
+        celdaDocente.appendChild(ListaDocentes);
+
+        //Ocultar IDs o valores necesarios
+        celdaID.style.editable = 'false';
+        //celdaID.style.textAlign = 'center';
+        for (var i = 0; i < array.length; i++) {
+            var option = document.createElement("option");
+            option.value = array[i];
+            option.text = array[i];
+            listaDocente.appendChild(option);
+        }
+
+    }
+</script>
