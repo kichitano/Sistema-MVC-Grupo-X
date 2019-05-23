@@ -2,58 +2,46 @@
 @{
     ViewBag.Title = "Index";
 }
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <h1>Gestión de Asignación</h1>
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Asignación</a></li>
-        <li class="active"> Index</li>
-    </ol>
-</section>
-<!-- Content Header (Page header) -->
-<!-- Main content -->
-<section class="content container-fluid">
-    <div class="box">
-        <div class="box-header with-border">
-            <div class="text-right">
-                <a href="~/Asignacion/AgregarEditar/" class="btn btn-success text-right">Nuevo Registro</a>
-            </div>
-            <br />
-        </div>
-        <div class="box-body">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th style="width:50px; text-align:center">Id</th>
-                        <th style="width:80px; text-align:center">Semestre</th>
-                        <th style="width:100px; text-align:center">Titulo</th>
-                        <th style="width:80px; text-align:center">Fecha de Registro</th>
-                        <th style="width:80px; text-align:center">Estado</th>
-                        <th style="width:200px; text-align:center">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var a in Model)
-                    {
-                        <tr>
-                            <th style="text-align:center">@(a.asignacion_id)</th>
-                            <th style="text-align:center">@(a.Semestre.nombre)</th>
-                            <th style="text-align:center">@(a.titulo)</th>
-                            <th style="text-align:center">@(a.fecharegistro.Value.ToString("dd/MM/yyyy"))</th>
-                            <th style="text-align:center">@(a.estado == "A" ? "Activo" : "Inactivo")</th>
-                            <th style="text-align:center; align-content:center">
-                                <a href="~/Asignacion/Visualizar/@a.asignacion_id"
-                                   class="btn btn-xs btn-warning" style="padding:inherit">Visualizar</a>
-                                <a href="~/Asignacion/AgregarEditar/@a.asignacion_id"
-                                   class="btn btn-xs btn-primary" style="padding:inherit">Modificar</a>
-                                <a href="~/Asignacion/Eliminar/@a.asignacion_id"
-                                   class="btn btn-xs btn-danger" style="padding:inherit"
-                                   onclick="return confirm('¿Esta seguro de eliminar ...?');">Eliminar</a>
-                            </th>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</section>
+
+<h2 class="card text-center">Gestión de Asignacion</h2>
+<br />
+<div class="text-right">
+    <a href="~/Asignacion/AgregarEditar/" class="btn btn-secondary text-right">
+        Nuevo Registro
+    </a>
+</div>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th style="width:50px; text-align:center">Id</th>
+            <th style="width:80px; text-align:center">Semestre</th>
+            <th style="width:100px; text-align:center">Titulo</th>
+            <th style="width:80px; text-align:center">Fecha de Registro</th>
+            <th style="width:80px; text-align:center">Estado</th>
+            <th style="width:200px; text-align:center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var a in Model)
+        {
+            <tr>
+                <th style="text-align:center">@(a.asignacion_id)</th>
+                <th style="text-align:center">@(a.Semestre.nombre)</th>
+                <th style="text-align:center">@(a.titulo)</th>
+                <th style="text-align:center">@(a.fecharegistro.Value.ToString("dd/MM/yyyy"))</th>
+                <th style="text-align:center">@(a.estado == "A" ? "Activo" : "Inactivo")</th>
+                <th style="text-align:center; align-content:center">
+                    <a href="~/Asignacion/Visualizar/@a.asignacion_id"
+                       class="btn btn-xs btn-warning" style="padding:inherit">Visualizar</a>
+                    <a href="~/Asignacion/AgregarEditar/@a.asignacion_id"
+                       class="btn btn-xs btn-primary" style="padding:inherit">Modificar</a>
+                    <a href="~/Asignacion/Eliminar/@a.asignacion_id"
+                       class="btn btn-xs btn-danger" style="padding:inherit"
+                       onclick="return confirm('¿Esta seguro de eliminar ...?');">Eliminar</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>
+<hr />
