@@ -72,11 +72,6 @@ namespace Sistema_MVC_Grupo_X.Models
                 .Property(e => e.estado)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Control>()
-                .HasMany(e => e.ControlAsignacion)
-                .WithRequired(e => e.Control)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<ControlAsignacion>()
                 .Property(e => e.duracion)
                 .IsUnicode(false);
@@ -158,6 +153,11 @@ namespace Sistema_MVC_Grupo_X.Models
             modelBuilder.Entity<DetalleAsignacion>()
                 .Property(e => e.estado)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<DetalleAsignacion>()
+                .HasMany(e => e.ControlAsignacion)
+                .WithRequired(e => e.DetalleAsignacion)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Docente>()
                 .Property(e => e.dni)
