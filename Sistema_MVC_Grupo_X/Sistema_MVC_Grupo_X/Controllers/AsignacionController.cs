@@ -12,6 +12,7 @@ namespace Sistema_MVC_Grupo_X.Controllers
         private Asignacion objAsignacion = new Asignacion();
         private Semestre objSemestre = new Semestre();
         private Docente objDocente = new Docente();
+        private Criterio objCriterio = new Criterio();
         //GET
         public ActionResult Index()
         {
@@ -29,6 +30,7 @@ namespace Sistema_MVC_Grupo_X.Controllers
         {
             ViewBag.Semestre = objSemestre.Listar();
             ViewBag.Docente = objDocente.Listar();
+            ViewBag.Criterio = objCriterio.Listar();
             return View(
                 id == 0 ? new Asignacion() //Agrega un nuevo objeto
                 : objAsignacion.Obtener(id) //Devuelva un objeto

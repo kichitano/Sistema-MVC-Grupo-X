@@ -2,6 +2,7 @@
 @{
     List<Sistema_MVC_Grupo_X.Models.Semestre> semestre = ViewBag.Semestre;
     List<Sistema_MVC_Grupo_X.Models.Docente> docente = ViewBag.Docente;
+    List<Sistema_MVC_Grupo_X.Models.Criterio> criterio = ViewBag.Criterio;
     ViewBag.Title = "AgregarEditar";
 }
 
@@ -60,9 +61,12 @@
                     </div>
                     <div class="form-group col-3">
                         @Html.Label("Estado")
-                        <input id="estadoCheckbox" type="checkbox" data-toggle="toggle" @(Model.estado == "A" ? "checked" : "")
-                               data-on="Activo" data-off="Inactivo" data-size="normal" data-onstyle="success" data-offstyle="danger" data-width="100%">
-                        <input name="estado" id="estado" type="hidden" value="@(Model.estado == "A" ? "A" : "I")">
+                        <div id="switchEstado">
+                            <input id="estadoCheckbox" type="checkbox" data-toggle="toggle" @(Model.estado == "A" ? "checked" : "")
+                                   data-on="Activo" data-off="Inactivo" data-size="normal" data-onstyle="success" data-offstyle="danger" data-width="100%">
+                        </div>
+                            <input name="estado" id="estado" type="hidden" value="@(Model.estado == "A" ? "A" : "I")">
+                        
                     </div>
                 </div>
 
@@ -96,8 +100,19 @@
                                 }
                             </select>
                     </div>
-                    @* Fin de lista invisible *@
+                    @* Fin de lista docentes invisible *@
 
+                    @* Creando lista criterio invisible *@
+                    <div hidden>
+                        <select id="listaCriterios" name="criterio_id" class="form-control">
+                                <option value="x">-- Seleccione --</option>
+                                @foreach (var c in criterio)
+                                {
+                                <option value="@c.criterio_id">@c.nombre_spanish</option>
+                                }
+                            </select>
+                    </div>
+                    @* Fin de lista criterio invisible *@
 
                     <table class="table">
                         <thead class="thead-dark">
@@ -152,25 +167,30 @@
         // Append a text node to the cell    || Agregar elementos a las celdas
             //Texto ID
         var idTexto = document.createTextNode('0');
-            //Copiando Lista invisible
+            //Copiando Lista docente invisible
         var idListaDocentes = document.getElementById('listaDocentes');
         var ListaDocentes = null;
         ListaDocentes = idListaDocentes.cloneNode(true);
+            //Copiando Lista criterio invisible
+        var idListaCriterios = document.getElementById('listaCriterios');
+        var ListaCriterios = null;
+        ListaCriterios = idListaCriterios.cloneNode(true);
+            //Copiando Switch estado prueba*
+        var idSwitchEstado = document.getElementById('switchEstado');
+        var SwitchEstados = null;
+        SwitchEstados = idSwitchEstado.cloneNode(true);
+
 
         //Agregando los elementos dinamicamente
 
         celdaID.appendChild(idTexto);
         celdaDocente.appendChild(ListaDocentes);
+        celdaCriterio.appendChild(ListaCriterios);
+        celdaEstado.appendChild(SwitchEstados); // CREAR EL BOTON DESDE 0 o CON OTRO ID PARA QUE FUNCIONE POR SEPARADO
 
         //Ocultar IDs o valores necesarios
         celdaID.style.editable = 'false';
         //celdaID.style.textAlign = 'center';
-        for (var i = 0; i < array.length; i++) {
-            var option = document.createElement("option");
-            option.value = array[i];
-            option.text = array[i];
-            listaDocente.appendChild(option);
-        }
 
     }
 </script>
