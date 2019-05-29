@@ -106,7 +106,7 @@ namespace Sistema_MVC_Grupo_X.Models
             {
                 using (var db = new Modelo_Sistema())
                 {
-                    if (this.modelo_id > 0)
+                    if (this.criterio_id > 0)
                     { //si existe un valor mayor a 0 es x que existe el registro
                         db.Entry(this).State = EntityState.Modified;
 
