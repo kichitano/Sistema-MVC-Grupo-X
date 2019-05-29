@@ -190,6 +190,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AsignacionController.cs" />
     <Compile Include="Controllers\ControlController.cs" />
+    <Compile Include="Controllers\CriterioController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\DocenteController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -256,6 +257,9 @@
     <Content Include="Views\Modelo\Index.cshtml" />
     <Content Include="Views\Modelo\Visualizar.cshtml" />
     <Content Include="Views\Modelo\AgregarEditar.cshtml" />
+    <Content Include="Views\Criterio\Index.cshtml" />
+    <Content Include="Views\Criterio\AgregarEditar.cshtml" />
+    <Content Include="Views\Criterio\Visualizar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

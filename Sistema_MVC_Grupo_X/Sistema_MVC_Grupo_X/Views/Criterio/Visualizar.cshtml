@@ -1,0 +1,39 @@
+﻿@model Sistema_MVC_Grupo_X.Models.Criterio
+@{
+    ViewBag.Title = "Visualizar";
+}
+
+<h2>Visualizar</h2>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="~/Criterio/Index">Control</a>
+        </li>
+        <li class="breadcrumb-item active">@Model.nombre_spanish</li>
+    </ol>
+</nav>
+
+<div class="card">
+    <div class="card-header">
+        Información detallada del control
+    </div>
+    <div class="card-body">
+        <dl class="dl-horizontal">
+            <dt>Id</dt>
+            <dd>@Model.criterio_id</dd>
+            <dt>Modelo</dt>
+            <dd>@Model.Modelo.nombre</dd>
+            <dt>Nombre Español</dt>
+            <dd>@Model.nombre_spanish</dd>
+            <dt>Nombre Ingles</dt>
+            <dd>@Model.nombre_english</dd>
+            <dt>URL</dt>
+            <dd>@Model.urlcriterio</dd>
+            <dt>Descripción</dt>
+            <dd>@Model.descripcion</dd>
+            <dt>Estado</dt>
+            <dd>@(Model.estado == "A" ? "Activo" : "Inactivo")</dd>
+        </dl>
+    </div>
+</div>
+<hr />

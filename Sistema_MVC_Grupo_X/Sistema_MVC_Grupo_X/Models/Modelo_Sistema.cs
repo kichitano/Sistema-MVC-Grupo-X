@@ -147,7 +147,6 @@ namespace Sistema_MVC_Grupo_X.Models
             modelBuilder.Entity<Criterio>()
                 .HasMany(e => e.EvidenciaCriterio)
                 .WithRequired(e => e.Criterio)
-                .HasForeignKey(e => e.evidencia_id)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Criterio>()

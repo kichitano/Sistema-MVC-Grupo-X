@@ -1,0 +1,47 @@
+﻿@model List<Sistema_MVC_Grupo_X.Models.Criterio>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="card text-center">Gestión de Criterio</h2>
+<br />
+<div class="text-right">
+    <a href="~/Criterio/AgregarEditar/" class="btn btn-secondary text-right">
+        Nuevo Registro
+    </a>
+</div>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th style="width:50px; text-align:center">Id</th>
+            <th style="width:80px; text-align:center">Modelo</th>
+            <th style="width:100px; text-align:center">Nombre ESP</th>
+            <th style="width:100px; text-align:center">Nombre ING</th>
+            <th style="width:80px; text-align:center">Estado</th>
+            <th style="width:200px; text-align:center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <th style="text-align:center">@(c.criterio_id)</th>
+                <th style="text-align:center">@(c.Modelo.nombre)</th>
+                <th style="text-align:center">@(c.nombre_spanish)</th>
+                <th style="text-align:center">@(c.nombre_english)</th>
+                <th style="text-align:center">@(c.estado == "A" ? "Activo" : "Inactivo")</th>
+                <th style="text-align:center; align-content:center">
+                    <a href="~/Criterio/Visualizar/@c.criterio_id"
+                       class="btn btn-xs btn-warning" style="padding:inherit">Visualizar</a>
+                    <a href="~/Criterio/AgregarEditar/@c.criterio_id"
+                       class="btn btn-xs btn-primary" style="padding:inherit">Modificar</a>
+                    <a href="~/Criterio/Eliminar/@c.criterio_id"
+                       class="btn btn-xs btn-danger" style="padding:inherit"
+                       onclick="return confirm('¿Esta seguro de eliminar ...?');">Eliminar</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>
+<hr />

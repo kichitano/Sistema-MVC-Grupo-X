@@ -1,0 +1,86 @@
+﻿@model Sistema_MVC_Grupo_X.Models.Criterio
+@{
+    List<Sistema_MVC_Grupo_X.Models.Modelo> modelo = ViewBag.Modelo;
+    ViewBag.Title = "AgregarEditar";
+}
+
+<h2>Agregar Editar</h2>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="~/Criterio/Index">Control</a>
+        </li>
+        <li class="breadcrumb-item active">
+            @(Model.criterio_id > 0 ? Model.nombre_spanish : "Nuevo Registro")
+        </li>
+    </ol>
+</nav>
+@using (Html.BeginForm("Guardar", "Criterio", FormMethod.Post, new { id = "frm-criterio" }))
+{
+    @Html.HiddenFor(x => x.criterio_id)
+    <div class="card">
+        <div class="card-header">Información de Criterio</div>
+        <div class="card-body">
+            <div class="form-group">
+                @Html.Label("Id")
+                @Html.TextBoxFor(x => x.criterio_id, new
+                { @class = "form-control", disabled = true })
+            </div>
+            <div class="form-group">
+                @Html.Label("Modelo")
+                <select name="modelo_id" class="form-control">
+                    <option @(Model.modelo_id.Equals("") ? "Selected" : "") value="">
+                        -- Seleccione --
+                    </option>
+                    @foreach (var m in modelo)
+                    {
+                        <option @(Model.modelo_id.Equals(m.modelo_id) ? "Selected" : "") value="@m.modelo_id">@m.nombre</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(x => x.modelo_id, null,
+                                         new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Nombre Español")
+                @Html.TextBoxFor(x => x.nombre_spanish, new
+                { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.nombre_spanish, null,
+                                         new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Nombre Ingles")
+                @Html.TextBoxFor(x => x.nombre_english, new
+                { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.nombre_english, null,
+                                         new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.Label("URL - Vínculo")
+                @Html.TextBoxFor(x => x.urlcriterio, new
+                { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.urlcriterio, null,
+                                         new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Descripcion")
+                @Html.TextAreaFor(x => x.descripcion, new
+                { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.descripcion, null,
+                                         new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Estado")
+                <input id="estadoCheckbox" type="checkbox" data-toggle="toggle" @(Model.estado == "A" ? "checked" : "")
+                       data-on="Activo" data-off="Inactivo" data-size="large" data-onstyle="success" data-offstyle="danger" data-width="100%" />
+                <input name="estado" id="estado" type="hidden" value="@(Model.estado == "A" ? "A" : "I")" />
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="text-right">
+        <button type="submit" id="otroBoton" class="btn btn-primary" onclick="submit();">Grabar</button>
+        <a href="~/Criterio" class="btn btn-danger">Cancelar</a>
+    </div>
+}
+<hr />

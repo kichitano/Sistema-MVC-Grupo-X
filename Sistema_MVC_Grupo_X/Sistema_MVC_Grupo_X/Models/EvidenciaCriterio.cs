@@ -11,11 +11,9 @@ namespace Sistema_MVC_Grupo_X.Models
     [Table("EvidenciaCriterio")]
     public partial class EvidenciaCriterio
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public int evidencia_id { get; set; }
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int criterio_id { get; set; }
 
         [Required]

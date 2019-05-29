@@ -118,6 +118,5 @@ namespace Sistema_MVC_Grupo_X.Models
                 throw;
             }
         }
-
     }
 }
