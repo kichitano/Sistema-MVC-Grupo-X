@@ -93,6 +93,7 @@ namespace Sistema_MVC_Grupo_X.Models
                         db.Entry(this).State = EntityState.Added;
                     }
                     db.SaveChanges();
+                    var row = asignacion_id;
                 }
             }
             catch (Exception ex)

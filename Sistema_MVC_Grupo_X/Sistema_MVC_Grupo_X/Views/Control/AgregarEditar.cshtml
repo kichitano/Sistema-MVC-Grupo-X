@@ -50,20 +50,20 @@
             </div>
             <div class="form-group">
                 @Html.Label("Fecha de Creacion")
-                @Html.TextBoxFor(x => x.fechacreacion, "{0:dd/MM/yyyy}",new
-                { @class = "form-control" , @id = "date-picker" ,})
+                @Html.TextBoxFor(x => x.fechacreacion, "{0:dd/MM/yyyy}",
+                    new { @class = "form-control" , @id = "date-picker"})
             </div>
             <div class="form-group">
                 @Html.Label("Estado")
                 <input id="estadoCheckbox" type="checkbox" data-toggle="toggle" @(Model.estado == "A" ? "checked" : "") 
-                       data-on="Activo" data-off="Inactivo" data-size="large" data-onstyle="success" data-offstyle="danger" data-width="100%">
-                <input name="estado" id="estado" type="hidden" value="@(Model.estado == "A" ? "A" : "I")">
+                       data-on="Activo" data-off="Inactivo" data-size="large" data-onstyle="success" data-offstyle="danger" data-width="100%" />
+                <input name="estado" id="estado" type="hidden" value="@(Model.estado == "A" ? "A" : "I")" />
             </div>
         </div>
     </div>
     <br />
     <div class="text-right">
-        <button type="submit" class="btn btn-primary">Grabar</button>
+        <button type="submit" id="otroBoton" class="btn btn-primary" onclick="submit();">Grabar</button>
         <a href="~/Control" class="btn btn-danger">Cancelar</a>
     </div>
 }

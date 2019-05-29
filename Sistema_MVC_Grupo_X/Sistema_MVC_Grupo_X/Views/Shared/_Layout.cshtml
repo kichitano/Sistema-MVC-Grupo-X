@@ -14,11 +14,6 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Sistema MVC</title>
-
-
-
-
-
     <!--Boostrap-->
     <link href="~/Scripts/bootstrap.css" rel="stylesheet" />
     <link href="~/Scripts/bootstrap.min.css" rel="stylesheet" />
@@ -30,7 +25,6 @@
     <!-- Required jQuery and jQuery UI Javascript references -->
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     <script src="~/Scripts/bootstrap4-toggle.min.js"></script>
-
 </head>
 <body>
     @if (controlador != "login")
@@ -57,9 +51,10 @@
                             <a class="dropdown-item" href="~/Criterio/Index">Criterio</a>
                             <a class="dropdown-item" href="~/Docente/Index">Docente</a>
                             <a class="dropdown-item" href="~/Usuario/Index">Usuario</a>
+                            <a class="dropdown-item" href="~/Modelo/Index">Modelo</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="~/Asignacion/Index">ASIGNACIÓN</a>
-                            <a class="dropdown-item" href="~/Control/Index">CONTROL</a>
+                            <a class="dropdown-item" href="~/Asignacion/Index">Asignación</a>
+                            <a class="dropdown-item" href="~/Control/Index">Control</a>
                         </div>
                     </li>
 
@@ -69,13 +64,14 @@
                             Consultas
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="~/Semestre/Consulta">SEMESTRE</a>
-                            <a class="dropdown-item" href="~/Criterio/Consulta">CRITERIO</a>
-                            <a class="dropdown-item" href="~/Docente/Consulta">DOCENTE</a>
-                            <a class="dropdown-item" href="~/Usuario/Consulta">USUARIO</a>
+                            <a class="dropdown-item" href="~/Semestre/Index">Semestre</a>
+                            <a class="dropdown-item" href="~/Criterio/Index">Criterio</a>
+                            <a class="dropdown-item" href="~/Docente/Index">Docente</a>
+                            <a class="dropdown-item" href="~/Usuario/Index">Usuario</a>
+                            <a class="dropdown-item" href="~/Modelo/Index">Modelo</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="~/Asignacion/Consulta">ASIGNACIÓN</a>
-                            <a class="dropdown-item" href="~/Control/Consulta">CONTROL</a>
+                            <a class="dropdown-item" href="~/Asignacion/Index">Asignación</a>
+                            <a class="dropdown-item" href="~/Control/Index">Control</a>
                         </div>
                     </li>
 
@@ -85,13 +81,14 @@
                             Reportes
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="~/Semestre/Reportes">SEMESTRE</a>
-                            <a class="dropdown-item" href="~/Criterio/Reportes">CRITERIO</a>
-                            <a class="dropdown-item" href="~/Docente/Reportes">DOCENTE</a>
-                            <a class="dropdown-item" href="~/Usuario/Reportes">USUARIO</a>
+                            <a class="dropdown-item" href="~/Semestre/Index">Semestre</a>
+                            <a class="dropdown-item" href="~/Criterio/Index">Criterio</a>
+                            <a class="dropdown-item" href="~/Docente/Index">Docente</a>
+                            <a class="dropdown-item" href="~/Usuario/Index">Usuario</a>
+                            <a class="dropdown-item" href="~/Modelo/Index">Modelo</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="~/Asignacion/Reportes">ASIGNACIÓN</a>
-                            <a class="dropdown-item" href="~/Control/Reportes">CONTROL</a>
+                            <a class="dropdown-item" href="~/Asignacion/Index">Asignación</a>
+                            <a class="dropdown-item" href="~/Control/Index">Control</a>
                         </div>
                     </li>
                 </ul>
@@ -128,6 +125,8 @@
     <script src="~/Assets/js/jquery.form.js"></script>
     <script src="~/Assets/js/jquery.validate.min.js"></script>
     <script src="~/Assets/js/jquery.validate.unobtrusive.min.js"></script>
+
+
 </body>
 </html>
 
@@ -152,7 +151,7 @@
             yearSuffix: ''
         };
         $.datepicker.setDefaults($.datepicker.regional["es"]);
-        // This will make every element with the class "date-picker" into a DatePicker element
+        // This will make every element with the id "date-picker" into a DatePicker element
         $('#date-picker').datepicker();
     });
     $(function () {

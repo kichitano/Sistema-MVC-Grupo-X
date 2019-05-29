@@ -182,7 +182,9 @@
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -191,6 +193,7 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\DocenteController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ModeloController.cs" />
     <Compile Include="Controllers\SemestreController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Filters\AdminFilters.cs" />
@@ -250,6 +253,9 @@
     <Content Include="Views\Asignacion\Index.cshtml" />
     <Content Include="Views\Asignacion\AgregarEditar.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Modelo\Index.cshtml" />
+    <Content Include="Views\Modelo\Visualizar.cshtml" />
+    <Content Include="Views\Modelo\AgregarEditar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

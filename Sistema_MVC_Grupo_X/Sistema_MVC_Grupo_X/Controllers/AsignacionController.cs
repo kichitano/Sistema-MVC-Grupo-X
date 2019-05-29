@@ -41,7 +41,7 @@ namespace Sistema_MVC_Grupo_X.Controllers
             if (ModelState.IsValid)
             {
                 objAsignacion.Guardar();
-                return Redirect("~/Asignacion");
+                return Redirect("~/Asignacion/AgregarEditar/"+objAsignacion.asignacion_id);
             }
             else
             {
