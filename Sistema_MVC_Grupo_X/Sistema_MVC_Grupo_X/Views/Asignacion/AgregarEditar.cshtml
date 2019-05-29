@@ -11,7 +11,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="~/Control/Index">Asignacion</a>
+            <a href="~/Asignacion/Index">Asignacion</a>
         </li>
         <li class="breadcrumb-item active">
             @(Model.asignacion_id > 0 ? Model.titulo : "Nuevo Registro")
@@ -114,13 +114,26 @@
                     </div>
                     @* Fin de lista criterio invisible *@
 
-                    <table class="table">
+                    @* Creadno lista de estado para tabla *@
+
+                    <div hidden>
+                        <select id="listaEstados" name="estado" class="form-control">
+                                <option value="x">-- Seleccione --</option>
+                                <option value="A">Activo</option>
+                                <option value="I">Inactivo</option>
+                            </select>
+                    </div>
+
+                    @* Fin de lista de estado para tabla*@
+
+
+                    <table class="table" id="tablaElementos">
                         <thead class="thead-dark">
                             <tr>
                                 <th style="width:8%; text-align:center">Id</th>
-                                <th style="width:28%; text-align:center">Docente</th>
-                                <th style="width:27%; text-align:center">Criterio</th>
-                                <th style="width:12%; text-align:center">Estado</th>
+                                <th style="width:25%; text-align:center">Docente</th>
+                                <th style="width:25%; text-align:center">Criterio</th>
+                                <th style="width:20%; text-align:center">Estado</th>
                                 <th style="width:25%; text-align:center">Acciones</th>
                             </tr>
                         </thead>
@@ -176,21 +189,80 @@
         var ListaCriterios = null;
         ListaCriterios = idListaCriterios.cloneNode(true);
             //Copiando Switch estado prueba*
-        var idSwitchEstado = document.getElementById('switchEstado');
-        var SwitchEstados = null;
-        SwitchEstados = idSwitchEstado.cloneNode(true);
+        var idListaEstado = document.getElementById('listaEstados');
+        var ListaEstados = null;
+        ListaEstados = idListaEstado.cloneNode(true);
+            //Agregando 3 botones
+        var btnAgregarEditar = document.createElement('button');
+                //Configurando boton AGREGAR
+        btnAgregarEditar.innerHTML = "Agregar";
+        btnAgregarEditar.id = "btnAgregar"
+        btnAgregarEditar.type = 'button';
+        btnAgregarEditar.className = "btn btn-success"
+        btnAgregarEditar.setAttribute('onClick','guardarDetalleAsignacion(this,@Model.asignacion_id)')
 
+
+        var btnCancelar = document.createElement('button');
+                //Configurando boton CANCELAR
+        btnCancelar.innerHTML = "Cancelar";
+        btnCancelar.type = 'button';
+        btnCancelar.className = "btn btn-danger"
+        btnCancelar.setAttribute('onClick','eliminarElementos(this)')
 
         //Agregando los elementos dinamicamente
 
         celdaID.appendChild(idTexto);
         celdaDocente.appendChild(ListaDocentes);
         celdaCriterio.appendChild(ListaCriterios);
-        celdaEstado.appendChild(SwitchEstados); // CREAR EL BOTON DESDE 0 o CON OTRO ID PARA QUE FUNCIONE POR SEPARADO
+        celdaEstado.appendChild(ListaEstados); // CREAR EL BOTON DESDE 0 o CON OTRO ID PARA QUE FUNCIONE POR SEPARADO  ---- Se creo una lista para simplificar
+            
+        celdaAcciones.appendChild(btnAgregarEditar);
+        //celdaAcciones.appendChild(btnEliminar);
+        celdaAcciones.appendChild(btnCancelar);
 
         //Ocultar IDs o valores necesarios
         celdaID.style.editable = 'false';
-        //celdaID.style.textAlign = 'center';
 
     }
+
+    function eliminarElementos(r) {
+        //Obternet el parametro Index de la fila
+        var i = r.parentNode.parentNode.rowIndex;
+        //Eliminar la fila seleccionada
+        document.getElementById("tablaElementos").deleteRow(i);
+    }
+
+    function guardarDetalleAsignacion(r,asig_id) {
+        //Obtener el parametro Index de la fila
+        var i = r.parentNode.parentNode.rowIndex;
+        //Encontrar y colocar en variable el valor de la lista
+                //DOCENTE ID
+        var doce_id = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(1)").find('select :selected').val();
+
+        //FALTAN LAS DEMAS VARIABLES
+
+        alert(texto);
+        
+        ////var crit_id = i.find('select[name="criterio_id"]').val();
+        //var crit_id = document.getElementById("listaCriterios").val;
+
+        ////var esta = i.find('select[name="estado"]').val();
+        //var esta = document.getElementById("listaEstados").val;
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Guardar", "DetalleAsignacion")',
+            data: { asignacion_id: asig_id, docente_id: doce_id, criterio_id: crit_id, estado: esta},
+            success: function () {
+                alert("Guardado con éxito.");
+            },
+            error: function () {
+                alert("Error al registrar.");
+            }
+        })
+    }
+
+
 </script>
+
+
