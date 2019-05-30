@@ -183,15 +183,17 @@
                                                 @if (da.estado == "A")                      //LLENADO DE ESTADO
                                                 {
                                                     <option value="A" selected>Activo</option>
+                                                    <option value="I" >Inactivo</option>
                                                 }
                                                 else
                                                 {
+                                                    <option value="A" >Activo</option>
                                                     <option value="I" selected>Inactivo</option>
                                                 }                  
                                             </select>
                                         </td>
-                                        <td>
-                                            <button id="btnModificar" type="button" class="btn btn-warning" onclick="modificarDetalleAsignacion(@da.detalleasignacion_id)">Modificar</button>
+                                        <td class="row justify-content-around">
+                                            <button id="btnModificar" type="button" class="btn btn-warning" onclick="modificarDetalleAsignacion(this,@da.asignacion_id)">Modificar</button>
                                             <button id="btnEliminar" type="button" class="btn btn-danger" onclick="eliminarDetalleAsignacion(this,@Model.asignacion_id)">Eliminar</button>
                                         </td>
                                     }
@@ -275,11 +277,11 @@
         celdaEstado.appendChild(ListaEstados); // CREAR EL BOTON DESDE 0 o CON OTRO ID PARA QUE FUNCIONE POR SEPARADO  ---- Se creo una lista para simplificar
 
         celdaAcciones.appendChild(btnAgregarEditar);
-        //celdaAcciones.appendChild(btnEliminar);
         celdaAcciones.appendChild(btnCancelar);
 
         //Ocultar IDs o valores necesarios
         celdaID.style.editable = 'false';
+        celdaAcciones.className = "row justify-content-around";
 
     }
 
@@ -306,7 +308,7 @@
         $.ajax({
             type: "POST",
             url: '@Url.Action("Guardar", "DetalleAsignacion")',
-            data: { asignacion_id: asig_id, docente_id: doce_id, criterio_id: crit_id, estado: esta },
+            data: { detalleAsignacion_id: 0, asignacion_id: asig_id, docente_id: doce_id, criterio_id: crit_id, estado: esta },
             success: function () {
                 alert("Guardado con éxito.");
                 location.reload();
@@ -335,9 +337,9 @@
         $.ajax({
             type: "POST",
             url: '@Url.Action("Guardar", "DetalleAsignacion")',
-            data: { asignacion_id: asig_id, docente_id: doce_id, criterio_id: crit_id, estado: esta },
+            data: { detalleAsignacion_id: deAsid, asignacion_id: asig_id, docente_id: doce_id, criterio_id: crit_id, estado: esta },
             success: function () {
-                alert("Guardado con éxito.");
+                alert("Modificado con éxito.");
                 location.reload();
             },
             error: function () {

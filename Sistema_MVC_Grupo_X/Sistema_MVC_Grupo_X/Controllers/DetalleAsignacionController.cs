@@ -38,8 +38,9 @@ namespace Sistema_MVC_Grupo_X.Controllers
         }
 
         //Accion guardar
-        public ActionResult Guardar(int asignacion_id, int docente_id, int criterio_id, string estado)
+        public ActionResult Guardar(int detalleAsignacion_id, int asignacion_id, int docente_id, int criterio_id, string estado)
         {
+            objDetalleAsignacion.detalleasignacion_id = detalleAsignacion_id;
             objDetalleAsignacion.asignacion_id = asignacion_id;
             objDetalleAsignacion.docente_id = docente_id;
             objDetalleAsignacion.criterio_id = criterio_id;
