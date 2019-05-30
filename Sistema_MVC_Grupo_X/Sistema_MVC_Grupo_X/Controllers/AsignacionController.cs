@@ -13,6 +13,8 @@ namespace Sistema_MVC_Grupo_X.Controllers
         private Semestre objSemestre = new Semestre();
         private Docente objDocente = new Docente();
         private Criterio objCriterio = new Criterio();
+        private DetalleAsignacion objDetalleAsignacion = new DetalleAsignacion();
+
         //GET
         public ActionResult Index()
         {
@@ -31,6 +33,7 @@ namespace Sistema_MVC_Grupo_X.Controllers
             ViewBag.Semestre = objSemestre.Listar();
             ViewBag.Docente = objDocente.Listar();
             ViewBag.Criterio = objCriterio.Listar();
+            ViewBag.DetalleAsignacion = objDetalleAsignacion.Listar();
             return View(
                 id == 0 ? new Asignacion() //Agrega un nuevo objeto
                 : objAsignacion.Obtener(id) //Devuelva un objeto
@@ -43,7 +46,7 @@ namespace Sistema_MVC_Grupo_X.Controllers
             if (ModelState.IsValid)
             {
                 objAsignacion.Guardar();
-                return Redirect("~/Asignacion/AgregarEditar/"+objAsignacion.asignacion_id);
+                return Redirect("~/Asignacion/AgregarEditar/" + objAsignacion.asignacion_id);
             }
             else
             {

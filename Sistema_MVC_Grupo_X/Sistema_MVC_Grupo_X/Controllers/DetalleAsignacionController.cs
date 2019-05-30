@@ -48,7 +48,7 @@ namespace Sistema_MVC_Grupo_X.Controllers
             if (ModelState.IsValid)
             {
                 objDetalleAsignacion.Guardar();
-                return Redirect("~/Asignacion/AgregarEditar/"+asignacion_id);
+                return Redirect("~/Asignacion/AgregarEditar/" + asignacion_id);
             }
             else
             {
@@ -57,11 +57,11 @@ namespace Sistema_MVC_Grupo_X.Controllers
         }
 
         //Accion eliminar
-        public ActionResult Eliminar(int id)
+        public ActionResult Eliminar(int id,int asignacion_id)
         {
             objDetalleAsignacion.detalleasignacion_id = id;
             objDetalleAsignacion.Eliminar();
-            return Redirect("~/Control");
+            return Redirect("~/Asignacion/AgregarEditar/" + asignacion_id);
         }
     }
 }

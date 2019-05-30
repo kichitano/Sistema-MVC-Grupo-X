@@ -3,6 +3,7 @@
     List<Sistema_MVC_Grupo_X.Models.Semestre> semestre = ViewBag.Semestre;
     List<Sistema_MVC_Grupo_X.Models.Docente> docente = ViewBag.Docente;
     List<Sistema_MVC_Grupo_X.Models.Criterio> criterio = ViewBag.Criterio;
+    List<Sistema_MVC_Grupo_X.Models.DetalleAsignacion> detalleAsignacion = ViewBag.DetalleAsignacion;
     ViewBag.Title = "AgregarEditar";
 }
 
@@ -72,11 +73,7 @@
 
                 @* Si el registro existe, boton agregar detalle, sino no *@
 
-                @if (Model.asignacion_id == 0)
-                {
-
-                }
-                else
+                @if (!(Model.asignacion_id == 0))
                 {
                     <hr style="height:1px; border:none; color:#000; background-color:#000;"/>
                     <div class="row align-content-stretch">
@@ -98,7 +95,7 @@
                                 {
                                 <option value="@d.docente_id">@d.nombre @d.apellido</option>
                                 }
-                            </select>
+                        </select>
                     </div>
                     @* Fin de lista docentes invisible *@
 
@@ -110,7 +107,7 @@
                                 {
                                 <option value="@c.criterio_id">@c.nombre_spanish</option>
                                 }
-                            </select>
+                         </select>
                     </div>
                     @* Fin de lista criterio invisible *@
 
@@ -121,7 +118,7 @@
                                 <option value="x">-- Seleccione --</option>
                                 <option value="A">Activo</option>
                                 <option value="I">Inactivo</option>
-                            </select>
+                        </select>
                     </div>
 
                     @* Fin de lista de estado para tabla*@
@@ -140,7 +137,66 @@
                         <tbody id="cuerpoTabla">
 
                             @* AGREGAR TODO EL CODIGO FOR PARA DETALLE *@
-
+                            @foreach(var da in detalleAsignacion)
+                            {
+                                <tr>
+                                    @if (da.asignacion_id == Model.asignacion_id)
+                                    {
+                                        <td>
+                                            <label id="idDetAsig">@da.detalleasignacion_id</label>                @*//ID DE ASIGNACION*@
+                                        </td>                          
+                                        <td>
+                                            <select id="listaDocentes" name="docente_id" class="form-control">      
+                                                <option value="x">-- Seleccione --</option>
+                                                @foreach (var d in docente)                 //LLENADO DE DOCENTE
+                                                {
+                                                    if (d.docente_id == da.docente_id)
+                                                    {
+                                                        <option value="@d.docente_id" selected>@d.nombre @d.apellido</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@d.docente_id">@d.nombre @d.apellido</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select id="listaCriterios" name="criterio_id" class="form-control">
+                                                <option value="x">-- Seleccione --</option>
+                                                @foreach (var c in criterio)                //LLENADO DE CRITERIO
+                                                {
+                                                    if (c.criterio_id == da.criterio_id)
+                                                    {
+                                                        <option value="@c.criterio_id" selected>@c.nombre_spanish</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@c.criterio_id">@c.nombre_spanish</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select id="listaEstados" name="estado" class="form-control">
+                                                <option value="x">-- Seleccione --</option>
+                                                @if (da.estado == "A")                      //LLENADO DE ESTADO
+                                                {
+                                                    <option value="A" selected>Activo</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="I" selected>Inactivo</option>
+                                                }                  
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <button id="btnModificar" type="button" class="btn btn-warning" onclick="modificarDetalleAsignacion(@da.detalleasignacion_id)">Modificar</button>
+                                            <button id="btnEliminar" type="button" class="btn btn-danger" onclick="eliminarDetalleAsignacion(this,@Model.asignacion_id)">Eliminar</button>
+                                        </td>
+                                    }
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 }
@@ -154,7 +210,7 @@
     <div class="form-group">
         <div class="text-right">
             <input type="submit" class="btn btn-primary" value="Grabar"/>
-            <a href="~/Asignacion" class="btn btn-danger">Cancelar</a>
+            <a href="~/Asignacion" class="btn btn-danger">Regresar</a>
         </div>
     </div>
     
@@ -179,7 +235,9 @@
 
         // Append a text node to the cell    || Agregar elementos a las celdas
             //Texto ID
-        var idTexto = document.createTextNode('0');
+        var idTexto = document.createElement('label');
+        idTexto.innerHTML = "0";
+        idTexto.id = "idDetAsig"
             //Copiando Lista docente invisible
         var idListaDocentes = document.getElementById('listaDocentes');
         var ListaDocentes = null;
@@ -207,7 +265,7 @@
         btnCancelar.innerHTML = "Cancelar";
         btnCancelar.type = 'button';
         btnCancelar.className = "btn btn-danger"
-        btnCancelar.setAttribute('onClick','eliminarElementos(this)')
+        btnCancelar.setAttribute('onClick','eliminarElementos(this,@Model.asignacion_id)')
 
         //Agregando los elementos dinamicamente
 
@@ -215,7 +273,7 @@
         celdaDocente.appendChild(ListaDocentes);
         celdaCriterio.appendChild(ListaCriterios);
         celdaEstado.appendChild(ListaEstados); // CREAR EL BOTON DESDE 0 o CON OTRO ID PARA QUE FUNCIONE POR SEPARADO  ---- Se creo una lista para simplificar
-            
+
         celdaAcciones.appendChild(btnAgregarEditar);
         //celdaAcciones.appendChild(btnEliminar);
         celdaAcciones.appendChild(btnCancelar);
@@ -238,23 +296,20 @@
         //Encontrar y colocar en variable el valor de la lista
                 //DOCENTE ID
         var doce_id = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(1)").find('select :selected').val();
+                //CRITERIO ID
+        var crit_id = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(2)").find('select :selected').val();
+                //ESTADO VAL
+        var esta = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(3)").find('select :selected').val();
 
-        //FALTAN LAS DEMAS VARIABLES
-
-        alert(texto);
-        
-        ////var crit_id = i.find('select[name="criterio_id"]').val();
-        //var crit_id = document.getElementById("listaCriterios").val;
-
-        ////var esta = i.find('select[name="estado"]').val();
-        //var esta = document.getElementById("listaEstados").val;
+        //ENVIO DE VARIABLES PARA GUARDAR REGISTRO
 
         $.ajax({
             type: "POST",
             url: '@Url.Action("Guardar", "DetalleAsignacion")',
-            data: { asignacion_id: asig_id, docente_id: doce_id, criterio_id: crit_id, estado: esta},
+            data: { asignacion_id: asig_id, docente_id: doce_id, criterio_id: crit_id, estado: esta },
             success: function () {
                 alert("Guardado con éxito.");
+                location.reload();
             },
             error: function () {
                 alert("Error al registrar.");
@@ -262,6 +317,56 @@
         })
     }
 
+    function modificarDetalleAsignacion(r,asig_id) {
+        //Obtener el parametro Index de la fila
+        var i = r.parentNode.parentNode.rowIndex;                                               ///FALTA ARREGLAR MODIFICAR
+        //Encontrar y colocar en variable el valor de la lista
+        //DETALLE ASIGNACION ID
+        var deAsid = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(0)").text();
+                //DOCENTE ID
+        var doce_id = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(1)").find('select :selected').val();
+                //CRITERIO ID
+        var crit_id = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(2)").find('select :selected').val();
+                //ESTADO VAL
+        var esta = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(3)").find('select :selected').val();
+
+        //ENVIO DE VARIABLES PARA GUARDAR REGISTRO
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Guardar", "DetalleAsignacion")',
+            data: { asignacion_id: asig_id, docente_id: doce_id, criterio_id: crit_id, estado: esta },
+            success: function () {
+                alert("Guardado con éxito.");
+                location.reload();
+            },
+            error: function () {
+                alert("Error al registrar.");
+            }
+        })
+    }
+
+    function eliminarDetalleAsignacion(r,asignacion_id) {
+        //Obtener el parametro Index de la fila
+        var i = r.parentNode.parentNode.rowIndex;
+        //Encontrar y colocar en variable el valor de la lista
+                //DETALLE ASIGNACION ID
+        var deAsid = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(0)").text();
+        //ENVIO DE VARIABLES PARA ELIMINAR REGISTRO
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Eliminar", "DetalleAsignacion")',
+            data: { id: deAsid, asignacion_id :  asignacion_id},
+            success: function () {
+                alert("Eliminado con éxito.");
+                location.reload();
+            },
+            error: function () {
+                alert("Error al eliminar.");
+            }
+        })
+    }
 
 </script>
 
