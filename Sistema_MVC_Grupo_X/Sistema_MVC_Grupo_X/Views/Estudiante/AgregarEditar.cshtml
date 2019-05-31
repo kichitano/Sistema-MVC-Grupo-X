@@ -1,0 +1,86 @@
+﻿@model Sistema_MVC_Grupo_X.Models.Estudiante
+@{
+    ViewBag.Title = "AgregarEditar";
+}
+
+<h2>Agregar Editar</h2>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="~/Estudiante/Index">Estudiante</a>
+        </li>
+        <li class="breadcrumb-item active">
+            @(Model.estudiante_id > 0 ? Model.nombre : "Nuevo Registro")
+        </li>
+    </ol>
+</nav>
+@using (Html.BeginForm("Guardar", "Estudiante", FormMethod.Post, new { id = "frm-Estudiante" }))
+{
+    @Html.HiddenFor(x => x.estudiante_id)
+    <div class="card">
+        <div class="card-header">Información del Estudiante</div>
+        <div class="card-body">
+            <div class="form-group">
+                @Html.Label("Id")
+                @Html.TextBoxFor(x => x.estudiante_id, new
+                { @class = "form-control", disabled = true })
+            </div>
+            <div class="form-group">
+                @Html.Label("Codigo")
+                @Html.TextBoxFor(x => x.estudiante_codigo, new
+                { @class = "form-control"})
+                @Html.ValidationMessageFor(x => x.nombre, null,
+                new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.Label("DNI")
+                @Html.TextBoxFor(x => x.dni, new
+                { @class = "form-control"})
+                @Html.ValidationMessageFor(x => x.nombre, null,
+                new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Nombre")
+                @Html.TextBoxFor(x => x.nombre, new
+                { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.nombre, null,
+                new { @class = "text-danger" })
+
+            </div>
+            <div class="form-group">
+                @Html.Label("Apellido")
+                @Html.TextBoxFor(x => x.apellido, new
+                { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.apellido, null,
+                new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Sexo")
+                @Html.TextBoxFor(x => x.sexo, new
+                { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.sexo, null,
+                new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Email")
+                @Html.TextBoxFor(x => x.email, new
+                { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.email, null,
+                new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Estado")
+                <input id="estadoCheckbox" type="checkbox" data-toggle="toggle" @(Model.estado == "A" ? "checked" : "")
+                       data-on="Activo" data-off="Inactivo" data-size="large" data-onstyle="success" data-offstyle="danger" data-width="100%">
+                <input name="estado" id="estado" type="hidden" value="@(Model.estado == "A" ? "A" : "I")">
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary">Grabar</button>
+        <a href="~/Estudiante" class="btn btn-danger">Cancelar</a>
+    </div>
+}
+<hr />

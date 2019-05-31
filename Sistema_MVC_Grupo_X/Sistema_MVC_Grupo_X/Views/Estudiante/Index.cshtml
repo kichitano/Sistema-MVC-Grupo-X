@@ -1,0 +1,53 @@
+﻿@model List<Sistema_MVC_Grupo_X.Models.Estudiante>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="card text-center">Gestión de Estudiante</h2>
+<br />
+<div class="text-right">
+    <a href="~/Estudiante/AgregarEditar/" class="btn btn-secondary text-right">
+        Nuevo Registro
+    </a>
+</div>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th style="width:50px; text-align:center">Id</th>
+            <th style="width:100px; text-align:center">Estudiante</th>
+            <th style="width:70px; text-align:center">Anio</th>
+            <th style="width:80px; text-align:center">Estado</th>
+            <th style="width:200px; text-align:center">Acciones</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+        <tr>
+            <th style="text-align:center">@(s.estudiante_id)</th>
+            <th style="text-align:center">@(s.estudiante_codigo)</th>
+            <th style="text-align:center">@(s.dni)</th>
+            <th style="text-align:center">@(s.apellido)</th>
+            <th style="text-align:center">@(s.nombre)</th>
+            <th style="text-align:center">@(s.sexo)</th>
+            <th style="text-align:center">@(s.email)</th>
+            <th style="text-align:center">@(s.direccion)</th>
+            <th style="text-align:center">@(s.celular)</th>
+            <th style="text-align:center">@(s.foto)</th>
+            <th style="text-align:center">@(s.estado == "A" ? "Activo" : "Inactivo")</th>
+            <th style="text-align:center; align-content:center">
+                <a href="~/Estudiante/Visualizar/@s.estudiante_id"
+                   class="btn btn-xs btn-warning" style="padding:inherit">Visualizar</a>
+                <a href="~/Estudiante/AgregarEditar/@s.estudiante_id"
+                   class="btn btn-xs btn-primary" style="padding:inherit">Modificar</a>
+                <a href="~/Estudiante/Eliminar/@s.estudiante_id"
+                   class="btn btn-xs btn-danger" style="padding:inherit"
+                   onclick="return confirm('¿Esta seguro de eliminar ...?');">Eliminar</a>
+            </th>
+        </tr>
+        }
+    </tbody>
+</table>
+<hr />
