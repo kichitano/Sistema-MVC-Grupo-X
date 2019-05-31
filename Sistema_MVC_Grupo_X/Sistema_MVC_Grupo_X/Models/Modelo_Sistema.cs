@@ -10,6 +10,8 @@ namespace Sistema_MVC_Grupo_X.Models
         public Modelo_Sistema()
             : base("name=Modelo_Sistema")
         {
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
 
         public virtual DbSet<Actividad> Actividad { get; set; }
@@ -147,7 +149,6 @@ namespace Sistema_MVC_Grupo_X.Models
             modelBuilder.Entity<Criterio>()
                 .HasMany(e => e.EvidenciaCriterio)
                 .WithRequired(e => e.Criterio)
-                .HasForeignKey(e => e.evidencia_id)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Criterio>()
@@ -350,6 +351,7 @@ namespace Sistema_MVC_Grupo_X.Models
                 .Property(e => e.estado)
                 .IsFixedLength()
                 .IsUnicode(false);
+           
         }
     }
 }

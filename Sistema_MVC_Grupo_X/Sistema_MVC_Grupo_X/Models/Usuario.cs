@@ -130,14 +130,14 @@ namespace Sistema_MVC_Grupo_X.Models
                     var usuario = db.Usuario.Where(x => x.nombre == Usuario)
                                             .Where(x => x.clave == Password)
                                             .SingleOrDefault();
-                    if(usuario != null)
+                    if (usuario != null)
                     {
                         SessionHelper.AddUserToSession(usuario.usuario_id.ToString());
                         rm.SetResponse(true);
                     }
                     else
                     {
-                        rm.SetResponse(false,"Usuario o Password incorrectos...");
+                        rm.SetResponse(false, "Usuario o Password incorrectos...");
                     }
                 }
             }

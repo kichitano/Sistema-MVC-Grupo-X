@@ -4,12 +4,12 @@
 
 <div id="login">
     <h1 class="page-header text-center">Autenticación en el sistema</h1>
-            <div class="card card-deck">
+            <div class="card card-deck">    
                 <div class="card-heading">Acceso al sistema</div>
                     <div class="card-body">
                         @using (Html.BeginForm("Validar", "Login", FormMethod.Post))
                         {
-                            <div class="form-group">
+                            <div class="form-group">    
                                 <label>Usuario</label>
                                 <input type="text" name="Usuario" class="form-control" placeholder="Ingrese cuenta de usuario" />
                             </div>

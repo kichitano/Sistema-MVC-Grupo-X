@@ -22,14 +22,14 @@ namespace Sistema_MVC_Grupo_X.Controllers
         public ActionResult Visualizar(int id)
         {
             return View(objModelo.Obtener(id));
-        }
+        } 
 
-        //Accion agregarEditar
+        //Action agregarEditar
         public ActionResult AgregarEditar(int id = 0)
         {
             return View(
-                id == 0 ? new Modelo() //Agrega un nuevo objeto
-                : objModelo.Obtener(id) //Devuelva un objeto
+                id == 0 ? new Modelo()  //Agrega un nuevo modelo
+                : objModelo.Obtener(id) //Devuelve un objeto
                 );
         }
 

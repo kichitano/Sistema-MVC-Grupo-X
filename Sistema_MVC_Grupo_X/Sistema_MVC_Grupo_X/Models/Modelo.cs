@@ -1,4 +1,4 @@
-    namespace Sistema_MVC_Grupo_X.Models
+namespace Sistema_MVC_Grupo_X.Models
 {
     using System;
     using System.Collections.Generic;
@@ -32,6 +32,10 @@
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Criterio> Criterio { get; set; }
+
+        //-----------------------------------------------------------------//
+
+        //metodo listar
         public List<Modelo> Listar() //Retorna un collection
         {
             var objModelo = new List<Modelo>();
