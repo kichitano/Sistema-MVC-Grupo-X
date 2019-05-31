@@ -170,17 +170,26 @@
     <Content Include="Scripts\bootstrap.min.css" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrap4-1-3.css" />
     <Content Include="Scripts\bootstrap4-toggle.css" />
     <Content Include="Scripts\bootstrap4-toggle.js" />
     <Content Include="Scripts\bootstrap4-toggle.min.css" />
     <Content Include="Scripts\bootstrap4-toggle.min.js" />
+    <Content Include="Scripts\dataTables.bootstrap4.min.css" />
+    <Content Include="Scripts\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\datatables.css" />
+    <Content Include="Scripts\datatables.js" />
+    <Content Include="Scripts\datatables.min.css" />
+    <Content Include="Scripts\datatables.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
