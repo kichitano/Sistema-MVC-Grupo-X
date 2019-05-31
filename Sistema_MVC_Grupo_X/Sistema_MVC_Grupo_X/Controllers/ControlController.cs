@@ -11,6 +11,10 @@ namespace Sistema_MVC_Grupo_X.Controllers
     {
         private Control objControl = new Control();
         private Semestre objSemestre = new Semestre();
+        private Docente objDocente = new Docente();
+        private Criterio objCriterio = new Criterio();
+        private ControlAsignacion objControlAsignacion = new ControlAsignacion();
+
         //GET
         public ActionResult Index()
         {
@@ -27,6 +31,9 @@ namespace Sistema_MVC_Grupo_X.Controllers
         public ActionResult AgregarEditar(int id = 0)
         {
             ViewBag.Semestre = objSemestre.Listar();
+            ViewBag.Docente = objDocente.Listar();
+            ViewBag.Criterio = objCriterio.Listar();
+            ViewBag.ControlAsignacion = objControlAsignacion.Listar();
             return View(
                 id == 0 ? new Control() //Agrega un nuevo objeto
                 : objControl.Obtener(id) //Devuelva un objeto
@@ -39,7 +46,7 @@ namespace Sistema_MVC_Grupo_X.Controllers
             if (ModelState.IsValid)
             {
                 objControl.Guardar();
-                return Redirect("~/Control");
+                return Redirect("~/Control/AgregarEditar/" + objControl.control_id);
             }
             else
             {

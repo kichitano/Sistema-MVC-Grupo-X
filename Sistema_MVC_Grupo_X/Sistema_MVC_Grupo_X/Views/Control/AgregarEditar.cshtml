@@ -1,6 +1,9 @@
 ﻿@model Sistema_MVC_Grupo_X.Models.Control
 @{
     List<Sistema_MVC_Grupo_X.Models.Semestre> semestre = ViewBag.Semestre;
+    List<Sistema_MVC_Grupo_X.Models.Docente> docente = ViewBag.Docente;
+    List<Sistema_MVC_Grupo_X.Models.Criterio> criterio = ViewBag.Criterio;
+    List<Sistema_MVC_Grupo_X.Models.ControlAsignacion> controlAsignacion = ViewBag.ControlAsignacion;
     ViewBag.Title = "AgregarEditar";
 }
 
@@ -22,49 +25,417 @@
     <div class="card">
         <div class="card-header">Información de Control</div>
         <div class="card-body">
-            <div class="form-group">
-                @Html.Label("Id")
-                @Html.TextBoxFor(x => x.control_id, new
-                { @class = "form-control", disabled = true })
-            </div>
-            <div class="form-group">
-                @Html.Label("Semestre")
-                <select name="semestre_id" class="form-control">
-                    <option @(Model.semestre_id.Equals("") ? "Selected" : "") value="">
-                        -- Seleccione --
-                    </option>
-                    @foreach (var s in semestre)
-                    {
-                        <option @(Model.semestre_id.Equals(s.semestre_id) ? "Selected" : "") value="@s.semestre_id">@s.nombre</option>
-                    }
-                </select>
-                @Html.ValidationMessageFor(x => x.semestre_id, null,
-                                    new { @class = "text-danger" })
-            </div>
-            <div class="form-group">
-                @Html.Label("Titulo")
-                @Html.TextBoxFor(x => x.titulo, new
-                { @class = "form-control" })
-                @Html.ValidationMessageFor(x => x.titulo, null,
-                                    new { @class = "text-danger" })
-            </div>
-            <div class="form-group">
-                @Html.Label("Fecha de Creacion")
-                @Html.TextBoxFor(x => x.fechacreacion, "{0:dd/MM/yyyy}",
-                    new { @class = "form-control" , @id = "date-picker"})
-            </div>
-            <div class="form-group">
-                @Html.Label("Estado")
-                <input id="estadoCheckbox" type="checkbox" data-toggle="toggle" @(Model.estado == "A" ? "checked" : "") 
-                       data-on="Activo" data-off="Inactivo" data-size="large" data-onstyle="success" data-offstyle="danger" data-width="100%" />
-                <input name="estado" id="estado" type="hidden" value="@(Model.estado == "A" ? "A" : "I")" />
+            <div class="container">
+                <div class="row">
+                    <div class="form-group col-4">
+                        @Html.Label("Id")
+                        @Html.TextBoxFor(x => x.control_id, new
+                        { @class = "form-control", disabled = true })
+                    </div>
+                    <div class="form-group col-4">
+                        @Html.Label("Semestre")
+                        <select name="semestre_id" class="form-control">
+                            <option @(Model.semestre_id.Equals("") ? "Selected" : "") value="">
+                                -- Seleccione --
+                            </option>
+                            @foreach (var s in semestre)
+                            {
+                                <option @(Model.semestre_id.Equals(s.semestre_id) ? "Selected" : "") value="@s.semestre_id">@s.nombre</option>
+                            }
+                        </select>
+                        @Html.ValidationMessageFor(x => x.semestre_id, null,
+                                               new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-4">
+                        @Html.Label("Fecha de Creacion")
+                        <input type="text" id="date-picker" name="fechacreacion" class="form-control"
+                               value="  @(Model.fechacreacion.Equals(null) ? "" : Model.fechacreacion.Value.ToString("dd/MM/yyyy"))" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-9">
+                        @Html.Label("Titulo")
+                        @Html.TextBoxFor(x => x.titulo, new
+                        { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.titulo, null,
+                                               new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-3">
+                        @Html.Label("Estado")
+                        <div id="switchEstado">
+                            <input id="estadoCheckbox" type="checkbox" data-toggle="toggle" @(Model.estado == "A" ? "checked" : "")
+                                   data-on="Activo" data-off="Inactivo" data-size="normal" data-onstyle="success" data-offstyle="danger" data-width="100%">
+                        </div>
+                        <input name="estado" id="estado" type="hidden" value="@(Model.estado == "A" ? "A" : "I")">
+
+                    </div>
+                </div>
+
+                @* Si el registro existe, boton agregar detalle, sino no *@
+
+                @if (!(Model.control_id == 0))
+                {
+                    <hr style="height:1px; border:none; color:#000; background-color:#000;" />
+                    <div class="row align-content-stretch">
+                        <div class="form-group col-9">
+                            <b>@Html.Label("Detalle Control")</b>
+                        </div>
+                        <div class="form-group col-3">
+                            <button type="button" class="btn btn-block btn-success" data-target="#myModal" data-toggle="modal" onclick="limpiarModal()">
+                                <span class="glyphicon  ">Agregar detalle</span>
+                            </button>
+
+                            @* Agregando el modal ControlAsignacion a la vista Control *@
+
+                            <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header text-center" style="margin:0 auto;">
+                                            <h5 class="modal-title">Agregar nuevo control de Asignación</h5>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            @* Agregando la vista para agregar un nuevo registro de ControlAsignacion*@
+
+                                            <input type="hidden" id="controlAsignacion_id_MODAL" value="0" />   
+
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <label class="d-block">Código Control</label>
+                                                    <label class="d-block" id="codigoControl_id_MODAL"><b>@Model.control_id</b></label>
+                                                </div>
+                                                <div class="col-4">
+                                                    <label class="d-block">Docente</label>
+                                                    <select id="docente_id_MODAL" class="form-control d-block">
+                                                        <option value="x">-- Seleccione --</option>
+                                                        @foreach (var d in docente)
+                                                        {
+                                                            <option value="@d.docente_id">@d.nombre @d.apellido</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                                <div class="col-4">
+                                                    <label class="d-block">Criterio</label>
+                                                    <select id="criterio_id_MODAL" class="form-control d-block">
+                                                        <option value="x">-- Seleccione --</option>
+                                                        @foreach (var c in criterio)
+                                                        {
+                                                            <option value="@c.criterio_id">@c.nombre_spanish</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <label class="d-block">Fecha de asignación</label>
+                                                    <input type="date" id="fechaAsignacion_MODAL" class="form-control" value="" />
+                                                </div>
+                                                <div class="col-4">
+                                                    <label class="d-block">Fecha de culminación</label>
+                                                    <input type="date" id="fechaCulminacion_MODAL" class="form-control" value="" />
+                                                </div>
+                                                <div class="col-4">
+                                                    <label class="d-block">Duracion</label>
+                                                    <input type="text" class="form-control d-block" id="duracion_MODAL" />
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <label class="d-block">Sustento</label>
+                                                    <input type="text" class="form-control d-block" id="sustento_MODAL" />
+                                                </div>
+                                                <div class="col-4">
+                                                    <label class="d-block">Porcentaje</label>
+                                                    <input type="text" class="form-control d-block" id="porcentaje_MODAL" />
+                                                </div>
+                                                <div class="col-4">
+                                                    <label class="d-block">Condicion</label>
+                                                    <input type="text" class="form-control d-block" id="condicion_MODAL" />
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <label class="d-block">Archivo</label>
+                                                    <input type="text" class="form-control d-block" id="archivo_MODAL" />
+                                                </div>
+                                                <div class="col-4">
+                                                    <label class="d-block">Observacion</label>
+                                                    <input type="text" class="form-control d-block" id="observacion_MODAL" />
+                                                </div>
+                                                <div class="col-4">
+                                                    <label class="d-block">Estado</label>
+                                                    <select id="estado_MODAL" class="form-control d-block">
+                                                        <option value="x">-- Seleccione --</option>
+                                                        <option value="A">Activo</option>
+                                                        <option value="I">Inactivo</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            @* Fin de vista para agregar ControlAsignacion *@
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" onclick="guardarControlAsignacion()">Guardar</button>
+                                            <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @* Fin de modal de ControlAsignacion *@
+
+                        </div>
+                    </div>                  
+
+                    <table class="table" id="tablaElementos">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th style="width:8%; text-align:center">Id</th>
+                                <th style="width:25%; text-align:center">Docente</th>
+                                <th style="width:25%; text-align:center">Criterio</th>
+                                <th style="width:20%; text-align:center">Estado</th>
+                                <th style="width:25%; text-align:center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpoTabla">
+
+                            @* AGREGAR TODO EL CODIGO FOR PARA DETALLE *@
+                            @foreach (var ca in controlAsignacion)
+                            {
+                                <tr>
+                                    @if (ca.control_id == Model.control_id)
+                                    {
+                                        <td>
+                                            <label id="idDetAsig">@ca.controlasignacion_id</label>                @*//ID DE ASIGNACION*@
+                                        </td>
+                                        <td hidden>
+                                            <label id="idControl">@ca.control_id</label>
+                                        </td>
+                                        <td>
+                                            <select id="listaDocentes" name="docente_id" class="form-control" disabled>
+                                                <option value="x">-- Seleccione --</option>
+                                                @foreach (var d in docente)                 //LLENADO DE DOCENTE
+                                                {
+                                                    if (d.docente_id == ca.docente_id)
+                                                    {
+                                                        <option value="@d.docente_id" selected>@d.nombre @d.apellido</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@d.docente_id">@d.nombre @d.apellido</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select id="listaCriterios" name="criterio_id" class="form-control" disabled>
+                                                <option value="x">-- Seleccione --</option>
+                                                @foreach (var c in criterio)                //LLENADO DE CRITERIO
+                                                {
+                                                    if (c.criterio_id == ca.criterio_id)
+                                                    {
+                                                        <option value="@c.criterio_id" selected>@c.nombre_spanish</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@c.criterio_id">@c.nombre_spanish</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </td>
+                                        <td hidden>
+                                            <label id="fechaAsignacion">@ca.fechaasignacion.Value.ToString("dd/MM/yyyy")</label>
+                                        </td>
+                                        <td hidden>
+                                            <label id="fechaCulminacion">@ca.fechaculminacion.Value.ToString("dd/MM/yyyy")</label>
+                                        </td>
+                                        <td hidden>
+                                            <label id="duracion">@ca.duracion</label>
+                                        </td>
+                                        <td hidden>
+                                            <label id="sustento">@ca.sustento</label>
+                                        </td>
+                                        <td hidden>
+                                            <label id="porcentaje">@ca.porcentaje</label>
+                                        </td>
+                                        <td hidden>
+                                            <label id="condicion">@ca.condicion</label>
+                                        </td>
+                                        <td hidden>
+                                            <label id="archivo">@ca.archivo</label>
+                                        </td>
+                                        <td hidden>
+                                            <label id="observacion">@ca.observacion</label>
+                                        </td>
+                                        <td>
+                                            <select id="listaEstados" name="estado" class="form-control" disabled>
+                                                <option value="x">-- Seleccione --</option>
+                                                @if (ca.estado == "A")                      //LLENADO DE ESTADO
+                                                {
+                                                    <option value="A" selected>Activo</option>
+                                                    <option value="I">Inactivo</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="A">Activo</option>
+                                                    <option value="I" selected>Inactivo</option>
+                                                }
+                                            </select>
+                                        </td>
+
+                                        <td class="row justify-content-around">
+                                            <button id="btnModificar" type="button" class="btn btn-warning" onclick="editarControlAsignacion(this,@Model.control_id)">Modificar</button>
+                                            <button id="btnEliminar" type="button" class="btn btn-danger" onclick="eliminarDetalleAsignacion(this,@Model.control_id)">Eliminar</button>
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+
+                @* FIN de si el registro existe, boton agregar detalle, sino no *@
+
             </div>
         </div>
     </div>
     <br />
-    <div class="text-right">
-        <button type="submit" id="otroBoton" class="btn btn-primary" onclick="submit();">Grabar</button>
-        <a href="~/Control" class="btn btn-danger">Cancelar</a>
+    <div class="form-group">
+        <div class="text-right">
+            <input type="submit" class="btn btn-primary" value="Grabar" />
+            <a href="~/Control" class="btn btn-danger">Regresar</a>
+        </div>
     </div>
+
 }
 <hr />
+
+<script>
+
+    function guardarControlAsignacion() {
+        //Encontrar y colocar en variable el valor de la lista
+
+        var controlAsignacion_id = document.getElementById("controlAsignacion_id_MODAL").value; 
+        var control_id = @Model.control_id;
+        var docente_id = document.getElementById("docente_id_MODAL").value;
+        var criterio_id = document.getElementById("criterio_id_MODAL").value;
+        var fechaAsignacion = document.getElementById("fechaAsignacion_MODAL").value;
+        var fechaCulminacion = document.getElementById("fechaCulminacion_MODAL").value;
+        var duracion = document.getElementById("duracion_MODAL").value;
+        var sustento = document.getElementById("sustento_MODAL").value;
+        var porcentaje = document.getElementById("porcentaje_MODAL").value;
+        var condicion = document.getElementById("condicion_MODAL").value;
+        var archivo = document.getElementById("archivo_MODAL").value;
+        var observacion = document.getElementById("observacion_MODAL").value;
+        var estado = document.getElementById("estado_MODAL").value;
+
+        //ENVIO DE VARIABLES PARA GUARDAR REGISTRO
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Guardar", "ControlAsignacion")',
+            data: {
+                controlAsignacion_id: controlAsignacion_id,
+                control_id: control_id,
+                docente_id: docente_id,
+                criterio_id: criterio_id,
+                fechaAsignacion: fechaAsignacion,
+                fechaCulminacion: fechaCulminacion,
+                duracion: duracion,
+                sustento: sustento,
+                porcentaje: porcentaje,
+                condicion: condicion,
+                archivo: archivo,
+                observacion: observacion,
+                estado: estado
+            },
+            success: function () {
+                alert("Guardado con éxito.");
+                location.reload();
+            },
+            error: function () {
+                alert("Error al registrar.");
+            }
+        })
+    }
+    function limpiarModal() {
+        document.getElementById("controlAsignacion_id_MODAL").value = 0; 
+        document.getElementById("docente_id_MODAL").value = "";
+        document.getElementById("criterio_id_MODAL").value = "";
+        document.getElementById("fechaAsignacion_MODAL").value = "";
+        document.getElementById("fechaCulminacion_MODAL").value = "";
+        document.getElementById("duracion_MODAL").value = "";
+        document.getElementById("sustento_MODAL").value = "";
+        document.getElementById("porcentaje_MODAL").value = "";
+        document.getElementById("condicion_MODAL").value = "";
+        document.getElementById("archivo_MODAL").value = "";
+        document.getElementById("observacion_MODAL").value = "";
+        document.getElementById("estado_MODAL").value = "";
+    }
+
+    function editarControlAsignacion(r,control_id) {
+
+        //Obtener el parametro Index de la fila
+        var i = r.parentNode.parentNode.rowIndex;
+        //Encontrar y colocar en variable el valor de la lista
+        //CONTROL ASIGNACION ID
+       
+        document.getElementById("controlAsignacion_id_MODAL").value =  $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(0)").text().trim();
+        document.getElementById("codigoControl_id_MODAL").value = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(1)").text().trim();
+        var sd = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(2)").find('select :selected').val();
+        var ld = document.getElementById("docente_id_MODAL");
+        ld.value = sd;  
+        var sc = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(3)").find('select :selected').val();
+        var lc = document.getElementById("criterio_id_MODAL");
+        lc.value = sc;  
+        var fam = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(4)").text().trim();
+        var date1 = fam.split('/')
+        var newDate = date1[1] + '/' + date1[0] + '/' + date1[2]
+        var date = new Date(newDate);
+        var fam2 = date.toISOString().slice(0, 10);
+        document.getElementById("fechaAsignacion_MODAL").value = fam2;
+        var fcm = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(5)").text().trim();
+        var date2 = fcm.split('/')
+        var newDate = date2[1] + '/' + date2[0] + '/' + date2[2]
+        var date = new Date(newDate);
+        var fcm2 = date.toISOString().slice(0, 10);
+        document.getElementById("fechaCulminacion_MODAL").value = fcm2;
+        document.getElementById("duracion_MODAL").value = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(6)").text().trim();
+        document.getElementById("sustento_MODAL").value = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(7)").text().trim();
+        document.getElementById("porcentaje_MODAL").value = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(8)").text().trim();
+        document.getElementById("condicion_MODAL").value = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(9)").text().trim();
+        document.getElementById("archivo_MODAL").value = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(10)").text().trim();
+        document.getElementById("observacion_MODAL").value = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(11)").text().trim();
+        var se = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(12)").find('select :selected').val();
+        var le = document.getElementById("estado_MODAL");
+        le.value = se;
+        $("#myModal").modal()
+    }
+
+    function eliminarDetalleAsignacion(r,control_id) {
+        //Obtener el parametro Index de la fila
+        var i = r.parentNode.parentNode.rowIndex;
+        //Encontrar y colocar en variable el valor de la lista
+                //CONTROL ASIGNACION ID
+        var asCoid = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(0)").text();
+        //ENVIO DE VARIABLES PARA ELIMINAR REGISTRO
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Eliminar", "ControlAsignacion")',
+            data: { id: asCoid, control_id :  control_id},
+            success: function () {
+                alert("Eliminado con éxito.");
+                location.reload();
+            },
+            error: function () {
+                alert("Error al eliminar.");
+            }
+        })
+    }
+
+</script>

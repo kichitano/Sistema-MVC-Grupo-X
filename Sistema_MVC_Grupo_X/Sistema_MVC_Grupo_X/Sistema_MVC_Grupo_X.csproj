@@ -189,6 +189,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AsignacionController.cs" />
+    <Compile Include="Controllers\ControlAsignacionController.cs" />
     <Compile Include="Controllers\ControlController.cs" />
     <Compile Include="Controllers\CriterioController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />

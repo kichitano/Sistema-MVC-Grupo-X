@@ -7,8 +7,11 @@ namespace Sistema_MVC_Grupo_X.Models
     using System.Data.Entity.Spatial;
     using System.Linq;
     using System.Data.Entity;
+    using System.Runtime.Serialization;
 
     [Table("Control")]
+    [DataContract(IsReference = true)]
+
     public partial class Control
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

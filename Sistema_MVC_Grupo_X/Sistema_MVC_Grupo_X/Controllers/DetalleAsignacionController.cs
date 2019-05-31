@@ -10,9 +10,6 @@ namespace Sistema_MVC_Grupo_X.Controllers
     public class DetalleAsignacionController : Controller
     {
         private DetalleAsignacion objDetalleAsignacion = new DetalleAsignacion();
-        private Asignacion objAsignacion = new Asignacion();
-        private Docente objDocente = new Docente();
-        private Criterio objCriterio = new Criterio();
         //GET
         public ActionResult Index()
         {
@@ -28,9 +25,6 @@ namespace Sistema_MVC_Grupo_X.Controllers
         //Accion agregarEditar
         public ActionResult AgregarEditar(int id = 0)
         {
-            ViewBag.Asignacion = objAsignacion.Listar();
-            ViewBag.Docente = objDocente.Listar();
-            ViewBag.Criterio = objCriterio.Listar();
             return View(
                 id == 0 ? new DetalleAsignacion() //Agrega un nuevo objeto
                 : objDetalleAsignacion.Obtener(id) //Devuelva un objeto

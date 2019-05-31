@@ -10,6 +10,8 @@ namespace Sistema_MVC_Grupo_X.Models
         public Modelo_Sistema()
             : base("name=Modelo_Sistema")
         {
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
 
         public virtual DbSet<Actividad> Actividad { get; set; }
@@ -349,6 +351,7 @@ namespace Sistema_MVC_Grupo_X.Models
                 .Property(e => e.estado)
                 .IsFixedLength()
                 .IsUnicode(false);
+           
         }
     }
 }
