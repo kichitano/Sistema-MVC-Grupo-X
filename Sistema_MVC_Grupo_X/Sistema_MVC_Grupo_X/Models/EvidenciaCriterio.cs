@@ -5,6 +5,8 @@ namespace Sistema_MVC_Grupo_X.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Linq;
+    using System.Data.Entity;
 
     [Table("EvidenciaCriterio")]
     public partial class EvidenciaCriterio
