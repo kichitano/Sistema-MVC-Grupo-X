@@ -12,6 +12,8 @@ namespace Sistema_MVC_Grupo_X.Models
     public partial class EvidenciaCriterio
     {
         [Key]
+        public int evidenciaCriterio_id { get; set; }
+
         public int evidencia_id { get; set; }
 
         public int criterio_id { get; set; }
@@ -32,5 +34,7 @@ namespace Sistema_MVC_Grupo_X.Models
         public string descripcion { get; set; }
 
         public virtual Criterio Criterio { get; set; }
+
+        public virtual Evidencia Evidencia { get; set; }
     }
 }

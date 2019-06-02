@@ -18,7 +18,16 @@ namespace Sistema_MVC_Grupo_X.Controllers
         {
             return View(objUsuario.Listar());
         }
-
+        public string Scripts()
+        {
+            String sqlCodigo = "";
+            foreach (var obj in objUsuario.Listar())
+            {
+                sqlCodigo = "Insert into Usuario (docente_id, nombre, clave, nivel, avatar, estado) "
+                    + "values (" + obj.docente_id + "," + obj.nombre + "," + obj.clave + "," + obj.nivel + "," + obj.avatar + "," + obj.estado + ")";
+            }
+            return HttpUtility.HtmlEncode(sqlCodigo);
+        }
         //Action Visualizar
         public ActionResult Visualizar(int id)
         {

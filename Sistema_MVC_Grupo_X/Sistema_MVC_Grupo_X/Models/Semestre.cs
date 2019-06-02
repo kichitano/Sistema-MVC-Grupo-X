@@ -15,8 +15,7 @@ namespace Sistema_MVC_Grupo_X.Models
         public Semestre()
         {
             Actividad = new HashSet<Actividad>();
-            Asignacion = new HashSet<Asignacion>();
-            Control = new HashSet<Control>();
+            Evidencia = new HashSet<Evidencia>();
         }
 
         [Key]
@@ -35,11 +34,7 @@ namespace Sistema_MVC_Grupo_X.Models
         public virtual ICollection<Actividad> Actividad { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Asignacion> Asignacion { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Control> Control { get; set; }
-
+        public virtual ICollection<Evidencia> Evidencia { get; set; }
         //-----------------------------------------------------------------//
 
             //metodo listar

@@ -16,7 +16,16 @@ namespace Sistema_MVC_Grupo_X.Controllers
         {
             return View(objDocente.Listar());
         }
-
+        public string Scripts()
+        {
+            String sqlCodigo = "";
+            foreach (var obj in objDocente.Listar())
+            {
+                sqlCodigo = "Insert into Docente (docente_codigo, dni, apellido, nombre, sexo, email, celular, cargo, condicion, categoria, foto, estado) "
+                    + "values (" + obj.docente_codigo + "," + obj.dni + "," + obj.apellido + "," + obj.nombre + "," + obj.sexo + "," + obj.email + "," + obj.celular + "," + obj.cargo + "," + obj.condicion + "," + obj.categoria + "," + obj.foto + "," + obj.estado + ")";
+            }
+            return HttpUtility.HtmlEncode(sqlCodigo);
+        }
         //Action Visualizar
         public ActionResult Visualizar(int id)
         {

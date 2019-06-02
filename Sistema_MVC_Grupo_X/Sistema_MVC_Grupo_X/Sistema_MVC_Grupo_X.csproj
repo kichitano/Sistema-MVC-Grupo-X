@@ -113,7 +113,7 @@
     <Content Include="Assets\js\jquery.js" />
     <Content Include="Assets\js\jquery.validate.min.js" />
     <Content Include="Assets\js\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Avatars\usuario 1.jpg" />
+    <Content Include="Avatars\usuario1.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
@@ -205,6 +205,7 @@
     <Compile Include="Controllers\DetalleAsignacionController.cs" />
     <Compile Include="Controllers\DocenteController.cs" />
     <Compile Include="Controllers\EstudianteController.cs" />
+    <Compile Include="Controllers\EvidenciaController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ModeloController.cs" />
     <Compile Include="Controllers\SemestreController.cs" />
@@ -222,15 +223,12 @@
     <Compile Include="Models\DetalleAsignacion.cs" />
     <Compile Include="Models\Docente.cs" />
     <Compile Include="Models\Estudiante.cs" />
+    <Compile Include="Models\Evidencia.cs" />
     <Compile Include="Models\EvidenciaActividad.cs" />
     <Compile Include="Models\EvidenciaCriterio.cs" />
-    <Compile Include="Models\HashHelper.cs" />
     <Compile Include="Models\Modelo.cs" />
     <Compile Include="Models\Modelo_Sistema.cs" />
-    <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Models\Semestre.cs" />
-    <Compile Include="Models\SessionHelper.cs" />
-    <Compile Include="Models\sysdiagrams.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -276,6 +274,10 @@
     <Content Include="Views\Estudiante\Index.cshtml" />
     <Content Include="Views\Estudiante\Visualizar.cshtml" />
     <Content Include="Views\Estudiante\AgregarEditar.cshtml" />
+    <Content Include="Views\Evidencia\Index.cshtml" />
+    <Content Include="Views\Evidencia\Visualizar.cshtml" />
+    <Content Include="Views\Evidencia\AgregarEditar.cshtml" />
+    <Content Include="Views\Evidencia\_MostrarCriterio.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -285,8 +287,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Upload\" />
     <Folder Include="Views\DetalleAsignacion\" />
-    <Folder Include="Views\Modelo\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,92 @@
+﻿@model Sistema_MVC_Grupo_X.Models.Evidencia
+
+@{
+    ViewBag.Title = "AgregarEditar";
+}
+
+<h2>Agregar Editar</h2>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="~/Estudiante/Index">Estudiante</a>
+        </li>
+
+    </ol>
+</nav>
+
+@using (Html.BeginForm("Guardar", "Evidencia", FormMethod.Post, new { id = "frm-Estudiante" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Evidencia</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.evidencia_id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.semestre_id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.semestre_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.semestre_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.modelo_id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.modelo_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.modelo_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+
+        </div>
+        <div class="form-group">
+            @using (Html.BeginForm("Archivo", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <input type="File" name="file" id="file" value="Choose File" />
+                <input id="totalLink" name="totalLink" type="hidden" value=@Model.archivoRuta />
+                if (@Model.evidencia_id != 0)
+                {
+                    <input id="evidencia_id" name="evidencia_id" type="hidden" value=@Model.evidencia_id />
+                }
+                <button type="submit">Upload</button>
+            }
+            @Html.LabelFor(model => model.archivoRuta, htmlAttributes: new { @class = "control-label col-md-2" })
+            <
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.categoria, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.categoria, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.categoria, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.estado, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary">Grabar</button>
+            <a href="~/Evidencia" class="btn btn-danger">Cancelar</a>
+        </div>
+    </div>
+}
+@Html.Partial("_MostrarCriterio")
+

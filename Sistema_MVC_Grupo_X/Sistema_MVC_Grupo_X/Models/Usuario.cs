@@ -36,7 +36,6 @@ namespace Sistema_MVC_Grupo_X.Models
         public string estado { get; set; }
 
         public virtual Docente Docente { get; set; }
-
         //-----------------------------------------------------------------//
         //metodo listar
         public List<Usuario> Listar() //Retorna un collection

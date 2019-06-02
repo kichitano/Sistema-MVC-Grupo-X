@@ -10,8 +10,7 @@ namespace Sistema_MVC_Grupo_X.Models
         public Modelo_Sistema()
             : base("name=Modelo_Sistema")
         {
-            this.Configuration.LazyLoadingEnabled = false;
-            this.Configuration.ProxyCreationEnabled = false;
+            
         }
 
         public virtual DbSet<Actividad> Actividad { get; set; }
@@ -22,11 +21,11 @@ namespace Sistema_MVC_Grupo_X.Models
         public virtual DbSet<DetalleAsignacion> DetalleAsignacion { get; set; }
         public virtual DbSet<Docente> Docente { get; set; }
         public virtual DbSet<Estudiante> Estudiante { get; set; }
+        public virtual DbSet<Evidencia> Evidencia { get; set; }
         public virtual DbSet<EvidenciaActividad> EvidenciaActividad { get; set; }
         public virtual DbSet<EvidenciaCriterio> EvidenciaCriterio { get; set; }
         public virtual DbSet<Modelo> Modelo { get; set; }
         public virtual DbSet<Semestre> Semestre { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -48,11 +47,6 @@ namespace Sistema_MVC_Grupo_X.Models
                 .IsFixedLength()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Actividad>()
-                .HasMany(e => e.EvidenciaActividad)
-                .WithRequired(e => e.Actividad)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<Asignacion>()
                 .Property(e => e.titulo)
                 .IsUnicode(false);
@@ -61,11 +55,6 @@ namespace Sistema_MVC_Grupo_X.Models
                 .Property(e => e.estado)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Asignacion>()
-                .HasMany(e => e.DetalleAsignacion)
-                .WithRequired(e => e.Asignacion)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<Control>()
                 .Property(e => e.titulo)
                 .IsUnicode(false);
@@ -73,11 +62,6 @@ namespace Sistema_MVC_Grupo_X.Models
             modelBuilder.Entity<Control>()
                 .Property(e => e.estado)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<Control>()
-                .HasMany(e => e.ControlAsignacion)
-                .WithRequired(e => e.Control)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ControlAsignacion>()
                 .Property(e => e.duracion)
@@ -151,14 +135,14 @@ namespace Sistema_MVC_Grupo_X.Models
                 .WithRequired(e => e.Criterio)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Criterio>()
-                .HasMany(e => e.DetalleAsignacion)
-                .WithRequired(e => e.Criterio)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<DetalleAsignacion>()
                 .Property(e => e.estado)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<DetalleAsignacion>()
+                .HasMany(e => e.ControlAsignacion)
+                .WithRequired(e => e.DetalleAsignacion)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Docente>()
                 .Property(e => e.dni)
@@ -211,11 +195,6 @@ namespace Sistema_MVC_Grupo_X.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Docente>()
-                .HasMany(e => e.DetalleAsignacion)
-                .WithRequired(e => e.Docente)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Docente>()
                 .HasMany(e => e.Usuario)
                 .WithRequired(e => e.Docente)
                 .WillCascadeOnDelete(false);
@@ -256,6 +235,32 @@ namespace Sistema_MVC_Grupo_X.Models
             modelBuilder.Entity<Estudiante>()
                 .Property(e => e.estado)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Evidencia>()
+                .Property(e => e.archivoRuta)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Evidencia>()
+                .Property(e => e.descripcion)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Evidencia>()
+                .Property(e => e.categoria)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Evidencia>()
+                .Property(e => e.estado)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Evidencia>()
+                .HasMany(e => e.Criterio)
+                .WithRequired(e => e.Evidencia)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Evidencia>()
+                .HasMany(e => e.EvidenciaCriterio)
+                .WithRequired(e => e.Evidencia)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<EvidenciaActividad>()
                 .Property(e => e.archivo)
@@ -307,6 +312,11 @@ namespace Sistema_MVC_Grupo_X.Models
                 .WithRequired(e => e.Modelo)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Modelo>()
+                .HasMany(e => e.Evidencia)
+                .WithRequired(e => e.Modelo)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Semestre>()
                 .Property(e => e.nombre)
                 .IsUnicode(false);
@@ -322,12 +332,7 @@ namespace Sistema_MVC_Grupo_X.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Semestre>()
-                .HasMany(e => e.Asignacion)
-                .WithRequired(e => e.Semestre)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Semestre>()
-                .HasMany(e => e.Control)
+                .HasMany(e => e.Evidencia)
                 .WithRequired(e => e.Semestre)
                 .WillCascadeOnDelete(false);
 
@@ -351,7 +356,6 @@ namespace Sistema_MVC_Grupo_X.Models
                 .Property(e => e.estado)
                 .IsFixedLength()
                 .IsUnicode(false);
-           
         }
     }
 }

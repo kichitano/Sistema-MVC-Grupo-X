@@ -15,6 +15,7 @@ namespace Sistema_MVC_Grupo_X.Models
         public Modelo()
         {
             Criterio = new HashSet<Criterio>();
+            Evidencia = new HashSet<Evidencia>();
         }
 
         [Key]
@@ -33,6 +34,8 @@ namespace Sistema_MVC_Grupo_X.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Criterio> Criterio { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Evidencia> Evidencia { get; set; }
         //-----------------------------------------------------------------//
 
         //metodo listar

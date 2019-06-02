@@ -10,15 +10,12 @@ namespace Sistema_MVC_Grupo_X.Models
     using System.Runtime.Serialization;
 
     [Table("Docente")]
-    [DataContract(IsReference = true)]
-
     public partial class Docente
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Docente()
         {
             ControlAsignacion = new HashSet<ControlAsignacion>();
-            DetalleAsignacion = new HashSet<DetalleAsignacion>();
             Usuario = new HashSet<Usuario>();
         }
 
@@ -71,11 +68,7 @@ namespace Sistema_MVC_Grupo_X.Models
         public virtual ICollection<ControlAsignacion> ControlAsignacion { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetalleAsignacion> DetalleAsignacion { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuario> Usuario { get; set; }
-
         //-----------------------------------------------------------------//
 
         //Metodo Listar
