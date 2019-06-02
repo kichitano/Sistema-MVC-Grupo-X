@@ -10,7 +10,6 @@ namespace Sistema_MVC_Grupo_X.Models
         public Modelo_Sistema()
             : base("name=Modelo_Sistema")
         {
-            
         }
 
         public virtual DbSet<Actividad> Actividad { get; set; }
@@ -253,12 +252,12 @@ namespace Sistema_MVC_Grupo_X.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Evidencia>()
-                .HasMany(e => e.Criterio)
+                .HasMany(e => e.EvidenciaCriterio)
                 .WithRequired(e => e.Evidencia)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Evidencia>()
-                .HasMany(e => e.EvidenciaCriterio)
+                .HasMany(e => e.EvidenciaActividad)
                 .WithRequired(e => e.Evidencia)
                 .WillCascadeOnDelete(false);
 
@@ -306,16 +305,6 @@ namespace Sistema_MVC_Grupo_X.Models
                 .Property(e => e.estado)
                 .IsFixedLength()
                 .IsUnicode(false);
-
-            modelBuilder.Entity<Modelo>()
-                .HasMany(e => e.Criterio)
-                .WithRequired(e => e.Modelo)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Modelo>()
-                .HasMany(e => e.Evidencia)
-                .WithRequired(e => e.Modelo)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Semestre>()
                 .Property(e => e.nombre)
@@ -328,11 +317,6 @@ namespace Sistema_MVC_Grupo_X.Models
 
             modelBuilder.Entity<Semestre>()
                 .HasMany(e => e.Actividad)
-                .WithRequired(e => e.Semestre)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Semestre>()
-                .HasMany(e => e.Evidencia)
                 .WithRequired(e => e.Semestre)
                 .WillCascadeOnDelete(false);
 
