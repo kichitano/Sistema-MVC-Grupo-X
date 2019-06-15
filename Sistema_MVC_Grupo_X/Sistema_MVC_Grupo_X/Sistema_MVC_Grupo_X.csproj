@@ -276,6 +276,7 @@
     <Content Include="Views\Criterio\Index.cshtml" />
     <Content Include="Views\Criterio\AgregarEditar.cshtml" />
     <Content Include="Views\Criterio\Visualizar.cshtml" />
+    <Content Include="Views\Modelo\GraficoBarras.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

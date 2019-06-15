@@ -8,6 +8,8 @@ namespace Sistema_MVC_Grupo_X.Models
     using System.Linq;
     using System.Data.Entity;
 
+
+
     [Table("Semestre")]
     public partial class Semestre
     {

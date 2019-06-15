@@ -1,0 +1,237 @@
+﻿@model List<Sistema_MVC_Grupo_X.Models.Modelo>
+@{
+    ViewBag.Title = "GraficoBarras";
+    List<Sistema_MVC_Grupo_X.Models.Criterio> criterios = ViewBag.Criterio;
+    int total = 0;
+    double porcentaje = 0.00;
+    string contenidoBarra = "";
+    string contenidoPie = "";
+    string contenido3en1 = "";
+    string categorias3en1 = "";
+    string valores3en1 = "";
+    string modelo = "";
+
+    int valor = 0;
+}
+
+<ol class="breadcrumb">
+    <li><a href="~/Modelo/Index">Modelo</a></li>
+</ol>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Criterios por Modelo
+    </div>
+</div>
+
+<div class="table table-responsive">
+    <table class="table display">
+        <thead>
+            <tr>
+                <th>N°</th>
+                <th>Modelo</th>
+                <th>Cantidad de Criterios</th>
+                <th>Porcentaje</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                total = total + m.Criterio.Count();
+            }
+
+            @foreach (var m in Model)
+            {
+
+
+
+                modelo = m.nombre;
+                valor = m.Criterio.Count();
+
+                //PARA LAS BARRAS
+                contenidoBarra = contenidoBarra + "{ name : '" + modelo + "'," +
+                    "data: [" + valor + "]},";
+                //{
+                //    name: 'Tokyo',
+                //    data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+                //}
+
+                //PARA EL PIE
+                contenidoPie = contenidoPie + "['" + modelo + "'," + valor + "],";
+                //['Firefox', 45.0],
+
+                //PARA EL 3 EN 1
+                categorias3en1 = categorias3en1 + "'" + modelo + "',";
+                valores3en1 = valores3en1 + valor + ",";
+                //'Apples', 'Oranges', 'Pears', 'Bananas', 'Plums'
+                //data: [3, 2.67, 3, 6.33, 3.33],
+
+                int inactivos = 0;
+                int activos = 0;
+
+                foreach(var c in criterios)
+                {
+                    if(c.modelo_id == m.modelo_id)
+                    {
+                        if (c.estado.Equals("I"))
+                        {
+                            inactivos++;
+                        }
+                        else
+                        {
+                            activos++;
+                        }
+                    }
+                }
+
+
+
+
+                double valor2 = Convert.ToDouble(valor);
+                double total2 = Convert.ToDouble(total);
+                porcentaje = valor2 / total2;
+
+                <tr>
+                    <td>@(m.modelo_id)</td>
+                    <td>@(m.nombre)</td>
+                    <td>@(m.Criterio.Count())</td>
+                    <td>@(porcentaje.ToString("P2"))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<br />
+
+@Html.Raw((String)valores3en1)
+
+
+<div id="containerBarras" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+<div id="containerPie" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+<div id="container3en1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+
+
+<script type="text/javascript">
+    Highcharts.chart('containerBarras', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Grafico estadístico'
+        },
+        subtitle: {
+            text: 'Criterios por Modelo'
+        },
+        xAxis: {
+            categories: [
+                'Criterios'
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Cantidad'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [ @Html.Raw((String)contenidoBarra) ]
+    });
+
+    Highcharts.chart('containerPie', {
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Gráfico estadístico de criterios por modelo'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Browser share',
+            data: [ @Html.Raw((String)contenidoPie) ]
+        }]
+    });
+
+    Highcharts.chart('container3en1', {
+        title: {
+            text: 'Criterios en Modelos'
+        },
+        xAxis: {
+            categories: [@Html.Raw((String)categorias3en1)]
+        },
+        labels: {
+            items: [{
+                html: 'Cantidad de criterios',
+                style: {
+                    left: '50px',
+                    top: '18px',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                }
+            }]
+        },
+        series: [{
+            type: 'column',
+            name: 'Cantidad de Criterios',
+            data: [@Html.Raw((String)valores3en1)]
+        }, {
+            type: 'spline',
+            name: 'Promedio',
+            data: [@Html.Raw((String)valores3en1)],
+            marker: {
+                lineWidth: 2,
+                lineColor: Highcharts.getOptions().colors[3],
+                fillColor: 'white'
+            }
+        }, {
+            type: 'pie',
+            name: 'Total criterios',
+            data: [ @Html.Raw((String)contenidoPie) ],
+            center: [20, 150],
+            size: 100,
+            showInLegend: false,
+            dataLabels: {
+                enabled: false
+            }
+        }]
+    });
+
+</script>
