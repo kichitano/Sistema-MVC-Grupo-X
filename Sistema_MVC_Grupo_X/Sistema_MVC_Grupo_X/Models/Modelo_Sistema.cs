@@ -256,11 +256,6 @@ namespace Sistema_MVC_Grupo_X.Models
                 .WithRequired(e => e.Evidencia)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Evidencia>()
-                .HasMany(e => e.EvidenciaActividad)
-                .WithRequired(e => e.Evidencia)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<EvidenciaActividad>()
                 .Property(e => e.archivo)
                 .IsUnicode(false);
@@ -305,6 +300,11 @@ namespace Sistema_MVC_Grupo_X.Models
                 .Property(e => e.estado)
                 .IsFixedLength()
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Modelo>()
+                .HasMany(e => e.Evidencia)
+                .WithRequired(e => e.Modelo)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Semestre>()
                 .Property(e => e.nombre)
@@ -317,6 +317,11 @@ namespace Sistema_MVC_Grupo_X.Models
 
             modelBuilder.Entity<Semestre>()
                 .HasMany(e => e.Actividad)
+                .WithRequired(e => e.Semestre)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Semestre>()
+                .HasMany(e => e.Evidencia)
                 .WithRequired(e => e.Semestre)
                 .WillCascadeOnDelete(false);
 

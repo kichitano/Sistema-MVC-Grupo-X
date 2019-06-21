@@ -25,12 +25,18 @@ go
 if (not exists(select 1 from sys.tables where name = 'Evidencia'))
     CREATE TABLE dbo.Evidencia (
        evidencia_id int identity(1,1) NOT NULL,       
+	   semestre_id int NOT NULL,
+	   modelo_id		    int NOT NULL,
+	   archivoRuta             varchar(30) NULL,
 	   descripcion            text NOT NULL,
 	   categoria              varchar(250) NOT NULL,
        estado               varchar(1) NOT NULL,
        PRIMARY KEY (evidencia_id),
+	   FOREIGN KEY (semestre_id) REFERENCES Semestre,
+	   FOREIGN KEY (modelo_id) REFERENCES Modelo,
 )
 go
+
 -- Tabla criterio
 if (not exists(select 1 from sys.tables where name = 'Criterio'))
     CREATE TABLE dbo.Criterio (
@@ -51,16 +57,13 @@ if (not exists(select 1 from sys.tables where name = 'EvidenciaCriterio'))
        evidenciaCriterio_id  int identity(1,1) NOT NULL,
 	   evidencia_id  int NOT NULL,
 	   criterio_id   int NOT NULL, 
-	   semestre_id	 int not null,
-	   modelo_id	 int not null,
 	   archivo       varchar(250) NOT NULL,
 	   tamanio       varchar(10) NOT NULL,
        tipo          varchar(10) NOT NULL,	   
        descripcion 	 text NULL	       
        PRIMARY KEY (evidenciaCriterio_id),
 	   FOREIGN KEY (criterio_id)  REFERENCES Criterio,
-	   FOREIGN KEY (semestre_id)  REFERENCES Semestre,
-	   FOREIGN KEY (modelo_id)  REFERENCES Modelo
+	   FOREIGN KEY (evidencia_id)  REFERENCES Evidencia
 )
 go
 
@@ -87,16 +90,14 @@ go
 -- Tabla Evidencia Actividad
 if (not exists(select 1 from sys.tables where name = 'EvidenciaActividad'))
     CREATE TABLE dbo.EvidenciaActividad (
-       evidenciaactividad_id  int identity(1,1) NOT NULL,	
-	   evidencia_id int not null,  
+       evidenciaactividad_id  int identity(1,1) NOT NULL,	  
 	   actividad_id  int NOT NULL,
 	   archivo       varchar(250) NOT NULL,
 	   tamanio       varchar(10) NOT NULL,
        tipo          varchar(10) NOT NULL,	   
        descripcion 	 text NULL	       
        PRIMARY KEY (evidenciaactividad_id),
-	   FOREIGN KEY (evidencia_id)  REFERENCES Evidencia,
-	   FOREIGN KEY (actividad_id)  REFERENCES Criterio,
+	   FOREIGN KEY (actividad_id)  REFERENCES Criterio
 )
 go
 

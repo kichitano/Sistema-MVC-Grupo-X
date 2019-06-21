@@ -226,9 +226,12 @@
     <Compile Include="Models\Evidencia.cs" />
     <Compile Include="Models\EvidenciaActividad.cs" />
     <Compile Include="Models\EvidenciaCriterio.cs" />
+    <Compile Include="Models\HashHelper.cs" />
     <Compile Include="Models\Modelo.cs" />
     <Compile Include="Models\Modelo_Sistema.cs" />
+    <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Models\Semestre.cs" />
+    <Compile Include="Models\SessionHelper.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

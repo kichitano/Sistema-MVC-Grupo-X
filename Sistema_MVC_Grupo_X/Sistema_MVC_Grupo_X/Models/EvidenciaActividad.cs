@@ -14,8 +14,6 @@ namespace Sistema_MVC_Grupo_X.Models
         [Key]
         public int evidenciaactividad_id { get; set; }
 
-        public int evidencia_id { get; set; }
-
         public int actividad_id { get; set; }
 
         [Required]
@@ -34,7 +32,5 @@ namespace Sistema_MVC_Grupo_X.Models
         public string descripcion { get; set; }
 
         public virtual Criterio Criterio { get; set; }
-
-        public virtual Evidencia Evidencia { get; set; }
     }
 }

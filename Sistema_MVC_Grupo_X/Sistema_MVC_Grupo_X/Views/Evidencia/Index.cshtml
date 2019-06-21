@@ -32,35 +32,37 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.semestre_id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.modelo_id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.archivoRuta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.categoria)
-            </td>
-            <td>
-                @(item.estado == "A" ? "Activo" : "Inactivo")
-            </td>
-            <td>
-                <a href="~/Evidencia/Visualizar/@item.evidencia_id"
-                   class="btn btn-xs btn-warning" style="padding:inherit">Visualizar</a>
-                <a href="~/Evidencia/AgregarEditar/@item.evidencia_id"
-                   class="btn btn-xs btn-primary" style="padding:inherit">Modificar</a>
-                <a href="~/Evidencia/Eliminar/@item.evidencia_id"
-                   class="btn btn-xs btn-danger" style="padding:inherit"
-                   onclick="return confirm('¿Esta seguro de eliminar ...?');">Eliminar</a>
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.semestre_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.modelo_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.archivoRuta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descripcion)
+        </td>
+        
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.categoria)
+        </td>
+        <td>
+            @(item.estado == "A" ? "Activo" : "Inactivo")
+        </td>
+        <td>
+            <a href="~/Evidencia/Visualizar/@item.evidencia_id"
+               class="btn btn-xs btn-warning" style="padding:inherit">Visualizar</a>
+            <a href="~/Evidencia/AgregarEditar/@item.evidencia_id"
+               class="btn btn-xs btn-primary" style="padding:inherit">Modificar</a>
+            <a href="~/Evidencia/Eliminar/@item.evidencia_id"
+               class="btn btn-xs btn-danger" style="padding:inherit"
+               onclick="return confirm('¿Esta seguro de eliminar ...?');">Eliminar</a>
+        </td>
+    </tr>
     }
 
 </table>

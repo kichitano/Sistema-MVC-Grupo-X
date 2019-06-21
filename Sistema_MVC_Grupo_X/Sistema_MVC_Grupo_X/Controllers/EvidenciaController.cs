@@ -25,20 +25,16 @@ namespace Sistema_MVC_Grupo_X.Controllers
 
             foreach (var item in directoryInfo.GetFiles())
             {
-                objEvidencia.Archivos.Add(new Archivo()
+                objEvidencia.EvidenciaCriterio.Add(new EvidenciaCriterio()
                 {
-
-                    nombreFile = item.Name,
-                    link = item.FullName,
+                    archivo = item.Name,
                     tipo = item.Extension,
-                    tamano = item.Length
-
-
+                    tamanio = item.Length+""
                 });
 
             }
             
-            return View("Index",objEvidencia.Listar());
+            return View("Index",objEvidencia);
         }
 
         private Criterio objCriterio = new Criterio();
@@ -48,16 +44,7 @@ namespace Sistema_MVC_Grupo_X.Controllers
         }
 
 
-        public string Scripts()
-        {
-            String sqlCodigo = "";
-            foreach (var obj in objEvidencia.Listar())
-            {
-                sqlCodigo = "Insert into Evidencia (semestre_id, modelo_id, archivoRuta, descripcion, categoria, estado) "
-                    + "values (" + obj.semestre_id + "," + obj.modelo_id + "," + obj.archivoRuta + "," + obj.descripcion + "," + obj.categoria + "," + obj.estado + ")";
-            }
-            return HttpUtility.HtmlEncode(sqlCodigo);
-        }
+        
 
 
         public ActionResult Archivo(HttpPostedFileBase file, string totalLink="", int evidencia_id=0)

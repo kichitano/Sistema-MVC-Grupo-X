@@ -15,11 +15,14 @@ namespace Sistema_MVC_Grupo_X.Models
         public Evidencia()
         {
             EvidenciaCriterio = new HashSet<EvidenciaCriterio>();
-            EvidenciaActividad = new HashSet<EvidenciaActividad>();
         }
 
         [Key]
         public int evidencia_id { get; set; }
+
+        public int semestre_id { get; set; }
+
+        public int modelo_id { get; set; }
 
         [StringLength(30)]
         public string archivoRuta { get; set; }
@@ -39,6 +42,9 @@ namespace Sistema_MVC_Grupo_X.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EvidenciaCriterio> EvidenciaCriterio { get; set; }
 
+        public virtual Modelo Modelo { get; set; }
+
+        public virtual Semestre Semestre { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EvidenciaActividad> EvidenciaActividad { get; set; }
         //-----------------------------------------------------------------//
@@ -46,19 +52,19 @@ namespace Sistema_MVC_Grupo_X.Models
         //metodo listar
         public List<Evidencia> Listar() //Retorna un collection
         {
-            var objSemestre = new List<Evidencia>();
+            var objEvidencia = new List<Evidencia>();
             try
             {
                 using (var db = new Modelo_Sistema())
                 {
-                    objSemestre = db.Evidencia.ToList();
+                    objEvidencia = db.Evidencia.ToList();
                 }
             }
             catch (Exception ex)
             {
                 throw;
             }
-            return objSemestre;
+            return objEvidencia;
         }
 
         //metodo obtener
