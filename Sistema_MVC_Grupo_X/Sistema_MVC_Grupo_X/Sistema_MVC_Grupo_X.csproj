@@ -202,6 +202,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ActividadController.cs" />
     <Compile Include="Controllers\AsignacionController.cs" />
     <Compile Include="Controllers\ControlAsignacionController.cs" />
     <Compile Include="Controllers\ControlController.cs" />
@@ -277,6 +278,8 @@
     <Content Include="Views\Criterio\AgregarEditar.cshtml" />
     <Content Include="Views\Criterio\Visualizar.cshtml" />
     <Content Include="Views\Modelo\GraficoBarras.cshtml" />
+    <Content Include="Views\Actividad\Index.cshtml" />
+    <Content Include="Views\Actividad\AgregarEditar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

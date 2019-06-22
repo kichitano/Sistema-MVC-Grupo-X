@@ -1,0 +1,49 @@
+﻿@model  List<Sistema_MVC_Grupo_X.Models.Actividad>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="card text-center">Gestión de Activida</h2>
+<br />
+<div class="text-right">
+    <a href="~/Actividad/AgregarEditar/" class="btn btn-secondary text-right">
+        Nuevo Registro
+    </a>
+</div>
+<br />
+<table class="table" id="tablaIndex" style="width:100%">
+    <thead>
+        <tr>
+            <th style="width:50px; text-align:center">Id</th>
+            <th style="width:80px; text-align:center">Semestre</th>
+            <th style="width:100px; text-align:center">Criterio</th>
+            <th style="width:100px; text-align:center">Nombre</th>
+            <th style="width:80px; text-align:center">Fecha</th>
+            <th style="width:80px; text-align:center">Estado</th>
+            <th style="width:200px; text-align:center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var a in Model)
+        {
+        <tr>
+            <th style="text-align:center">@(a.actividad_id)</th>
+            <th style="text-align:center">@(a.Semestre.nombre)</th>
+            <th style="text-align:center">@(a.Criterio.nombre_spanish)</th>
+            <th style="text-align:center">@(a.nombre)</th>
+            <th style="text-align:center">@(a.fecha.Value.ToString("dd/MM/yyyy"))</th>
+            <th style="text-align:center">@(a.estado == "A" ? "Activo" : "Inactivo")</th>
+            <th style="text-align:center; align-content:center">
+                <a href="~/Actividad/Visualizar/@a.actividad_id"
+                   class="btn btn-xs btn-warning" style="padding:inherit">Visualizar</a>
+                <a href="~/Actividad/AgregarEditar/@a.actividad_id"
+                   class="btn btn-xs btn-primary" style="padding:inherit">Modificar</a>
+                <a href="~/Actividad/Eliminar/@a.actividad_id"
+                   class="btn btn-xs btn-danger" style="padding:inherit"
+                   onclick="return confirm('¿Esta seguro de eliminar ...?');">Eliminar</a>
+            </th>
+        </tr>
+        }
+    </tbody>
+</table>
+<hr />
