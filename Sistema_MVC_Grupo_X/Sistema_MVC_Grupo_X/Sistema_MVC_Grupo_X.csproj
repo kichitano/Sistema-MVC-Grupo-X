@@ -117,12 +117,12 @@
     <Content Include="Assets\js\jquery.js" />
     <Content Include="Assets\js\jquery.validate.min.js" />
     <Content Include="Assets\js\jquery.validate.unobtrusive.min.js" />
-<<<<<<< HEAD
+
     <Content Include="Avatars\usuario1.jpg" />
-=======
+
     <Content Include="Assets\js\offline-exporting.js" />
     <Content Include="Avatars\usuario 1.jpg" />
->>>>>>> kixi2
+
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
@@ -284,7 +284,7 @@
     <Content Include="Views\Criterio\Index.cshtml" />
     <Content Include="Views\Criterio\AgregarEditar.cshtml" />
     <Content Include="Views\Criterio\Visualizar.cshtml" />
-<<<<<<< HEAD
+
     <Content Include="Views\Estudiante\Index.cshtml" />
     <Content Include="Views\Estudiante\Visualizar.cshtml" />
     <Content Include="Views\Estudiante\AgregarEditar.cshtml" />
@@ -292,11 +292,11 @@
     <Content Include="Views\Evidencia\Visualizar.cshtml" />
     <Content Include="Views\Evidencia\AgregarEditar.cshtml" />
     <Content Include="Views\Evidencia\_MostrarCriterio.cshtml" />
-=======
+
     <Content Include="Views\Modelo\GraficoBarras.cshtml" />
     <Content Include="Views\Actividad\Index.cshtml" />
     <Content Include="Views\Actividad\AgregarEditar.cshtml" />
->>>>>>> kixi2
+
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
