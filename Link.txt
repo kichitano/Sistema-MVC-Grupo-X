@@ -1,1 +1,6 @@
+Integrantes:
+Cristian Cespedes
+Edwin Condori
+Carol Husnayo
+Rosalia Mamani
 https://github.com/kichitano/Sistema-MVC-Grupo-X.git
