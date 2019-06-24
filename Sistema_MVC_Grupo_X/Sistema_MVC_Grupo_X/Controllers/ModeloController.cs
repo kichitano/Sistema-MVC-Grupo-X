@@ -1,6 +1,4 @@
-﻿using Sistema_MVC_Grupo_X.Filters;
-using Sistema_MVC_Grupo_X.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;

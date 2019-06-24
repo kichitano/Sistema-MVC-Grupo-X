@@ -2,56 +2,56 @@
 @{
     ViewBag.Title = "AgregarEditar";
 }
-<section class="content-header">
-    <h1>
-        <a href="~/Modelo/Index">Modelo</a>
-        <small>Demasiada abstración</small>
-    </h1>
+
+<h2>Agregar Editar</h2>
+
+<nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li><a href="~/Modelo/Index"><i class="fa fa-dashboard"></i> Modelo</a></li>
-        <li class="active"> 
+        <li class="breadcrumb-item">
+            <a href="~/Modelo/Index">Modelo</a>
+        </li>
+        <li class="breadcrumb-item active">
             @(Model.modelo_id > 0 ? Model.nombre : "Nuevo Registro")
         </li>
     </ol>
-</section>
-<!-- Content Header (Page header) -->
-<!-- Main content -->
-<section class="content container-fluid">
-    @using (Html.BeginForm("Guardar", "Modelo", FormMethod.Post, new { id = "frm-modelo" }))
-    {
-        @Html.HiddenFor(x => x.modelo_id)
-    <div class="box">
-        <div class="box-header with-border">Información del Modelo</div>
-        <div class="box-body">
+</nav>
+@using (Html.BeginForm("Guardar", "Modelo", FormMethod.Post, new { id = "frm-modelo" }))
+{
+    @Html.HiddenFor(x => x.modelo_id)
+    <div class="card">
+        <div class="card-header">Información del semestre</div>
+        <div class="card-body">
             <div class="form-group">
                 @Html.Label("Id")
-                @Html.TextBoxFor(x => x.modelo_id, new { @class = "form-control", disabled = true })
+                @Html.TextBoxFor(x => x.modelo_id, new
+                { @class = "form-control", disabled = true })
             </div>
             <div class="form-group">
-                @Html.Label("Modelo")
-                @Html.TextBoxFor(x => x.nombre, new { @class = "form-control" })
-                @Html.ValidationMessageFor(x => x.nombre, null, new { @class = "text-danger" })
+                @Html.Label("Nombre")
+                @Html.TextBoxFor(x => x.nombre, new
+                { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.nombre, null,
+                     new { @class = "text-danger" })
             </div>
             <div class="form-group">
-                @Html.Label("Descripción")
-                @Html.TextBoxFor(x => x.descripcion, new { @class = "form-control" })
-                @Html.ValidationMessageFor(x => x.descripcion, null, new { @class = "text-danger" })
+                @Html.Label("Descripcion")
+                @Html.TextBoxFor(x => x.descripcion, new
+                { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.descripcion, null,
+                     new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 @Html.Label("Estado")
-
-                <select name="estado" class="form-control">
-                    <option @(Model.estado == "" ? "Selected" : "" ) value="">Seleccione</option>
-                    <option @(Model.estado == "A" ? "Selected" : "" ) value="A">Activo</option>
-                    <option @(Model.estado == "I" ? "Selected" : "" ) value="I">Inactivo</option>
-                </select>
-                @Html.ValidationMessageFor(x => x.estado, null, new { @class = "text-danger" })
+                <input id="estadoCheckbox" type="checkbox" data-toggle="toggle" @(Model.estado == "A" ? "checked" : "")
+                       data-on="Activo" data-off="Inactivo" data-size="large" data-onstyle="success" data-offstyle="danger" data-width="100%">
+                <input name="estado" id="estado" type="hidden" value="@(Model.estado == "A" ? "A" : "I")">
             </div>
         </div>
-        <div class="text-right">
-            <button type="submit" class="btn btn-primary">Grabar</button>
-            <a href="~/Modelo" class="btn btn-danger">Cancelar</a>
-        </div>
-     </div>
-     }
-</section>
+    </div>
+    <br />
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary">Grabar</button>
+        <a href="~/Modelo" class="btn btn-danger">Cancelar</a>
+    </div>
+}
+<hr />

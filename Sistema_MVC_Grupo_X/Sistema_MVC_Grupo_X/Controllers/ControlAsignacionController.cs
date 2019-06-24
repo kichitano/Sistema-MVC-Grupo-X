@@ -39,6 +39,7 @@ namespace Sistema_MVC_Grupo_X.Controllers
             string archivo, string observacion, string estado)
         {
             objControlAsignacion.controlasignacion_id = controlAsignacion_id;
+            objControlAsignacion.control_id = control_id;
             objControlAsignacion.docente_id = docente_id;
             objControlAsignacion.criterio_id = criterio_id;
             objControlAsignacion.fechaasignacion = fechaAsignacion;

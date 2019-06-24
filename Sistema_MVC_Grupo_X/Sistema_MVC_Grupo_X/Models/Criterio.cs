@@ -10,6 +10,8 @@ namespace Sistema_MVC_Grupo_X.Models
     using System.Runtime.Serialization;
 
     [Table("Criterio")]
+    [DataContract(IsReference = true)]
+
     public partial class Criterio
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,14 +21,13 @@ namespace Sistema_MVC_Grupo_X.Models
             ControlAsignacion = new HashSet<ControlAsignacion>();
             EvidenciaActividad = new HashSet<EvidenciaActividad>();
             EvidenciaCriterio = new HashSet<EvidenciaCriterio>();
+            DetalleAsignacion = new HashSet<DetalleAsignacion>();
         }
 
         [Key]
         public int criterio_id { get; set; }
 
         public int modelo_id { get; set; }
-
-        public int evidencia_id { get; set; }
 
         [Required]
         [StringLength(250)]
@@ -51,8 +52,6 @@ namespace Sistema_MVC_Grupo_X.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ControlAsignacion> ControlAsignacion { get; set; }
 
-        public virtual Evidencia Evidencia { get; set; }
-
         public virtual Modelo Modelo { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -60,6 +59,10 @@ namespace Sistema_MVC_Grupo_X.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EvidenciaCriterio> EvidenciaCriterio { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetalleAsignacion> DetalleAsignacion { get; set; }
+
         //-----------------------------------------------------------------//
 
         //metodo listar

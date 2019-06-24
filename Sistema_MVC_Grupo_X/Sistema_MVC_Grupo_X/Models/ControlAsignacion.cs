@@ -4,7 +4,6 @@ namespace Sistema_MVC_Grupo_X.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
     using System.Linq;
     using System.Data.Entity;
     using System.Data.Entity.Validation;
@@ -13,12 +12,14 @@ namespace Sistema_MVC_Grupo_X.Models
     using System.Web.Script.Serialization;
 
     [Table("ControlAsignacion")]
+    [DataContract(IsReference = true)]
+
     public partial class ControlAsignacion
     {
         [Key]
         public int controlasignacion_id { get; set; }
 
-        public int detalleasignacion_id { get; set; }
+        public int control_id { get; set; }
 
         public int docente_id { get; set; }
 
@@ -56,11 +57,12 @@ namespace Sistema_MVC_Grupo_X.Models
         [StringLength(1)]
         public string estado { get; set; }
 
+        public virtual Control Control { get; set; }
+
         public virtual Criterio Criterio { get; set; }
 
-        public virtual DetalleAsignacion DetalleAsignacion { get; set; }
-
         public virtual Docente Docente { get; set; }
+
         //-----------------------------------------------------------------//
 
         //metodo listar
@@ -156,5 +158,6 @@ namespace Sistema_MVC_Grupo_X.Models
                 throw;
             }
         }
+
     }
 }
