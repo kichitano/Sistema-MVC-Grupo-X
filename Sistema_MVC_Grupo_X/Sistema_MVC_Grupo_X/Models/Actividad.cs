@@ -4,7 +4,9 @@ namespace Sistema_MVC_Grupo_X.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     [Table("Actividad")]
     public partial class Actividad
@@ -35,8 +37,7 @@ namespace Sistema_MVC_Grupo_X.Models
         public virtual Criterio Criterio { get; set; }
 
         public virtual Semestre Semestre { get; set; }
-<<<<<<< HEAD
-=======
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EvidenciaActividad> EvidenciaActividad { get; set; }
@@ -127,6 +128,6 @@ namespace Sistema_MVC_Grupo_X.Models
                 throw;
             }
         }
->>>>>>> kixi2
+
     }
 }
