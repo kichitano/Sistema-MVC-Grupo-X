@@ -103,17 +103,26 @@
     <Content Include="Assets\css\bootstrap-reboot.min.css" />
     <Content Include="Assets\css\bootstrap.css" />
     <Content Include="Assets\css\bootstrap.min.css" />
+    <Content Include="Assets\css\highcharts.css" />
     <Content Include="Assets\js\bootstrap.bundle.js" />
     <Content Include="Assets\js\bootstrap.bundle.min.js" />
     <Content Include="Assets\js\bootstrap.js" />
     <Content Include="Assets\js\bootstrap.min.js" />
+    <Content Include="Assets\js\exporting.js" />
+    <Content Include="Assets\js\highcharts-3d.js" />
+    <Content Include="Assets\js\highcharts.js" />
     <Content Include="Assets\js\ini.js" />
     <Content Include="Assets\js\jquery-3.3.0.min.js" />
     <Content Include="Assets\js\jquery.form.js" />
     <Content Include="Assets\js\jquery.js" />
     <Content Include="Assets\js\jquery.validate.min.js" />
     <Content Include="Assets\js\jquery.validate.unobtrusive.min.js" />
+<<<<<<< HEAD
     <Content Include="Avatars\usuario1.jpg" />
+=======
+    <Content Include="Assets\js\offline-exporting.js" />
+    <Content Include="Avatars\usuario 1.jpg" />
+>>>>>>> kixi2
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
@@ -197,6 +206,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ActividadController.cs" />
     <Compile Include="Controllers\AsignacionController.cs" />
     <Compile Include="Controllers\ControlAsignacionController.cs" />
     <Compile Include="Controllers\ControlController.cs" />
@@ -274,6 +284,7 @@
     <Content Include="Views\Criterio\Index.cshtml" />
     <Content Include="Views\Criterio\AgregarEditar.cshtml" />
     <Content Include="Views\Criterio\Visualizar.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Estudiante\Index.cshtml" />
     <Content Include="Views\Estudiante\Visualizar.cshtml" />
     <Content Include="Views\Estudiante\AgregarEditar.cshtml" />
@@ -281,6 +292,11 @@
     <Content Include="Views\Evidencia\Visualizar.cshtml" />
     <Content Include="Views\Evidencia\AgregarEditar.cshtml" />
     <Content Include="Views\Evidencia\_MostrarCriterio.cshtml" />
+=======
+    <Content Include="Views\Modelo\GraficoBarras.cshtml" />
+    <Content Include="Views\Actividad\Index.cshtml" />
+    <Content Include="Views\Actividad\AgregarEditar.cshtml" />
+>>>>>>> kixi2
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -5,19 +5,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Sistema_MVC_Grupo_X.Models;
+using Sistema_MVC_Grupo_X.Filters;
 
 namespace Sistema_MVC_Grupo_X.Controllers
 {
+    [Autenticado]
     public class ModeloController : Controller
     {
         private Modelo objModelo = new Modelo();
-        [Autenticado]
+        private Criterio objCriterio = new Criterio();
         // GET: Modelo
         public ActionResult Index()
         {
             return View(objModelo.Listar());
         }
 
+        public ActionResult GraficoBarras()
+        {
+            ViewBag.Criterio = objCriterio.Listar();
+            return View(objModelo.ObtenerCantidadCriterios());
+        }
+        
         //Action Visualizar
         public ActionResult Visualizar(int id)
         {

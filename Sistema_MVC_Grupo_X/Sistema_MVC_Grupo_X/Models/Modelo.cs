@@ -8,6 +8,7 @@ namespace Sistema_MVC_Grupo_X.Models
     using System.Linq;
     using System.Data.Entity;
 
+
     [Table("Modelo")]
     public partial class Modelo
     {
@@ -37,6 +38,25 @@ namespace Sistema_MVC_Grupo_X.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Evidencia> Evidencia { get; set; }
         //-----------------------------------------------------------------//
+
+        //metodo listar
+        public List<Modelo> ObtenerCantidadCriterios() //Retorna un collection
+        {
+            var objModelo = new List<Modelo>();
+            try
+            {
+                using (var db = new Modelo_Sistema())
+                {
+                    objModelo = db.Modelo.Include("Criterio")
+                        .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return objModelo;
+        }
 
         //metodo listar
         public List<Modelo> Listar() //Retorna un collection
