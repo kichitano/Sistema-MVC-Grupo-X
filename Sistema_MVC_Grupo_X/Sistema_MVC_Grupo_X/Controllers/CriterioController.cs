@@ -36,8 +36,12 @@ namespace Sistema_MVC_Grupo_X.Controllers
                 : objCriterio.Obtener(id) //Devuelve un objeto
                 );
         }
-        //Crear EXCEL
-        public ActionResult Reporte()
+        public ActionResult Reportes()
+        {
+            return View(objCriterio.Listar());
+        }
+        //Crear PDF
+        public ActionResult ExportarPDF()
         {
             List<Criterio> listaCriterio = objCriterio.Listar();
             var destino = Server.MapPath(@"~/Assets/report/Criterio.pdf");
@@ -45,6 +49,8 @@ namespace Sistema_MVC_Grupo_X.Controllers
             int numeroFila = 3;
             //Crear una variable faltante para el valor perdido  
             object missing = System.Reflection.Missing.Value;
+            var modelos = from grupo in listaCriterio group grupo by grupo.modelo_id into grp select new { key = grp.Key, cnt = grp.Count() };
+            string modelo = "";
             if (!System.IO.File.Exists(filename))
             {
                 // Creamos un objeto Excel.
@@ -83,8 +89,7 @@ namespace Sistema_MVC_Grupo_X.Controllers
 
 
                 
-                var modelos = from grupo in listaCriterio group grupo by grupo.modelo_id into grp select new { key = grp.Key, cnt = grp.Count() };
-                string modelo="";
+                
                 foreach (var item in modelos)
                 {
                     modelo = objModelo.Obtener(item.key).nombre;
@@ -137,11 +142,10 @@ namespace Sistema_MVC_Grupo_X.Controllers
                 //Iniciar archivo
                 InteropExcel.Workbook workbook = application.Workbooks.Open(filename);
                 InteropExcel.Worksheet HojaExcel = workbook.Worksheets[1];
-                var modelos = from grupo in listaCriterio group grupo by grupo.modelo_id into grp select new { key = grp.Key, cnt = grp.Count() };
-
                 foreach (var item in modelos)
                 {
-                    HojaExcel.Cells[numeroFila, 4] = item.key;
+                    modelo = objModelo.Obtener(item.key).nombre;
+                    HojaExcel.Cells[numeroFila, 4] = modelo;
                     HojaExcel.Cells[numeroFila, 5] = item.cnt;
                     numeroFila++;
                 }

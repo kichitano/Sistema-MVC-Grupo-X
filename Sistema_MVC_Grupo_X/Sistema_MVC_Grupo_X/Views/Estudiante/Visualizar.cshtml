@@ -1,0 +1,45 @@
+﻿@model Sistema_MVC_Grupo_X.Models.Estudiante
+@{
+    ViewBag.Title = "Visualizar";
+}
+<h2>Visualizar</h2>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="~/Estudiante/Index">Estudiante</a>
+        </li>
+        <li class="breadcrumb-item active">@(Model.nombre + " " + Model.apellido)</li>
+    </ol>
+</nav>
+<div class="card">
+    <div class="card-header">
+        Información detallada del estudiante
+    </div>
+    <div class="card-body">
+        <dl class="dl-horizontal">
+            <dt>Id</dt>
+            <dd>@Model.estudiante_id </dd>
+            <dt>Código</dt>
+            <dd>@Model.estudiante_codigo</dd>
+            <dt>Dni</dt>
+            <dd>@Model.dni</dd>
+            <dt>Apellido</dt>
+            <dd>@Model.apellido</dd>
+            <dt>Nombre</dt>
+            <dd>@Model.nombre</dd>
+            <dt>Sexo</dt>
+            <dd>@(Model.sexo == "M" ? "Masculino" : "Femenino")</dd>
+            <dt>Email</dt>
+            <dd>@Model.email</dd>
+            <dt>Cargo</dt>
+            <dd>@Model.direccion</dd>
+            <dt>Celular</dt>
+            <dd>@Model.celular</dd>
+            <dt>Foto</dt>
+            <dd>@Model.foto</dd>
+            <dt>Estado</dt>
+            <dd>@(Model.estado == "A" ? "Activo" : "Inactivo")</dd>
+        </dl>
+    </div>
+</div>
+<hr />

@@ -1,0 +1,45 @@
+﻿@model List<Sistema_MVC_Grupo_X.Models.Estudiante>
+@{
+    ViewBag.Title = "Index";
+}
+<h2 class="card text-center">Gestión de Estudiantes</h2>
+<br />
+<div class="text-right">
+    <a href="~/Estudiante/AgregarEditar/" class="btn btn-secondary text-right">
+        Nuevo Registro
+    </a>
+</div>
+<br />
+<table class="table" id="tablaIndex" style="width:100%">
+    <thead>
+        <tr>
+            <th style="width:40px; text-align:center">Id</th>
+            <th style="width:150px; text-align:center">Estudiante</th>
+            <th style="width:150px; text-align:center">Email - Celular</th>
+            <th style="width:50px; text-align:center">Estado</th>
+            <th style="width:150px; text-align:center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var d in Model)
+        {
+            <tr>
+                <th style="text-align:center">@(d.estudiante_id)</th>
+                <th style="text-align:center">@(d.nombre + " " + d.apellido)</th>
+                <th style="text-align:center">@(d.email + " / " + d.celular)</th>
+                <th style="text-align:center">@(d.estado == "A" ? "Activo" : "Inactivo")</th>
+                <th style="text-align:center; align-content:center">
+                    <a href="~/Estudiante/Visualizar/@d.estudiante_id"
+                       class="btn btn-xs btn-warning" style="padding:inherit">Visualizar</a>
+                    <a href="~/Estudiante/AgregarEditar/@d.estudiante_id"
+                       class="btn btn-xs btn-primary" style="padding:inherit">Modificar</a>
+                    <a href="~/Estudiante/Eliminar/@d.estudiante_id"
+                       class="btn btn-xs btn-danger" style="padding:inherit"
+                       onclick="return confirm('¿Esta seguro de eliminar ...?');">Eliminar</a>
+                </th>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<hr />

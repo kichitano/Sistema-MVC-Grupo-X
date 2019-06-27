@@ -228,6 +228,7 @@
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\DetalleAsignacionController.cs" />
     <Compile Include="Controllers\DocenteController.cs" />
+    <Compile Include="Controllers\EstudianteController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ModeloController.cs" />
     <Compile Include="Controllers\SemestreController.cs" />
@@ -299,6 +300,15 @@
     <Content Include="Views\Actividad\AgregarEditar.cshtml" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Views\Actividad\Visualizar.cshtml" />
+    <Content Include="Views\Asignacion\Visualizar.cshtml" />
+    <Content Include="Views\Estudiante\Index.cshtml" />
+    <Content Include="Views\Estudiante\Visualizar.cshtml" />
+    <Content Include="Views\Estudiante\AgregarEditar.cshtml" />
+    <Content Include="Views\Actividad\Reporte.cshtml" />
+    <Content Include="Views\Asignacion\Reporte.cshtml" />
+    <Content Include="Views\ControlAsignacion\Reporte.cshtml" />
+    <Content Include="Views\Criterio\Reportes.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

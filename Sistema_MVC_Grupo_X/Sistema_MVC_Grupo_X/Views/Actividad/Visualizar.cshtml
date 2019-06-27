@@ -1,0 +1,39 @@
+﻿@model Sistema_MVC_Grupo_X.Models.Actividad
+@{
+    List<Sistema_MVC_Grupo_X.Models.Semestre> semestre = ViewBag.Semestre;
+    List<Sistema_MVC_Grupo_X.Models.Criterio> criterio = ViewBag.Criterio;
+    List<Sistema_MVC_Grupo_X.Models.EvidenciaActividad> evidenciaActividad = ViewBag.EvidenciaActividad;
+    ViewBag.Title = "Visualizar";
+}
+
+<h2>Visualizar</h2>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="~/Actividad/Index">Actividad</a>
+        </li>
+        <li class="breadcrumb-item active">@Model.nombre</li>
+    </ol>
+</nav>
+<div class="card">
+    <div class="card-header">
+        Información detallada de actividad
+    </div>
+    <div class="card-body">
+        <dl class="dl-horizontal">
+            <dt>Id</dt>
+            <dd>@Model.actividad_id</dd>
+            <dt>Semestre</dt>
+            <dd>@Model.Semestre.nombre</dd>
+            <dt>Criterio</dt>
+            <dd>@Model.Criterio.nombre_spanish</dd>
+            <dt>Nombre</dt>
+            <dd>@Model.nombre</dd>
+            <dt>Fecha de creacion</dt>
+            <dd>@Model.fecha.Value.ToString("dd/MM/yyyy")</dd>
+            <dt>Estado</dt>
+            <dd>@(Model.estado == "A" ? "Activo" : "Inactivo")</dd>
+        </dl>
+    </div>
+</div>
+<hr />

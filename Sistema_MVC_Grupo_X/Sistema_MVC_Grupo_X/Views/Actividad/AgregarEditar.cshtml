@@ -240,7 +240,7 @@
         btnAgregarEditar.id = "btnAgregar"
         btnAgregarEditar.type = 'button';
         btnAgregarEditar.className = "btn btn-success"
-        btnAgregarEditar.setAttribute('onClick','guardarDetalleAsignacion(this,@Model.asignacion_id)')
+        btnAgregarEditar.setAttribute('onClick','guardarDetalleAsignacion(this,@Model.actividad_id)')
 
 
         var btnCancelar = document.createElement('button');
@@ -248,7 +248,7 @@
         btnCancelar.innerHTML = "Cancelar";
         btnCancelar.type = 'button';
         btnCancelar.className = "btn btn-danger"
-        btnCancelar.setAttribute('onClick','eliminarElementos(this,@Model.asignacion_id)')
+        btnCancelar.setAttribute('onClick','eliminarElementos(this,@Model.actividad_id)')
 
         //Agregando los elementos dinamicamente
 
