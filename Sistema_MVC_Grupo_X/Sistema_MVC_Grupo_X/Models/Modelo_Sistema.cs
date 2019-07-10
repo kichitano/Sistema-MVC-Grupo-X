@@ -10,24 +10,24 @@ namespace Sistema_MVC_Grupo_X.Models
         public Modelo_Sistema()
             : base("name=Modelo_Sistema")
         {
-            this.Configuration.LazyLoadingEnabled = false;
-            this.Configuration.ProxyCreationEnabled = false;
         }
 
         public virtual DbSet<Actividad> Actividad { get; set; }
         public virtual DbSet<Asignacion> Asignacion { get; set; }
+        public virtual DbSet<Categoria> Categoria { get; set; }
         public virtual DbSet<Control> Control { get; set; }
         public virtual DbSet<ControlAsignacion> ControlAsignacion { get; set; }
         public virtual DbSet<Criterio> Criterio { get; set; }
         public virtual DbSet<DetalleAsignacion> DetalleAsignacion { get; set; }
         public virtual DbSet<Docente> Docente { get; set; }
         public virtual DbSet<Estudiante> Estudiante { get; set; }
+        public virtual DbSet<Evidencia> Evidencia { get; set; }
         public virtual DbSet<EvidenciaActividad> EvidenciaActividad { get; set; }
-        public virtual DbSet<EvidenciaCriterio> EvidenciaCriterio { get; set; }
         public virtual DbSet<Modelo> Modelo { get; set; }
         public virtual DbSet<Semestre> Semestre { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<EvidenciaCriterio> EvidenciaCriterio { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -64,6 +64,15 @@ namespace Sistema_MVC_Grupo_X.Models
             modelBuilder.Entity<Asignacion>()
                 .HasMany(e => e.DetalleAsignacion)
                 .WithRequired(e => e.Asignacion)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Categoria>()
+                .Property(e => e.descripcion_categoria)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Categoria>()
+                .HasMany(e => e.Evidencia)
+                .WithRequired(e => e.Categoria)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Control>()
@@ -147,13 +156,14 @@ namespace Sistema_MVC_Grupo_X.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Criterio>()
-                .HasMany(e => e.EvidenciaCriterio)
+                .HasMany(e => e.DetalleAsignacion)
                 .WithRequired(e => e.Criterio)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Criterio>()
-                .HasMany(e => e.DetalleAsignacion)
+                .HasMany(e => e.EvidenciaCriterio)
                 .WithRequired(e => e.Criterio)
+                .HasForeignKey(e => e.evidencia_id)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<DetalleAsignacion>()
@@ -257,6 +267,24 @@ namespace Sistema_MVC_Grupo_X.Models
                 .Property(e => e.estado)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Evidencia>()
+                .Property(e => e.archivo_evidencia)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Evidencia>()
+                .Property(e => e.descripcion_evidencia)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Evidencia>()
+                .Property(e => e.estado_evidencia)
+                .IsFixedLength()
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Evidencia>()
+                .HasMany(e => e.EvidenciaCriterio)
+                .WithRequired(e => e.Evidencia)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<EvidenciaActividad>()
                 .Property(e => e.archivo)
                 .IsUnicode(false);
@@ -270,22 +298,6 @@ namespace Sistema_MVC_Grupo_X.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<EvidenciaActividad>()
-                .Property(e => e.descripcion)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<EvidenciaCriterio>()
-                .Property(e => e.archivo)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<EvidenciaCriterio>()
-                .Property(e => e.tamanio)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<EvidenciaCriterio>()
-                .Property(e => e.tipo)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<EvidenciaCriterio>()
                 .Property(e => e.descripcion)
                 .IsUnicode(false);
 
@@ -304,6 +316,11 @@ namespace Sistema_MVC_Grupo_X.Models
 
             modelBuilder.Entity<Modelo>()
                 .HasMany(e => e.Criterio)
+                .WithRequired(e => e.Modelo)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Modelo>()
+                .HasMany(e => e.Evidencia)
                 .WithRequired(e => e.Modelo)
                 .WillCascadeOnDelete(false);
 
@@ -331,6 +348,11 @@ namespace Sistema_MVC_Grupo_X.Models
                 .WithRequired(e => e.Semestre)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Semestre>()
+                .HasMany(e => e.Evidencia)
+                .WithRequired(e => e.Semestre)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Usuario>()
                 .Property(e => e.nombre)
                 .IsUnicode(false);
@@ -351,7 +373,6 @@ namespace Sistema_MVC_Grupo_X.Models
                 .Property(e => e.estado)
                 .IsFixedLength()
                 .IsUnicode(false);
-           
         }
     }
 }

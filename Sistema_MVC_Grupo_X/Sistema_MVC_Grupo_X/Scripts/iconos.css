@@ -1,0 +1,33 @@
+﻿a:before {
+    margin: 0 10px 0 0px;
+    width:100px;
+    height:50px;
+}
+
+a[href$=".docx"]:before {
+    content: url(https://www.file-extension.info/images/resource/64/microsoft-word.png);
+}
+
+a[href$=".ppt"]:before {
+    content: url(http://icons.iconarchive.com/icons/carlosjj/microsoft-office-2013/16/PowerPoint-icon.png);
+}
+
+a[href$=".xlsx"]:before {
+    content: url(https://www.file-extension.info/images/resource/64/microsoft-word.png);
+}
+
+a[href$=".pdf"]:before {
+    content: url(https://image.flaticon.com/icons/png/128/1825/1825959.png);
+}
+
+a[href$=".jpg"]:before {
+    content: url(https://images.sftcdn.net/images/t_app-logo-l,f_auto,dpr_auto/p/7bfb2f90-c8f4-11e6-a571-00163ed833e7/3130071110/motorola-camera-icon.png);
+}
+
+a[href$=".png"]:before {
+    content: url(https://images.sftcdn.net/images/t_app-logo-l,f_auto,dpr_auto/p/7bfb2f90-c8f4-11e6-a571-00163ed833e7/3130071110/motorola-camera-icon.png);
+}
+
+a[href$=".zip"]:before {
+    content: url(https://www.aulafacil.com/images/icono-zip-64x64.png);
+}

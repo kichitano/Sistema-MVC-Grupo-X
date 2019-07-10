@@ -19,6 +19,7 @@ namespace Sistema_MVC_Grupo_X.Models
             Actividad = new HashSet<Actividad>();
             Asignacion = new HashSet<Asignacion>();
             Control = new HashSet<Control>();
+            Evidencia = new HashSet<Evidencia>();
         }
 
         [Key]
@@ -41,6 +42,9 @@ namespace Sistema_MVC_Grupo_X.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Control> Control { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Evidencia> Evidencia { get; set; }
 
         //-----------------------------------------------------------------//
 

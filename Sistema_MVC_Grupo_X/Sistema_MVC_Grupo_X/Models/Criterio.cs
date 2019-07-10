@@ -7,11 +7,8 @@ namespace Sistema_MVC_Grupo_X.Models
     using System.Data.Entity.Spatial;
     using System.Linq;
     using System.Data.Entity;
-    using System.Runtime.Serialization;
 
     [Table("Criterio")]
-    [DataContract(IsReference = true)]
-
     public partial class Criterio
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,8 +17,8 @@ namespace Sistema_MVC_Grupo_X.Models
             Actividad = new HashSet<Actividad>();
             ControlAsignacion = new HashSet<ControlAsignacion>();
             EvidenciaActividad = new HashSet<EvidenciaActividad>();
-            EvidenciaCriterio = new HashSet<EvidenciaCriterio>();
             DetalleAsignacion = new HashSet<DetalleAsignacion>();
+            EvidenciaCriterio = new HashSet<EvidenciaCriterio>();
         }
 
         [Key]
@@ -58,10 +55,10 @@ namespace Sistema_MVC_Grupo_X.Models
         public virtual ICollection<EvidenciaActividad> EvidenciaActividad { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EvidenciaCriterio> EvidenciaCriterio { get; set; }
+        public virtual ICollection<DetalleAsignacion> DetalleAsignacion { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetalleAsignacion> DetalleAsignacion { get; set; }
+        public virtual ICollection<EvidenciaCriterio> EvidenciaCriterio { get; set; }
 
         //-----------------------------------------------------------------//
 
@@ -74,6 +71,25 @@ namespace Sistema_MVC_Grupo_X.Models
                 using (var db = new Modelo_Sistema())
                 {
                     objCriterio = db.Criterio.Include("Modelo").ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return objCriterio;
+        }
+        //metodo listar por Modelo
+        public List<Criterio> ListarporModelo(int idModelo) //Retorna un collection
+        {
+            var objCriterio = new List<Criterio>();
+            try
+            {
+                using (var db = new Modelo_Sistema())
+                {
+                    objCriterio = db.Criterio
+                        .Where(x => x.modelo_id == idModelo)
+                        .ToList();
                 }
             }
             catch (Exception ex)
