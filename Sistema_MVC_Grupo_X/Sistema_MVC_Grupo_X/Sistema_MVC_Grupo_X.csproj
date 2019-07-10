@@ -181,6 +181,7 @@
     <Content Include="Scripts\datatables.js" />
     <Content Include="Scripts\datatables.min.css" />
     <Content Include="Scripts\datatables.min.js" />
+    <Content Include="Scripts\iconos.css" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
@@ -198,12 +199,15 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AsignacionController.cs" />
+    <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\ControlAsignacionController.cs" />
     <Compile Include="Controllers\ControlController.cs" />
     <Compile Include="Controllers\CriterioController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\DetalleAsignacionController.cs" />
     <Compile Include="Controllers\DocenteController.cs" />
+    <Compile Include="Controllers\EvidenciaController.cs" />
+    <Compile Include="Controllers\EvidenciaCriterioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ModeloController.cs" />
     <Compile Include="Controllers\SemestreController.cs" />
@@ -214,12 +218,14 @@
     </Compile>
     <Compile Include="Models\Actividad.cs" />
     <Compile Include="Models\Asignacion.cs" />
+    <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\Control.cs" />
     <Compile Include="Models\ControlAsignacion.cs" />
     <Compile Include="Models\Criterio.cs" />
     <Compile Include="Models\DetalleAsignacion.cs" />
     <Compile Include="Models\Docente.cs" />
     <Compile Include="Models\Estudiante.cs" />
+    <Compile Include="Models\Evidencia.cs" />
     <Compile Include="Models\EvidenciaActividad.cs" />
     <Compile Include="Models\EvidenciaCriterio.cs" />
     <Compile Include="Models\HashHelper.cs" />
@@ -271,6 +277,9 @@
     <Content Include="Views\Criterio\Index.cshtml" />
     <Content Include="Views\Criterio\AgregarEditar.cshtml" />
     <Content Include="Views\Criterio\Visualizar.cshtml" />
+    <Content Include="Views\Evidencia\Index.cshtml" />
+    <Content Include="Views\Evidencia\AgregarEditar.cshtml" />
+    <Content Include="Views\Shared\_Criterios.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -279,8 +288,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Archivos\" />
+    <Folder Include="Views\Categoria\" />
     <Folder Include="Views\DetalleAsignacion\" />
+    <Folder Include="Views\EvidenciaCriterio\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

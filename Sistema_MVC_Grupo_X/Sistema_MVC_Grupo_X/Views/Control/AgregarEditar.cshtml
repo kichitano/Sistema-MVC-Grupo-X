@@ -423,7 +423,7 @@
                 //CONTROL ASIGNACION ID
         var asCoid = $('#tablaElementos').find("tr:eq(" + i + ")").find("td:eq(0)").text();
         //ENVIO DE VARIABLES PARA ELIMINAR REGISTRO
-
+        
         $.ajax({
             type: "POST",
             url: '@Url.Action("Eliminar", "ControlAsignacion")',
@@ -437,5 +437,5 @@
             }
         })
     }
-
+    
 </script>

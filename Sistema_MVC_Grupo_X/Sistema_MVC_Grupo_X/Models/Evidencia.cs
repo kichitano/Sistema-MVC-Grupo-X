@@ -8,47 +8,58 @@ namespace Sistema_MVC_Grupo_X.Models
     using System.Linq;
     using System.Data.Entity;
 
-    [Table("Modelo")]
-    public partial class Modelo
+    [Table("Evidencia")]
+    public partial class Evidencia
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Modelo()
+        public Evidencia()
         {
-            Criterio = new HashSet<Criterio>();
-            Evidencia = new HashSet<Evidencia>();
+            EvidenciaCriterio = new HashSet<EvidenciaCriterio>();
         }
 
         [Key]
+        public int evidencia_id { get; set; }
+
+        public int semestre_id { get; set; }
+
         public int modelo_id { get; set; }
 
+        public int categoria_id { get; set; }
+
         [Required]
-        [StringLength(250)]
-        public string nombre { get; set; }
+        [StringLength(100)]
+        public string archivo_evidencia { get; set; }
 
-        [Column(TypeName = "text")]
-        public string descripcion { get; set; }
+        [StringLength(100)]
+        public string descripcion_evidencia { get; set; }
 
+        [Required]
         [StringLength(1)]
-        public string estado { get; set; }
+        public string estado_evidencia { get; set; }
+
+        public virtual Categoria Categoria { get; set; }
+
+        public virtual Modelo Modelo { get; set; }
+
+        public virtual Semestre Semestre { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Criterio> Criterio { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Evidencia> Evidencia { get; set; }
+        public virtual ICollection<EvidenciaCriterio> EvidenciaCriterio { get; set; }
 
         //-----------------------------------------------------------------//
 
         //metodo listar
-        public List<Modelo> Listar() //Retorna un collection
+        public List<Evidencia> Listar() //Retorna un collection
         {
-            var objModelo = new List<Modelo>();
+            var objEvidencia = new List<Evidencia>();
             try
             {
                 using (var db = new Modelo_Sistema())
                 {
-                    objModelo = db.Modelo
-                        .Include("Criterio")
+                    objEvidencia = db.Evidencia
+                        .Include("Semestre")
+                        .Include("Modelo")
+                        .Include("Categoria")
                         .ToList();
                 }
             }
@@ -56,19 +67,22 @@ namespace Sistema_MVC_Grupo_X.Models
             {
                 throw;
             }
-            return objModelo;
+            return objEvidencia;
         }
 
         //metodo obtener
-        public Modelo Obtener(int id) //retorna solo un objeto
+        public Evidencia Obtener(int id) //retorna solo un objeto
         {
-            var objModelo = new Modelo();
+            var objEvidencia = new Evidencia();
             try
             {
                 using (var db = new Modelo_Sistema())
                 {
-                    objModelo = db.Modelo
-                    .Where(x => x.modelo_id == id)
+                    objEvidencia = db.Evidencia
+                        .Include("Semestre")
+                        .Include("Modelo")
+                        .Include("Categoria")
+                    .Where(x => x.evidencia_id == id)
                         .SingleOrDefault();
                 }
             }
@@ -76,7 +90,7 @@ namespace Sistema_MVC_Grupo_X.Models
             {
                 throw;
             }
-            return objModelo;
+            return objEvidencia;
         }
         //metodo guardar y modificar
         public void Guardar()
@@ -85,7 +99,7 @@ namespace Sistema_MVC_Grupo_X.Models
             {
                 using (var db = new Modelo_Sistema())
                 {
-                    if (this.modelo_id > 0)
+                    if (this.evidencia_id > 0)
                     { //si existe un valor mayor a 0 es x que existe el registro
                         db.Entry(this).State = EntityState.Modified;
 
@@ -119,5 +133,6 @@ namespace Sistema_MVC_Grupo_X.Models
                 throw;
             }
         }
+
     }
 }

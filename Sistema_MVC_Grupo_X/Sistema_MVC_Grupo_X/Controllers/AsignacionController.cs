@@ -34,6 +34,7 @@ namespace Sistema_MVC_Grupo_X.Controllers
             ViewBag.Docente = objDocente.Listar();
             ViewBag.Criterio = objCriterio.Listar();
             ViewBag.DetalleAsignacion = objDetalleAsignacion.Listar();
+
             return View(
                 id == 0 ? new Asignacion() //Agrega un nuevo objeto
                 : objAsignacion.Obtener(id) //Devuelva un objeto

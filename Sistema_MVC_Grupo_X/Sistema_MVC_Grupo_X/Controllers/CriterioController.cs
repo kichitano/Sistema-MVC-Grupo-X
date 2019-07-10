@@ -11,12 +11,20 @@ namespace Sistema_MVC_Grupo_X.Controllers
     {
         private Criterio objCriterio = new Criterio();
         private Modelo objModelo = new Modelo();
+        private EvidenciaCriterio objEvidenciaCriterio = new EvidenciaCriterio();
         // GET: Modelo
         public ActionResult Index()
         {
+           
             return View(objCriterio.Listar());
+            
         }
 
+        public ActionResult _Criterios(int idModelo = 0,int evidencia_id=0)
+        {
+            ViewBag.EvidenciaCriterio = objEvidenciaCriterio.ListarPorEvidencia(evidencia_id);
+            return View("_Criterios", objCriterio.ListarporModelo(idModelo));
+        }
         //Action Visualizar
         public ActionResult Visualizar(int id)
         {

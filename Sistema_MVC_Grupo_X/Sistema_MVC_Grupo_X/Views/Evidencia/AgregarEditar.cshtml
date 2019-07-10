@@ -1,0 +1,175 @@
+﻿@model Sistema_MVC_Grupo_X.Models.Evidencia
+@{
+    ViewBag.Title = "AgregarEditar";
+    List<Sistema_MVC_Grupo_X.Models.Semestre> semestre = ViewBag.Semestre;
+    List<Sistema_MVC_Grupo_X.Models.Modelo> modelo = ViewBag.Modelo;
+    List<Sistema_MVC_Grupo_X.Models.Categoria> categoria = ViewBag.Categoria;
+    List<Sistema_MVC_Grupo_X.Models.EvidenciaCriterio> objEvidenciasCriteriosAct = null;
+    string archivoAct = "";
+    if (Model.evidencia_id > 0)
+    {
+        objEvidenciasCriteriosAct = ViewBag.EvidenciaCriterioAct;
+        TempData["ecAct"] = objEvidenciasCriteriosAct;
+        archivoAct = Model.archivo_evidencia;
+    }
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var modeloID = @Model.modelo_id;   
+        $("#lista_criterios").load("/Criterio/_Criterios", { idModelo: modeloID , evidencia_id: @Model.evidencia_id});
+    });
+</script>
+
+
+<h2>Agregar Editar Evidencias</h2>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="~/Evidencia/Index">Evidencia</a>
+        </li>
+        <li class="breadcrumb-item active">
+            @(Model.evidencia_id > 0 ? Model.descripcion_evidencia : "Nuevo Registro")
+        </li>
+    </ol>
+</nav>
+@using (Html.BeginForm("Guardar", "Evidencia", FormMethod.Post, new { id = "frm-evidencia" , enctype = "multipart/form-data"}))
+{
+    @Html.HiddenFor(x => x.evidencia_id)
+    <div class="card">
+        <div class="card-header">Información de la Evidencia</div>
+        <div class="card-body">
+            <div class="row form-group">
+                <div class="col-3">
+                    <label><b>Semestre</b></label>
+                </div>
+                <div class="col-9">
+                    <select name="semestre_id" class="form-control">
+                        <option @(Model.semestre_id.Equals("") ? "Selected" : "") value="">
+                            -- Seleccione --
+                        </option>
+                        @foreach (var s in semestre)
+                        {
+                            <option @(Model.semestre_id.Equals(s.semestre_id) ? "Selected" : "") value="@s.semestre_id">@s.nombre</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-3">
+                    <label><b>Modelo</b></label>
+                </div>
+                <div class="col-9">
+                    <select name="modelo_id" class="form-control" onchange="Actualizar(this)">
+                        <option @(Model.modelo_id.Equals("") ? "Selected" : "") value="" >
+                            -- Seleccione --
+                        </option>
+                        @foreach (var m in modelo)
+                        {
+                            <option @(Model.modelo_id.Equals(m.modelo_id) ? "Selected" : "") value="@m.modelo_id" >@m.nombre</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group" >
+                <div class="col-3">
+                    <label><b>Criterios</b></label>
+                </div>
+                <div class="col-9">  
+                    @Html.HiddenFor(item => objEvidenciasCriteriosAct)
+                    <div id="lista_criterios">
+                        @if(Model.evidencia_id > 0)
+                        {
+                            // VISTA PARCIAL _Criterios
+                        }
+                        else
+                        {
+                            <label>-- Seleccione un modelo valido primero --</label>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label><b>Archivo</b></label>
+                </div>
+                <div class="col-9">
+                    <div id="contenedorArchivo">
+                            <div class="custom-file mb-3">
+                                <input type="file" class="custom-file-input" id="cargarArchivo" name="cargar_Archivo">
+                                <label class="custom-file-label" for="cargarArchivo" name="textoEvidencia" id="textoEvidencia2">@(Model.archivo_evidencia == "" ? "Elegir Archivo" : Model.archivo_evidencia)</label>
+                                <input type="hidden" id="cadenaArchivo" name="archivo_evidencia" value="@(Model.archivo_evidencia)" />
+                                @if (Model.evidencia_id > 0) {
+                                    <input type="hidden" id="archivoAct" name="archivo_actual" value="@(archivoAct)" />
+                                }
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-3">
+                    <label><b>Categoría</b></label>
+                </div>
+                <div class="col-9">
+                    <select name="categoria_id" class="form-control">
+                        <option @(Model.categoria_id.Equals("") ? "Selected" : "") value="">
+                            -- Seleccione --
+                        </option>
+                        @foreach (var c in categoria)
+                        {
+                            <option @(Model.categoria_id.Equals(c.categoria_id) ? "Selected" : "") value="@c.categoria_id">@c.descripcion_categoria</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-3">
+                    <label><b>Descripcion</b></label>
+                </div>
+                <div class="col-9">
+                    <div class="md-form">
+                        <textarea name="descripcion_evidencia" class="md-textarea form-control" style="resize:none" rows="4">@Model.descripcion_evidencia</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label><b>Estado</b></label>
+                </div>
+                <div class="col-9">
+                    <div class="form-group">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="estado_act" name="estado_evidencia" @(Model.estado_evidencia == "A" ? "checked" : "") value="A">
+                            <label class="custom-control-label" for="estado_act">Activo</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="estado_ina" name="estado_evidencia" @(Model.estado_evidencia == "I" ? "checked" : "") value="I">
+                            <label class="custom-control-label" for="estado_ina">Inactivo</label>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+    </div>
+    <br />
+    <div class="text-right">
+        <input type="submit" class="btn btn-primary" value="Grabar"/>
+        <a href="~/Evidencia" class="btn btn-danger">Cancelar</a>
+    </div>
+}
+<hr />
+
+<script>
+    function Actualizar(sel) {
+        var modeloID = sel.value;        
+        $("#lista_criterios").load("/Criterio/_Criterios", {idModelo : modeloID});
+    }
+
+    $("#cargarArchivo").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        document.getElementById("cadenaArchivo").value = fileName;
+    });
+
+</script>

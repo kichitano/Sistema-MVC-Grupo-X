@@ -7,32 +7,23 @@ namespace Sistema_MVC_Grupo_X.Models
     using System.Data.Entity.Spatial;
     using System.Linq;
     using System.Data.Entity;
+    using System.Runtime.Serialization;
 
-    [Table("Modelo")]
-    public partial class Modelo
+    [Table("Categoria")]
+    public partial class Categoria
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Modelo()
+        public Categoria()
         {
-            Criterio = new HashSet<Criterio>();
             Evidencia = new HashSet<Evidencia>();
         }
 
         [Key]
-        public int modelo_id { get; set; }
+        public int categoria_id { get; set; }
 
         [Required]
-        [StringLength(250)]
-        public string nombre { get; set; }
-
-        [Column(TypeName = "text")]
-        public string descripcion { get; set; }
-
-        [StringLength(1)]
-        public string estado { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Criterio> Criterio { get; set; }
+        [StringLength(100)]
+        public string descripcion_categoria { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Evidencia> Evidencia { get; set; }
@@ -40,15 +31,14 @@ namespace Sistema_MVC_Grupo_X.Models
         //-----------------------------------------------------------------//
 
         //metodo listar
-        public List<Modelo> Listar() //Retorna un collection
+        public List<Categoria> Listar() //Retorna un collection
         {
-            var objModelo = new List<Modelo>();
+            var objCategoria = new List<Categoria>();
             try
             {
                 using (var db = new Modelo_Sistema())
                 {
-                    objModelo = db.Modelo
-                        .Include("Criterio")
+                    objCategoria = db.Categoria
                         .ToList();
                 }
             }
@@ -56,19 +46,19 @@ namespace Sistema_MVC_Grupo_X.Models
             {
                 throw;
             }
-            return objModelo;
+            return objCategoria;
         }
 
         //metodo obtener
-        public Modelo Obtener(int id) //retorna solo un objeto
+        public Categoria Obtener(int id) //retorna solo un objeto
         {
-            var objModelo = new Modelo();
+            var objCategoria = new Categoria();
             try
             {
                 using (var db = new Modelo_Sistema())
                 {
-                    objModelo = db.Modelo
-                    .Where(x => x.modelo_id == id)
+                    objCategoria = db.Categoria
+                    .Where(x => x.categoria_id == id)
                         .SingleOrDefault();
                 }
             }
@@ -76,7 +66,7 @@ namespace Sistema_MVC_Grupo_X.Models
             {
                 throw;
             }
-            return objModelo;
+            return objCategoria;
         }
         //metodo guardar y modificar
         public void Guardar()
@@ -85,7 +75,7 @@ namespace Sistema_MVC_Grupo_X.Models
             {
                 using (var db = new Modelo_Sistema())
                 {
-                    if (this.modelo_id > 0)
+                    if (this.categoria_id > 0)
                     { //si existe un valor mayor a 0 es x que existe el registro
                         db.Entry(this).State = EntityState.Modified;
 
@@ -119,5 +109,6 @@ namespace Sistema_MVC_Grupo_X.Models
                 throw;
             }
         }
+
     }
 }

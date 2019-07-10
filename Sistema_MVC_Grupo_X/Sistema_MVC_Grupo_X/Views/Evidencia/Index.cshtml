@@ -1,0 +1,110 @@
+﻿@model List<Sistema_MVC_Grupo_X.Models.Evidencia>
+@{
+    ViewBag.Title = "Index";
+    string cadenaCriterios = "";
+    List<Sistema_MVC_Grupo_X.Models.EvidenciaCriterio> evidenciaCriterio = ViewBag.EvidenciaCriterio;
+    List<Sistema_MVC_Grupo_X.Models.Criterio> detalleCriterio = ViewBag.Criterio;
+    List<Sistema_MVC_Grupo_X.Models.Semestre> semestre = ViewBag.Semestre;
+    List<Sistema_MVC_Grupo_X.Models.Categoria> categoria = ViewBag.Categoria;
+    List<Sistema_MVC_Grupo_X.Models.Modelo> modelo = ViewBag.Modelo;
+
+}
+
+<link href="~/Scripts/iconos.css" rel="stylesheet" />
+
+<h2 class="card text-center">Gestión de Evidencias Generales</h2>
+<br />
+<div class="text-right">
+    <a href="~/Evidencia/AgregarEditar/" class="btn btn-secondary text-right">
+        Nuevo Registro
+    </a>
+</div>
+<br />
+<table class="table" id="tablaIndex" style="width:100%">
+    <thead>
+        <tr>
+            <th style="width:40px; text-align:center">Id</th>
+            <th style="width:150px; text-align:center">Semestre</th>
+            <th style="width:120px; text-align:center">Modelo</th>
+            <th style="width:80px; text-align:center">Criterios</th>
+            <th style="width:150px; text-align:center">Nombre archivo</th>
+            <th style="width:50px; text-align:center">Tamaño</th>
+            <th style="width:50px; text-align:center">Extension</th>
+            <th style="width:120px; text-align:center">Ver Archivo</th>
+            <th style="width:80px; text-align:center">Categoría</th>
+            <th style="width:900px; text-align:center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var e in Model)
+        {
+            cadenaCriterios = "";
+            <tr>
+                <td style="text-align:center">@(e.evidencia_id)</td>
+                <td style="text-align:center">@(e.Semestre.nombre)</td>
+                <td style="text-align:center">@(e.Modelo.nombre)</td>
+
+            @for (int i = 0; i < evidenciaCriterio.Count; i++)
+            {
+                if (evidenciaCriterio[i].evidencia_id == e.evidencia_id)
+                {
+                    for (int j = 0; j < detalleCriterio.Count; j++)
+                    {
+                        if (evidenciaCriterio[i].criterio_id == detalleCriterio[j].criterio_id)
+                        {
+                            cadenaCriterios = cadenaCriterios + detalleCriterio[j].nombre_spanish + " ";
+                        }
+                    }
+                }
+            }
+                <td style="text-align:center">@(cadenaCriterios)</td>  @*CRITERIOS*@
+                <td style="text-align:center">@(Path.GetFileNameWithoutExtension(e.archivo_evidencia))</td>
+                
+                @{
+                    string[] sizes = { "B", "KB", "MB", "GB", "TB" };
+                    string path = Server.MapPath("~/App_Data/Archivos/" + Path.GetFileNameWithoutExtension(e.archivo_evidencia) + "__" + e.evidencia_id + Path.GetExtension(e.archivo_evidencia));
+                    string otroPath = "~/App_Data/Archivos/" + Path.GetFileNameWithoutExtension(e.archivo_evidencia) + "__" + e.evidencia_id + Path.GetExtension(e.archivo_evidencia);
+                    double len = new System.IO.FileInfo(Server.MapPath("~/App_Data/Archivos/" + Path.GetFileNameWithoutExtension(e.archivo_evidencia) + "__" + e.evidencia_id + Path.GetExtension(e.archivo_evidencia))).Length;
+                    int order = 0;
+                    while (len >= 1024 && order < sizes.Length - 1)
+                    {
+                        order++;
+                        len = len / 1024;
+                    }
+                    // Ajuste del string a las preferencias de cada 1.
+                    string resultado = String.Format("{0:0.##} {1}", len, sizes[order]);
+                }
+
+                <td style="text-align:center">@(resultado)</td> @*TAMAÑO*@
+                <td style="text-align:center">@(Path.GetExtension(e.archivo_evidencia))</td> @*EXTENSION*@
+                <td style="text-align:center"><a href="@path" target="_blank" onclick="window.open(@otroPath,'_blank')"></a></td> @*VER ARCHIVO*@
+                <td style="text-align:center">@(e.Categoria.descripcion_categoria)</td>
+                <td class="d-flex justify-content-around" style="text-align:center; align-content:center">
+                    <a href="~/Evidencia/Visualizar/@e.evidencia_id"
+                       class="btn btn-xs btn-warning" style="padding:inherit">Visualizar</a>
+                    <a href="~/Evidencia/AgregarEditar/@e.evidencia_id"
+                       class="btn btn-xs btn-primary" style="padding:inherit">Modificar</a>
+                    <button id="btnEliminar" type="button" class="btn btn-xs btn-danger" onclick="eliminarEvidencia(@(e.evidencia_id),'@(otroPath)')">Eliminar</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<hr />
+
+<script>
+    function eliminarEvidencia(id,ruta_archivo) {  
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Eliminar", "Evidencia")',
+            data: { id: id, archivo_elim :  ruta_archivo},
+            success: function () {
+                alert("Eliminado con éxito.");
+                location.reload();
+            },
+            error: function () {
+                alert("Error al eliminar.");
+            }
+        })
+    }    
+</script>
